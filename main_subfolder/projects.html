@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link rel="stylesheet" type="text/css" href="projects_style.css">
+    
+</head>
+<header class="header">
+<div class="header-content">
+  <div class="logo">
+    <a href="index.html" class="logo-with-bg"></a>
+    </div>
+<nav class="navbar">
+<ul class="nav-list">
+<li><a href="#">Home</a></li>
+<li><a href="#">Research</a></li>
+<li><a href="../main_subfolder/projects.html">Projects</a></li>
+</ul>
+</nav>
+</div>
+<hr class="gradient-line"/>
+</header>
+<progress max="100" value="0"></progress>
+<body class="red_clay">
+    <div class="page"> 
+        <h1>
+        Josh Phythian
+    </h1>
+</div>
+
+    <nav>
+        <ul>
+            <!--<li><a href="/">Home</a></li>-->
+            <li>
+                <a href="/monster_zero" target="_blank">Monster Zero Drink Ranking</a>
+                
+                <p>I wanted to try some more web design stuff and I have a ranking of most monster zero flavors, so I made this. First I tried webscraping the monster page to get images, but they had an anti scraping protocol, so I just tediously downloaded them all. Next I used PIL to pick the font and can color for each can, and add that to a dictionary with my ranking for the flavor. Then I used the dictionary to create the images seen in the background. Then I used scroll trigger to implement some animations. </p>
+            </li>
+            <li>
+                <a href="/EnergyDrinkWebsite" target="_blank">Celsius Energy Drink Ranking</a>
+                <p>I wanted to explore some basic web design, webscraping and put my rankings for each celsius flavor somewhere. After a lot of selenium and bs4 testing, I could not get past the captchas to get images for all the celsius, so I had to download them all manually, hence the uneven sizing across the images.
+                </p>
+                
+                <!--<p> FAQ:-->
+                <!--<br>-->
+                <!--    Why is it that you have to scroll through the whole thing?-->
+                <!--    I like how that feels and the ranking doesn't really matter, cuz if you are gonna drink a celsius I would reccomend fantasy vibe or any other flavor cuz they all kinda taste the same. -->
+                <!--</p>-->
+            </li>
+            <li>
+                <a href="https://jphythian.pythonanywhere.com/" target="_blank">Run Sectors Website </a>
+                <p>Explore my work on analyzing sectors and running models. To use this: input a correlation matrix from applying cpptraj on an MD output and the corresponding pdb file. I used flask to just make a simple webpage and connect it to my python code for sector identification.</p>
+            </li>
+            <li>
+                <a href="/germanic_latin_root_game" target="_blank">Germanic Latin Game</a>
+                <p>A game where you guess if a word has germanic or latin roots. A friend was playing this game using wikipedia, and I thought, that wouldn't be too hard to automate. I wanted to use the wikipedia API and request a random term each time, but it was just kinda easier to scrape wikipedia, then make a table using the scraped data, and randomly pick a term from that table. I may add another gamemode soon.
+                </p>
+            </li>
+            <li>
+                <a href="/Lambda_evaluator" target="_blank">Lambda term Evaluator</a>
+                
+                <p>
+                    I am so close to this working. I wanted to use js_of_ocaml to turn my evalutaor in ocaml to byte code and then turn that into js, but it has been more tedious than I thought. I am having errors where the js file is not recognizing the functions that were in the ocaml file. Currently trying a new approach using Dream.
+                </p>
+            </li>
+            <li>
+                <a href="https://vahnk.itch.io/game-design-final" target="_blank">Virtual Escape Room </a>
+                
+                <p>
+                    This is an escape room about a musician who has to get his life back together and write some music . It was my first time using git and unity together. Also it is not designed to be played on the web so it is a little glitchy.
+                </p>
+            </li>
+            <li>
+                <a href="/5_daily_quotes">5 Daily Quotes</a>
+                
+                <p>
+                    I use flask, request, and bs4 to get 5 daily quotes, and store them in a updating cache.
+                </p>
+            </li>
+            
+            <li>
+                <a>Coming Soon! </a>
+                
+                <p>
+                    <br>
+                   <strong>C4 review website</strong>
+                   <br>
+                   I want to experiment with some more web design effects<br>
+                   <strong> Online tic tac toe </strong><br>
+                   I am currently integrating this with AWS. So far I have a build with flask for the backend and react for the frontend. I am also working on turning an AI TicTacToe player that I wrote in SML to a playable bot.
+                   <br>
+                   <strong>Hiking Map</strong>
+                   <br>
+                   This will be an interactive map where as you scroll down, it will follow an svg path projected onto a hiking map and at various points there will be a panorama I have taken while walking on that trail.
+                   
+                </p>
+                <br>
+            </li>
+        </ul>
+    </nav>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script>
+        // Register GSAP and ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Define colors for the gradient
+        const colors = [
+            "#01b3e3", // Start (light blue)
+            "#25ce7b", // Green
+            "#fdc741", // Yellow
+            "#ff6b01", // Orange
+            "#db38b5", // Purple
+            "#fc4236"  // Red
+        ];
+
+        // Function to mix colors based on progress
+        const mixColors = (progress) => {
+            const startColorIndex = Math.floor(progress * (colors.length - 1));
+            const endColorIndex = Math.min(startColorIndex + 1, colors.length - 1);
+
+            const mixRatio = (progress * (colors.length - 1)) % 1;
+
+            const startColor = gsap.utils.splitColor(colors[startColorIndex]);
+            const endColor = gsap.utils.splitColor(colors[endColorIndex]);
+
+            const mixedColor = startColor.map((startValue, index) => {
+                const endValue = endColor[index];
+                return Math.round(startValue + mixRatio * (endValue - startValue));
+            });
+
+            return `rgb(${mixedColor.join(",")})`;
+        };
+
+        // ScrollTrigger to update scrollbar thumb color
+        ScrollTrigger.create({
+            trigger: document.body,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.3,
+            onUpdate: (self) => {
+                // Calculate the scroll progress (0 to 1)
+                const progress = self.progress;
+
+                // Mix colors based on progress
+                const gradientColor = mixColors(progress);
+
+                // Apply the color to the scrollbar thumb
+                document.documentElement.style.setProperty('--scrollbar-thumb-color', gradientColor);
+            },
+        });
+    </script>
+   
+</body>
+</html>

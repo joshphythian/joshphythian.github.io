@@ -1,0 +1,295 @@
+
+body, html {
+	padding: 0;
+	margin: 0;
+	height: 100%;
+	background-image: url('images/background_hydra_2.png'); /* Default background */
+	background-size: cover; /* Ensures the background image covers the entire screen */
+	background-repeat: no-repeat; /* Prevents tiling */
+	background-position: center; /* Centers the image */
+	background-attachment: fixed; /* Keeps the background fixed when scrolling */
+	color:  #1E2021;
+	font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+	box-sizing: border-box;
+	scrollbar-color: var(--scrollbar-thumb-color, #01b3e3) black;
+}
+
+
+.page h1:first-child {
+	margin-top: 0;
+}
+
+.page li {
+	margin-bottom: 1.5em;
+}
+
+iframe {
+	border: none;
+	height: 100%;
+	width: 100%;
+}
+
+.page {
+	padding: 24px;
+}
+
+img {
+	max-width: 100%;
+}
+
+a {
+	/* This is for links */
+	color: #2f0806;
+}
+
+.avatar {
+	width: 200px;
+	height: 200px;
+}
+
+.wrapper {
+	position: relative;
+	top: 50%;
+	margin: auto;
+	margin-top: -200px;
+	width: 850px;
+	height: 400px;
+}
+
+.sidebar {
+	float: left;
+	width: 200px;
+	height: 100%;
+	position: center;
+	justify-content: center;
+}
+
+.main {
+	float: right;
+	width: 630px;
+	height: 100%;
+	/* border: 3px double #D8F3FF; */
+	border: 3px double #191d1f;
+    /* background-image: url('images/background_hydra_1.pngs'); */
+    /* background-image: url('images/stained_glass.jpeg'); */
+	box-sizing: border-box;
+}
+
+.red_clay, .paper {
+    height: auto;
+    min-height: 100vh; /* Ensures full viewport height */
+    background-size: cover;
+    background-repeat: no-repeat; /* Prevent gaps caused by vertical tiling */
+    background-position: center;
+    padding: 0; /* Ensure no extra padding inside the elements */
+    margin: 0; /* Remove margin between the borders and the backgrounds */
+    /* border: 3px double #D8F3FF;  */
+    border: 3px double #191d1f; 
+    box-sizing: border-box; 
+}
+
+
+.paper {
+
+	/* background-image: url('images/stained_glass.jpeg');  */
+	background-image: url('images/crumpled_paper.jpg'); 
+    /* https://www.rawpixel.com/image/584227/crumpled-paper-texture */
+
+    /* height: auto;
+    min-height: 100vh; 
+    background-size: cover; 
+	background-repeat: repeat-y; 
+	background-position: center;  */
+}
+
+.red_clay {
+	/* background-image: url('images/red_clay.jpg');  */
+	background-image: url('images/red_clay copy.jpg'); 
+    /* height: auto;
+    min-height: 100vh; 
+    background-size: cover; 
+	background-repeat: repeat-y; 
+	background-position: center; 
+    color: #1E2021; */
+    font-family: 'Source Code Pro', monospace;
+}
+.red_clay h1 {
+	margin-bottom: -1em;
+}
+.red_clay ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.red_clay li {
+    margin-bottom: 1em;
+    padding-left: 1em;
+}
+
+.red_clay li p {
+    margin: 0.2em 0 0 1em;
+    font-size: 0.9em;
+    color: black;
+    max-width: 70ch; 
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+}
+
+
+.red_clay h2 {
+    color: #D8F3FF; /* Light blue color */
+}
+
+.red_clay ul {
+    margin-top: 0; /* Remove space above the list */
+    padding-top: 0; /* Remove any padding */
+}
+
+.red_clay h3 {
+    color: #1E2021; /* Dark gray/black */
+    margin-left: 20px; 
+}
+
+.red_clay li::before {
+	padding: 16 px;
+    content: "→"; /* Arrow symbol */
+    position: relative;
+    left: 0; /* Position arrow at the left */
+    font-size: 1.5em; /* Adjust arrow size */
+    color: #8A2D36; /* Customize arrow color */
+}
+
+.red_clay strong {
+	font-size: 1.15em; /* Increases the font size by 20% relative to the base size */
+    color: #2f0806; /* Retains your existing color */
+    text-decoration: none; /* Optional, removes underline if desired */
+}
+
+.red_clay a {
+    font-size: 1.2em; /* Increases the font size by 20% relative to the base size */
+    color: #df180d; /* Retains your existing color */
+    text-decoration: none; /* Optional, removes underline if desired */
+}
+
+.red_clay a:hover {
+    text-decoration: underline; /* Optional, adds underline on hover */
+}
+
+.menu {
+	padding: 24px;
+	/* justify-content: center; */
+	text-align: center;
+}
+
+.menu a {
+	display: inline-block;
+	padding: 3px 6px;
+	color: #D8F3FF;
+	margin-bottom: 6px;
+	text-decoration: none;
+	font-weight: 500;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+.menu a:hover {
+
+    background: #D8F3FF;
+	color: #000;
+}
+
+h1, h2, h3, h4 {
+	color: #252728;
+}
+
+h1 {
+	font-size: 20px;
+	background: #57676f;
+	color: #000;
+	display: inline-block;
+	padding: 4px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+h2 {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 16px;
+	border-bottom: 1px dashed #3c4448;;
+	padding-bottom: 4px;
+}
+
+.about-page {
+    text-align: center;
+    
+    font-family: Arial, sans-serif;
+    background-color: #F3FBFF; /* Light background color */
+	height: auto;
+	min-height: 100vh;
+	background-size: cover;
+	background-image: url('images/background_hydra_3.png')
+}
+
+.about-page h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #1E2021; /* Dark text color */
+}
+
+.about-page img.kermit-dancing {
+	position: absolute; 
+	left: 0; /* Start at the top-left corner, for instance */
+	top: 0;
+	width: 150px; /* Adjust as needed */
+	height: auto;
+	/* padding-top: 40px; */
+    max-width: 100%;
+	justify-content: center; /* Centers horizontally */
+	align-items: center; /* Centers vertically */
+	position: center; 
+    height: auto; /* Ensures the GIF scales responsively */
+    border: 5px solid #8A2D36; /* Adds a border around the GIF */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Progress Bar */
+progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 15px;
+    border: none;
+    background: transparent;
+}
+progress::-webkit-progress-bar {
+    background: black; /* Black background for the progress bar */
+}
+
+progress::-webkit-progress-value {
+    background-color: var(--scrollbar-thumb-color, #e30132); /* Dynamic color for the progress value */
+}
+
+progress::-moz-progress-bar {
+    background-color: var(--scrollbar-thumb-color, #e30000); /* Dynamic color for Firefox */
+}
+
+/* Style the scrollbar */
+body::-webkit-scrollbar {
+    width: 12px; /* Set scrollbar width */
+    background-color: black; /* Black background for the scrollbar */
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color, #e00000); /* Dynamic color */
+    border-radius: 6px; /* Rounded scrollbar */
+    transition: background-color 0.2s linear; /* Smooth transition for color */
+}
+
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #25ce7b; /* Hover color */
+}

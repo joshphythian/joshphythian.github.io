@@ -269,7 +269,7 @@ body {
   position: relative;
   width: 60px; /* Adjust width to match your lobster image */
   height: 60px; /* Adjust height to match your lobster image */
-  background-image: url("lobster.png");
+  background-image: url("golden_ration.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
@@ -289,7 +289,7 @@ body {
 }
 
 .logo-with-bg::before {
-  content: "Thayer Lab";
+  content: "Josh Phythian";
   position: absolute;
   top: 50%;
   left: 50%;
