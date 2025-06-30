@@ -569,7 +569,6 @@ body {
 }
 
 /* Red semicircle background element */
-/* Red semicircle background element */
 .textboxes-container::before {
   content: 'RESEARCH';
   position: absolute; /* Keep as absolute if you want it contained to the section */
@@ -743,4 +742,86 @@ body {
 .footer a:hover {
   color: rgb(15, 11, 12);
   text-decoration: underline;
+}
+
+/* Project section */
+
+.title {
+  font-size: max(2vw, 24px);
+  line-height: 1.1;
+  padding-bottom: .4em;
+  color: rgb(255, 255, 255);
+  text-shadow: 0 2px 2px rgba(0, 0, 0, .1);
+}
+
+.text {
+  font-size: max(1vw, 15px);
+  line-height: 1.4;
+  overflow: hidden;
+  padding-bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.accordions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20vh;
+}
+
+.accordion {
+  background: linear-gradient(200deg,  #F4E285 13.57%, #8CB369 98.38%);
+  width: max(50vw, 280px);
+  padding: 25px 30px 10px;
+  border-radius: 15px;
+  margin-bottom: 40px;
+  box-shadow: 0 30px 30px -10px rgba(0, 0, 0, .3);
+  
+  &:nth-child(2) {
+    background: linear-gradient(200deg, rgb(242, 136, 133) 13.57%, rgb(233, 79, 102) 98.38%);
+  }
+  
+  &:nth-child(3) {
+    background: linear-gradient(200deg, rgb(101, 187, 118) 13.57%, rgb(70, 111, 171) 98.38%);
+  }
+  
+  &:nth-child(4) {
+    background: linear-gradient(200deg, #7C9EB2 13.57%, #52528C 98.38%);
+  }
+}
+
+#project-section a,
+.accordion a,
+.accordion .title a {
+  color: white !important;
+  text-decoration: none;
+}
+
+/* Hover effect for project section links */
+#project-section a:hover,
+.accordion a:hover,
+.accordion .title a:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: underline;
+}
+
+/* Alternative approach - if you want to be more specific */
+.accordions .accordion .title a {
+  color: white !important;
+  text-decoration: none;
+}
+
+.accordions .accordion .title a:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
+  text-decoration: underline;
+}
+
+
+@media (max-width: 480px) {
+  .accordion {
+    padding: 15px 20px 8px;
+  }
+  .title {
+    font-size: 20px;
+  }
 }

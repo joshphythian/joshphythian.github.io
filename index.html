@@ -17,7 +17,7 @@
 <ul class="nav-list">
 <li><a href="#">Home</a></li>
 <li><a href="#research-section">Research</a></li>
-<li><a href="./main_subfolder/projects.html">Projects</a></li>
+<li><a href="#project-anchor">Projects</a></li>
 </ul>
 </nav>
 </div>
@@ -78,11 +78,58 @@
 <!-- <p>  identifies key residues, or the sector that hypothetically, when perturbed will send signals to reactivate mutant p53</p> -->
 </div>
 </div>
-
+</section>
 <!-- More spacer for scroll -->
 <div class="spacer"></div>
-</section>
 
+<div id="project-anchor" style="position: relative; top: -250px;"></div>
+
+<section id="project-section">
+
+
+<!-- Project Section -->
+<div id="wrapper">
+  <div id="content">
+    <div class="spacer"></div>
+    <div class="accordions">
+      <div class="accordion">
+        <div class="title">
+          <a href="/monster_website/index.html" target="_blank">Monster Zero Drink Ranking</a>
+        </div>
+        <div class="text">
+          I wanted to try some more web design stuff and I have a ranking of most monster zero flavors, so I made this. First I tried webscraping the monster page to get images, but they had an anti scraping protocol, so I just tediously downloaded them all. Next I used PIL to pick the font and can color for each can, and add that to a dictionary with my ranking for the flavor. Then I used the dictionary to create the images seen in the background. Then I used scroll trigger to implement some animations. 
+        </div>
+      </div>
+      <div class="accordion">
+        <div class="title"> 
+          <a href="/celsius_website/index.html" target="_blank">Celsius Energy Drink Ranking</a>
+        </div>
+        <div class="text">
+          I wanted to explore some basic web design, webscraping and put my rankings for each celsius flavor somewhere. After a lot of selenium and bs4 testing, I could not get past the captchas to get images for all the celsius, so I had to download them all manually, hence the uneven sizing across the images.
+        </div>
+      </div>
+      <div class="accordion">
+        <div class="title">
+          <a href="https://jphythian.pythonanywhere.com/" target="_blank">Run Sectors Website </a>
+        </div>
+        <div class="text">
+          Explore my work on analyzing sectors and running models. To use this: input a correlation matrix from applying cpptraj on an MD output and the corresponding pdb file. I used flask to just make a simple webpage and connect it to my python code for sector identification.
+        </div>
+      </div>
+      <div class="accordion">
+        <div class="title">Germanic Latin Game</div>
+        <div class="text"><strong>This link is currently down. I have to make a new pythonanywhere account to start running it.</strong> A game where you guess if a word has germanic or latin roots. A friend was playing this game using wikipedia, and I thought, that wouldn't be too hard to automate. I wanted to use the wikipedia API and request a random term each time, but it was just kinda easier to scrape wikipedia, then make a table using the scraped data, and randomly pick a term from that table. I may add another gamemode soon.</div>
+      </div>
+      <div class="accordion">
+        <div class="title"><a href="https://vahnk.itch.io/game-design-final" target="_blank">Virtual Escape Room </a>
+        </div>
+        <div class="text">This is an escape room about a musician who has to get his life back together and write some music . It was my first time using git and unity together. Also it is not designed to be played on the web so it is a little glitchy.</div>
+      </div>
+    </div>
+    <!-- <div class="spacer"></div> -->
+  </div>
+</div>
+</section>
 
 <!-- Info Section -->
 <!-- <section class="info-section">
@@ -121,7 +168,15 @@
   </footer>
 
 <!-- Load ScrollMagic before your custom script -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+<script src="script.js"></script> -->
+<!-- Load GSAP libraries FIRST -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+<!-- Load ScrollMagic after GSAP -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
