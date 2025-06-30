@@ -373,7 +373,7 @@ body {
   /* 1/2 from left, minus half width to center */
   left: calc(83.33% - 150px); 
   
-  top: 100px;
+  top: -50px;
   transform: translateX(100px) scale(0.8); /* Initial offset */
   transition-delay: 0s;
 }
@@ -407,6 +407,15 @@ body {
   transform: translateX(0) scale(1);
 }
 
+/* Reduce spacing between intro paragraph and list */
+.textbox .list-intro {
+  margin-bottom: 4px; /* Reduced from default margin */
+}
+
+.textbox .tight-list {
+  margin-top: 0px; /* Remove top margin from list */
+  padding-top: 0;
+}
 
 
 /* Remove the old visible state since it's now handled individually */
@@ -560,8 +569,9 @@ body {
 }
 
 /* Red semicircle background element */
+/* Red semicircle background element */
 .textboxes-container::before {
-  content: '';
+  content: 'RESEARCH';
   position: absolute; /* Keep as absolute if you want it contained to the section */
   left: -25vw; /* Extend beyond container to left */
   top: 0;
@@ -573,6 +583,17 @@ body {
   opacity: 0.2;
   pointer-events: none;
   transform: translateY(-10vw); /* Move up by 10vw */
+  
+  /* Text styling */
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  font-size: 6vw;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "Times New Roman", Times, serif;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.2em;
 }
 
 /* Ensure the textboxes container can contain the semicircle */
