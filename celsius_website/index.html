@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celsius Website</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Serif, sans-serif;
+        }
+        .spacer {
+            height: 400px; /* Increase this value to make the scrollable area larger */
+        }
+        .spacer.s1 {
+            height: 200px; /* Larger spacer before the first reveal */
+        }
+        .spacer.s2 {
+            height: 400px; /* Larger spacer for more space before and after the reveal */
+        }
+        .content-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: left;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+        .reveal {
+            opacity: 0;
+            -webkit-transform: scale(0.9);
+                 -moz-transform: scale(0.9);
+                 -ms-transform: scale(0.9);
+                     -o-transform: scale(0.9);
+                        transform: scale(0.9);
+            -webkit-transition: all 1s ease-in-out;
+                 -moz-transition: all 1s ease-in-out;
+                    -ms-transition: all 1s ease-in-out;
+                     -o-transition: all 1s ease-in-out;
+                        transition: all 1s ease-in-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            -webkit-transform: none;
+                 -moz-transform: none;
+                    -ms-transform: none;
+                     -o-transform: none;
+                        transform: none;
+        }
+        .box2 {
+            background-color: blue;
+            color: white;
+            padding: 20px;
+            margin: 20px;
+            width: 300px;
+            border-radius: 8px;
+            flex: 1;
+        }
+        img {
+            max-width: 600px;
+            max-height: 400px;
+            width: 100%;
+            height: auto;
+            margin: 20px;
+            flex: 1;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <div id="trigger1" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_lemon_lime.png" alt="Revealed Image 1" />
+        <div class="box2">
+            <p>Classic lemon lime nothing more to be said. I feel the lemon lime at the back of my tongue, not many forward flavors</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger2" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_green_apple_cherry.png" alt="Revealed Image 2" />
+        <div class="box2">
+            <p>Not for me. Drinking this gives me a headache, as the flavor profile is confusing. Why do I do this to myself</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger3" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_grape.png" alt="Revealed Image 3" />
+        <div class="box2">
+            <p>Mid grape, kind of stomach wrenching once it gets down to it</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger4" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_cosmic_vibe.png" alt="Revealed Image 4" />
+        <div class="box2">
+            <p>Not a vibe</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger5" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_astro_vibe.png" alt="Revealed Image 5" />
+        <div class="box2">
+            <p>It is interesting. it is full flavor, pungent. But why is it yellow? and what is a blue raspberry</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger6" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_blue_razz_lemonade.png" alt="Revealed Image 6" />
+        <div class="box2">
+            <p>Normal lemonade with slight twist, not the best, not the worst</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger7" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_mango_peach_green_tea.png" alt="Revealed Image 7" />
+        <div class="box2">
+            <p>Clean team, compareable to STEEZ peach green tea but slightly better </p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger8" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_mango_passionfruit.png" alt="Revealed Image 8" />
+        <div class="box2">
+            <p>its ok... its average... I wish there was more mango. I feel like the natural version is just the better alternative. Someone in the elevator once told me this was the best celsius flavor. </p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger9" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_strawberry_guava.png" alt="Revealed Image 9" />
+        <div class="box2">
+            <p>Before, This is doesn't taste like much — tastes more like dried sour plums than strawberry or guava -> 7. After, drinking again, not out of choice this is like a 3 cuz its boring</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger10" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_mixed_berry.png" alt="Revealed Image 10" />
+        <div class="box2">
+            <p>Hmmm this was j meh nothing crazy but nothing bad </p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger11" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_strawberry_lemonade.png" alt="Revealed Image 11" />
+        <div class="box2">
+            <p>It is a good flavor but I am not a fan of the aftertaste of lemon and sugar</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger12" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_watermelon.png" alt="Revealed Image 12" />
+        <div class="box2">
+            <p>I was pleasantly suprised with this flavor. Normally I do not like watermelon but this one tastes good? I like how it doesn't linger on the back of the tounge like some other celsius</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger13" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_orange.png" alt="Revealed Image 13" />
+        <div class="box2">
+            <p>It tastes like a sparkling yerba mate. Even though this has none of the cane sugar and stuff it still tastes similar. But how? For me, this is the standard celsius, just one fruit flavoring and nothing else</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger14" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_cola.png" alt="Revealed Image 14" />
+        <div class="box2">
+            <p>It has a very different flavor from coca cola. Its a little more acidic. If I were to drink a celsius I would tend to go for the more fruity flavors rather than a coke flavor. The ending notes of it are almost tart but not quite. The drinks feels weird.</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger15" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_raspberry_peach.png" alt="Revealed Image 15" />
+        <div class="box2">
+            <p>Wow, potency of raspberry with that taste that lingers on the back of the tounge of peach</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger16" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_fantasy_vibe.png" alt="Revealed Image 16" />
+        <div class="box2">
+            <p>The name fits the drink. Super good, kinda like a sour plum drink. Lots of complexity, sweetness, sour, maybe even a little salt?</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger17" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_oasis_vibe.png" alt="Revealed Image 17" />
+        <div class="box2">
+            <p>Kind of tastes like the arnold palmer arizona. meh</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+    <div id="trigger18" class="spacer s0"></div>
+    <div class="content-container reveal">
+        <img src="./celsius_images/celsius_cucmber_lime.png" alt="Revealed Image 18" />
+        <div class="box2">
+            <p>Hands down worst flavor. I thought it would at least be refreshing. Why would they make this a flavor. First celsius i dont want to drink. It doesn't really taste like lime and it doesn't really taste like cucumber</p>
+            <a href="#" class="viewsource">view source</a>
+        </div>
+    </div>
+
+    <div class="spacer s2"></div>
+    
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/plugins/debug.addIndicators.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>

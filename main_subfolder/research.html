@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="../style.css">
+	<meta name="viewport" content="width=device-width, initial-scale=0.1">
+</head>
+<body class="paper">
+	<div class="page">
+		<h1>Josh Phythian</h1>
+		
+		<h2>Thayer Lab at Wesleyan University</h2>
+
+        <p> I was recently awarded High Honors in the College of Integrative Sciences and Honors in Computer Science for my undergraduate thesis, "Sector Analysis of the p53 Tumor Suppressor Protein". The Thayer lab aims to restore the cancer-fighting protein p53 to its normal function after mutation, a key goal since mutated p53 is involved in over 50% of cancers. Since experimental methods can’t provide the atomic detail needed, computer science—through high-performance simulations—fills the gap. My thesis focuses on allosteric networks, which are capable of sending signals across a protein. My work identifies key residues, or the sector that hypothetically, when perturbed will send signals to reactivate mutant p53.</p>
+
+        <p> Here is a pdf of my thesis: <a href="./files/Complete_Thesis_W_TitlePage.pdf" target="_blank">link</a></p>
+
+		<p>	The ultimate goal of the Thayer lab is to return p53 to its native function after it mutates. The p53 protein is implicated in over 50% of human cancers. When it mutates, it ceases to be able to perform its native function: killing damaged cells, leading to uncontrolled cell growth—the hallmark of cancer. Therefore finding a way to return p53 from its mutant state to its native state is of the utmost importance.
+  
+			
+			
+		</p>
+        <p> Engineering a molecule to rescue proteins requires atomic level information which is not available from wet lab studies. Computer science plays a critical role in this problem that Molecular Biology cannot: utilizing new advancements in high performance computing to produce high throughput models that produce cheaper and faster results, with atomic level resolution to explain the underlying mechanics. Allostery can broadly be defined as: one molecule binds to another macromolecule which modulates the binding behavior at a site distinct from the location of the binding event. An allosteric network is a system of residues that can communicate a signal across a protein from one site to another distinct site. Our lab hypothesizes that a network of motionally covarying residues, known as the sector, could send an allosteric signal to reactivate mutant p53. 
+        </p>
+        <p> My work focuses on establishing a pipeline for identifying the amino acid residues that are in the sector. I am currently writing an undergraduate thesis including sector analysis for p53, p53's various isoforms, and the nucleosome. 
+        </p>
+		
+		<!-- <img src="images/Dawg.jpeg"> -->
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <script>
+        // Register GSAP and ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Define colors for the gradient
+        const colors = [
+            "#01b3e3", // Start (light blue)
+            "#25ce7b", // Green
+            "#fdc741", // Yellow
+            "#ff6b01", // Orange
+            "#db38b5", // Purple
+            "#fc4236"  // Red
+        ];
+
+        // Function to mix colors based on progress
+        const mixColors = (progress) => {
+            const startColorIndex = Math.floor(progress * (colors.length - 1));
+            const endColorIndex = Math.min(startColorIndex + 1, colors.length - 1);
+
+            const mixRatio = (progress * (colors.length - 1)) % 1;
+
+            const startColor = gsap.utils.splitColor(colors[startColorIndex]);
+            const endColor = gsap.utils.splitColor(colors[endColorIndex]);
+
+            const mixedColor = startColor.map((startValue, index) => {
+                const endValue = endColor[index];
+                return Math.round(startValue + mixRatio * (endValue - startValue));
+            });
+
+            return `rgb(${mixedColor.join(",")})`;
+        };
+
+        // ScrollTrigger to update scrollbar thumb color
+        ScrollTrigger.create({
+            trigger: document.body,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 0.3,
+            onUpdate: (self) => {
+                // Calculate the scroll progress (0 to 1)
+                const progress = self.progress;
+
+                // Mix colors based on progress
+                const gradientColor = mixColors(progress);
+
+                // Apply the color to the scrollbar thumb
+                document.documentElement.style.setProperty('--scrollbar-thumb-color', gradientColor);
+            },
+        });
+    </script>
+</body>
+</html>
