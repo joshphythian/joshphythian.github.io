@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sokoban with AI Solver</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin: 20px;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .game-board {
+            display: grid;
+            gap: 2px;
+            justify-content: center;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .cell {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+        
+        .wall { background: #2c3e50; }
+        .floor { background: #ecf0f1; }
+        .target { background: #f39c12; border: 2px solid #e67e22; }
+        .box { background: #8b4513; border: 2px solid #654321; border-radius: 6px; }
+        .box-on-target { background: #27ae60; border: 2px solid #229954; border-radius: 6px; }
+        .player { background: #3498db; border: 2px solid #2980b9; border-radius: 50%; }
+        .player-on-target { background: #9b59b6; border: 2px solid #8e44ad; border-radius: 50%; }
+        
+        .info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .status {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .ai-status {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .instructions {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e8;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .legend-symbol {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1 style="text-align: center; color: #2c3e50; margin-bottom: 20px;">🎮 Sokoban with AI Solver</h1>
+        
+        <div class="controls">
+            <button onclick="resetLevel()">🔄 Reset Level</button>
+            <button onclick="nextLevel()">⏭️ Next Level</button>
+            <button onclick="prevLevel()">⏮️ Previous Level</button>
+            <button id="aiButton" onclick="toggleAI()">🤖 Start AI Solver</button>
+            <button onclick="generateRandomLevel()">🎲 Random Level</button>
+        </div>
+        
+        <div class="info">
+            <div class="status">Level: <span id="levelNumber">1</span></div>
+            <div class="status">Moves: <span id="moveCount">0</span></div>
+            <div class="status">Pushes: <span id="pushCount">0</span></div>
+            <div class="ai-status" id="aiStatus">AI: Ready</div>
+        </div>
+        
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-symbol player"></div>
+                <span>Player</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-symbol box"></div>
+                <span>Box</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-symbol target"></div>
+                <span>Target</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-symbol box-on-target"></div>
+                <span>Box on Target</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-symbol wall"></div>
+                <span>Wall</span>
+            </div>
+        </div>
+        
+        <div id="gameBoard" class="game-board"></div>
+        
+        <div class="instructions">
+            <strong>How to Play:</strong><br>
+            • Use WASD or Arrow Keys to move the player<br>
+            • Push all boxes (brown squares) onto targets (orange squares)<br>
+            • Boxes turn green when correctly placed<br>
+            • Click "Start AI Solver" to watch the AI solve the level automatically<br>
+            • Try the random level generator for infinite puzzles!
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let currentLevel = 0;
+        let gameState = null;
+        let originalState = null;
+        let isAIRunning = false;
+        let aiSolution = [];
+        let aiStepIndex = 0;
+        
+        // Predefined levels
+        const levels = [
+            [
+                "########",
+                "#      #",
+                "# .$$. #",
+                "#  $$  #",
+                "#   @  #",
+                "#      #",
+                "########"
+            ],
+            [
+                "  #####",
+                "###   #",
+                "#.@ $ #",
+                "### $.#",
+                "#.##$ #",
+                "#     #",
+                "#######"
+            ],
+            [
+                "#######",
+                "#     #",
+                "# .$. #",
+                "# $.$ #",
+                "# .$. #",
+                "#  @  #",
+                "#######"
+            ],
+            [
+                "########",
+                "#   .  #",
+                "#  $$ ##",
+                "## .   #",
+                "#  $ # #",
+                "#  @ # #",
+                "#    # #",
+                "########"
+            ]
+        ];
+        
+        // Game symbols
+        const WALL = '#';
+        const FLOOR = ' ';
+        const TARGET = '.';
+        const BOX = '$';
+        const PLAYER = '@';
+        
+        // Direction vectors
+        const directions = {
+            'w': [-1, 0], 'a': [0, -1], 's': [1, 0], 'd': [0, 1],
+            'ArrowUp': [-1, 0], 'ArrowLeft': [0, -1], 'ArrowDown': [1, 0], 'ArrowRight': [0, 1]
+        };
+        
+        class GameState {
+            constructor(level) {
+                if (Array.isArray(level) && level.length > 0 && typeof level[0] === 'string') {
+                    this.grid = level.map(row => row.split(''));
+                    this.height = this.grid.length;
+                    this.width = this.grid[0].length;
+                } else {
+                    // For cloning - initialize empty arrays
+                    this.grid = [];
+                    this.height = 0;
+                    this.width = 0;
+                }
+                this.playerPos = null;
+                this.boxes = new Set();
+                this.targets = new Set();
+                this.moves = 0;
+                this.pushes = 0;
+                
+                if (this.grid.length > 0) {
+                    this.parseLevel();
+                }
+            }
+            
+            parseLevel() {
+                for (let y = 0; y < this.height; y++) {
+                    for (let x = 0; x < this.width; x++) {
+                        const cell = this.grid[y][x];
+                        if (cell === PLAYER) {
+                            this.playerPos = [y, x];
+                            this.grid[y][x] = FLOOR;
+                        } else if (cell === BOX) {
+                            this.boxes.add(`${y},${x}`);
+                            this.grid[y][x] = FLOOR;
+                        } else if (cell === TARGET) {
+                            this.targets.add(`${y},${x}`);
+                        }
+                    }
+                }
+            }
+            
+            clone() {
+                const newState = new GameState([]);
+                newState.grid = this.grid.map(row => [...row]);
+                newState.height = this.height;
+                newState.width = this.width;
+                newState.playerPos = this.playerPos ? [...this.playerPos] : null;
+                newState.boxes = new Set(this.boxes);
+                newState.targets = new Set(this.targets);
+                newState.moves = this.moves;
+                newState.pushes = this.pushes;
+                return newState;
+            }
+            
+            isValidMove(y, x) {
+                return y >= 0 && y < this.height && x >= 0 && x < this.width && 
+                       this.grid[y][x] !== WALL;
+            }
+            
+            move(direction) {
+                const [dy, dx] = directions[direction];
+                const [py, px] = this.playerPos;
+                const newY = py + dy;
+                const newX = px + dx;
+                
+                if (!this.isValidMove(newY, newX)) return false;
+                
+                const boxKey = `${newY},${newX}`;
+                if (this.boxes.has(boxKey)) {
+                    // Trying to push a box
+                    const boxNewY = newY + dy;
+                    const boxNewX = newX + dx;
+                    const boxNewKey = `${boxNewY},${boxNewX}`;
+                    
+                    if (!this.isValidMove(boxNewY, boxNewX) || this.boxes.has(boxNewKey)) {
+                        return false; // Can't push box
+                    }
+                    
+                    // Move the box
+                    this.boxes.delete(boxKey);
+                    this.boxes.add(boxNewKey);
+                    this.pushes++;
+                }
+                
+                // Move the player
+                this.playerPos = [newY, newX];
+                this.moves++;
+                return true;
+            }
+            
+            isWon() {
+                for (let boxKey of this.boxes) {
+                    if (!this.targets.has(boxKey)) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+            
+            getStateKey() {
+                return `${this.playerPos[0]},${this.playerPos[1]}|${Array.from(this.boxes).sort().join(';')}`;
+            }
+            
+            // Simple deadlock detection
+            isDeadlocked() {
+                for (let boxKey of this.boxes) {
+                    const [by, bx] = boxKey.split(',').map(Number);
+                    
+                    // Skip if box is on target
+                    if (this.targets.has(boxKey)) continue;
+                    
+                    // Check if box is in a corner
+                    const corners = [
+                        [by-1, bx], [by, bx-1], // top-left
+                        [by-1, bx], [by, bx+1], // top-right
+                        [by+1, bx], [by, bx-1], // bottom-left
+                        [by+1, bx], [by, bx+1]  // bottom-right
+                    ];
+                    
+                    for (let i = 0; i < corners.length; i += 2) {
+                        const [y1, x1] = corners[i];
+                        const [y2, x2] = corners[i + 1];
+                        
+                        if ((this.grid[y1] && this.grid[y1][x1] === WALL) &&
+                            (this.grid[y2] && this.grid[y2][x2] === WALL)) {
+                            return true; // Box is stuck in corner
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+        
+        // A* pathfinding for AI solver
+        class AISolver {
+            constructor(gameState) {
+                this.initialState = gameState.clone();
+            }
+            
+            solve() {
+                const openList = [{ state: this.initialState, path: [], cost: 0, heuristic: this.calculateHeuristic(this.initialState) }];
+                const closedSet = new Set();
+                
+                while (openList.length > 0) {
+                    // Sort by f-cost (cost + heuristic)
+                    openList.sort((a, b) => (a.cost + a.heuristic) - (b.cost + b.heuristic));
+                    const current = openList.shift();
+                    
+                    if (current.state.isWon()) {
+                        return current.path;
+                    }
+                    
+                    const stateKey = current.state.getStateKey();
+                    if (closedSet.has(stateKey)) continue;
+                    closedSet.add(stateKey);
+                    
+                    // Prevent infinite loops
+                    if (current.path.length > 200) continue;
+                    
+                    // Try all possible moves
+                    for (let direction of ['w', 'a', 's', 'd']) {
+                        const newState = current.state.clone();
+                        if (newState.move(direction)) {
+                            if (newState.isDeadlocked()) continue;
+                            
+                            const newPath = [...current.path, direction];
+                            const newCost = current.cost + 1;
+                            const heuristic = this.calculateHeuristic(newState);
+                            
+                            openList.push({
+                                state: newState,
+                                path: newPath,
+                                cost: newCost,
+                                heuristic: heuristic
+                            });
+                        }
+                    }
+                }
+                
+                return null; // No solution found
+            }
+            
+            calculateHeuristic(state) {
+                let totalDistance = 0;
+                
+                // Calculate minimum distance from each box to nearest target
+                for (let boxKey of state.boxes) {
+                    if (state.targets.has(boxKey)) continue; // Already on target
+                    
+                    const [bx, by] = boxKey.split(',').map(Number);
+                    let minDistance = Infinity;
+                    
+                    for (let targetKey of state.targets) {
+                        const [tx, ty] = targetKey.split(',').map(Number);
+                        const distance = Math.abs(bx - tx) + Math.abs(by - ty);
+                        minDistance = Math.min(minDistance, distance);
+                    }
+                    
+                    totalDistance += minDistance;
+                }
+                
+                return totalDistance;
+            }
+        }
+        
+        function initializeGame() {
+            gameState = new GameState(levels[currentLevel]);
+            originalState = gameState.clone();
+            updateDisplay();
+            updateStats();
+        }
+        
+        function updateDisplay() {
+            const board = document.getElementById('gameBoard');
+            board.innerHTML = '';
+            board.style.gridTemplateColumns = `repeat(${gameState.width}, 34px)`;
+            
+            for (let y = 0; y < gameState.height; y++) {
+                for (let x = 0; x < gameState.width; x++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    
+                    const isPlayer = gameState.playerPos[0] === y && gameState.playerPos[1] === x;
+                    const isBox = gameState.boxes.has(`${y},${x}`);
+                    const isTarget = gameState.targets.has(`${y},${x}`);
+                    const gridCell = gameState.grid[y][x];
+                    
+                    if (gridCell === WALL) {
+                        cell.className += ' wall';
+                    } else if (isPlayer && isTarget) {
+                        cell.className += ' player-on-target';
+                    } else if (isPlayer) {
+                        cell.className += ' player';
+                    } else if (isBox && isTarget) {
+                        cell.className += ' box-on-target';
+                    } else if (isBox) {
+                        cell.className += ' box';
+                    } else if (isTarget) {
+                        cell.className += ' target';
+                    } else {
+                        cell.className += ' floor';
+                    }
+                    
+                    board.appendChild(cell);
+                }
+            }
+            
+            if (gameState.isWon()) {
+                setTimeout(() => {
+                    alert('🎉 Congratulations! Level completed!');
+                }, 100);
+            }
+        }
+        
+        function updateStats() {
+            document.getElementById('levelNumber').textContent = currentLevel + 1;
+            document.getElementById('moveCount').textContent = gameState.moves;
+            document.getElementById('pushCount').textContent = gameState.pushes;
+        }
+        
+        function resetLevel() {
+            stopAI();
+            gameState = originalState.clone();
+            updateDisplay();
+            updateStats();
+        }
+        
+        function nextLevel() {
+            stopAI();
+            currentLevel = (currentLevel + 1) % levels.length;
+            initializeGame();
+        }
+        
+        function prevLevel() {
+            stopAI();
+            currentLevel = (currentLevel - 1 + levels.length) % levels.length;
+            initializeGame();
+        }
+        
+        function generateRandomLevel() {
+            stopAI();
+            const randomLevel = generateRandomSokobanLevel();
+            levels[currentLevel] = randomLevel;
+            initializeGame();
+        }
+        
+        function generateRandomSokobanLevel() {
+            const width = 8;
+            const height = 7;
+            const level = Array(height).fill().map(() => Array(width).fill(FLOOR));
+            
+            // Add walls around perimeter
+            for (let x = 0; x < width; x++) {
+                level[0][x] = WALL;
+                level[height-1][x] = WALL;
+            }
+            for (let y = 0; y < height; y++) {
+                level[y][0] = WALL;
+                level[y][width-1] = WALL;
+            }
+            
+            // Add some internal walls
+            for (let i = 0; i < 8; i++) {
+                const x = Math.floor(Math.random() * (width - 2)) + 1;
+                const y = Math.floor(Math.random() * (height - 2)) + 1;
+                level[y][x] = WALL;
+            }
+            
+            // Place player
+            let playerPlaced = false;
+            while (!playerPlaced) {
+                const x = Math.floor(Math.random() * (width - 2)) + 1;
+                const y = Math.floor(Math.random() * (height - 2)) + 1;
+                if (level[y][x] === FLOOR) {
+                    level[y][x] = PLAYER;
+                    playerPlaced = true;
+                }
+            }
+            
+            // Place boxes and targets
+            const numBoxes = 3;
+            for (let i = 0; i < numBoxes; i++) {
+                // Place box
+                let boxPlaced = false;
+                while (!boxPlaced) {
+                    const x = Math.floor(Math.random() * (width - 2)) + 1;
+                    const y = Math.floor(Math.random() * (height - 2)) + 1;
+                    if (level[y][x] === FLOOR) {
+                        level[y][x] = BOX;
+                        boxPlaced = true;
+                    }
+                }
+                
+                // Place target
+                let targetPlaced = false;
+                while (!targetPlaced) {
+                    const x = Math.floor(Math.random() * (width - 2)) + 1;
+                    const y = Math.floor(Math.random() * (height - 2)) + 1;
+                    if (level[y][x] === FLOOR) {
+                        level[y][x] = TARGET;
+                        targetPlaced = true;
+                    }
+                }
+            }
+            
+            return level.map(row => row.join(''));
+        }
+        
+        async function toggleAI() {
+            const button = document.getElementById('aiButton');
+            const status = document.getElementById('aiStatus');
+            
+            if (isAIRunning) {
+                stopAI();
+                return;
+            }
+            
+            button.disabled = true;
+            button.textContent = '🤖 Solving...';
+            status.textContent = 'AI: Calculating solution...';
+            
+            // Small delay to update UI
+            await new Promise(resolve => setTimeout(resolve, 100));
+            
+            const solver = new AISolver(gameState);
+            aiSolution = solver.solve();
+            
+            if (aiSolution) {
+                isAIRunning = true;
+                aiStepIndex = 0;
+                button.textContent = '⏹️ Stop AI';
+                button.disabled = false;
+                status.textContent = `AI: Found solution (${aiSolution.length} moves)`;
+                executeAIStep();
+            } else {
+                button.textContent = '🤖 Start AI Solver';
+                button.disabled = false;
+                status.textContent = 'AI: No solution found';
+            }
+        }
+        
+        function executeAIStep() {
+            if (!isAIRunning || aiStepIndex >= aiSolution.length) {
+                stopAI();
+                return;
+            }
+            
+            const move = aiSolution[aiStepIndex];
+            if (gameState.move(move)) {
+                updateDisplay();
+                updateStats();
+                aiStepIndex++;
+                
+                if (gameState.isWon()) {
+                    stopAI();
+                    document.getElementById('aiStatus').textContent = 'AI: Level completed!';
+                } else {
+                    setTimeout(executeAIStep, 200);
+                }
+            } else {
+                stopAI();
+                document.getElementById('aiStatus').textContent = 'AI: Move failed';
+            }
+        }
+        
+        function stopAI() {
+            isAIRunning = false;
+            aiSolution = [];
+            aiStepIndex = 0;
+            document.getElementById('aiButton').textContent = '🤖 Start AI Solver';
+            document.getElementById('aiButton').disabled = false;
+            document.getElementById('aiStatus').textContent = 'AI: Ready';
+        }
+        
+        // Event listeners
+        document.addEventListener('keydown', (e) => {
+            if (isAIRunning) return;
+            
+            if (directions[e.key]) {
+                e.preventDefault();
+                if (gameState.move(e.key)) {
+                    updateDisplay();
+                    updateStats();
+                }
+            }
+        });
+        
+        // Initialize the game
+        initializeGame();
+    </script>
+</body>
+</html>
