@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  height: 100vh; /* full height of the viewport */
+  display: flex;
+  justify-content: center; /* horizontal center */
+  align-items: center;     /* vertical center */
+  background-color: #111;  /* optional background */
+}
+
+video {
+  max-width: 50%;
+  max-height: 50%;
+}
