@@ -3,12 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tea</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Tea Animation</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: rgb(135, 81, 81);
+      overflow: hidden;
+    }
+
+    .sprite {
+      width: 1024px; /* Keep original frame size */
+      height: 1024px; /* Keep original frame size */
+      background: url('sprite_1024.png') left top no-repeat;
+      background-size: 36864px 1024px; /* Keep original sprite dimensions */
+      animation: play 1.5s steps(36) infinite;
+      transform: scale(0.25); /* Scale down to 1/4 size visually */
+      transform-origin: center;
+    }
+
+    @keyframes play {
+      from { background-position: 0 0; }
+      to   { background-position: -36864px 0; } /* Full original width */
+    }
+  </style>
 </head>
-<video autoplay loop muted playsinline>
-  <source src="animation-alpha.webm" type="video/webm">
-  <source src="animation-safari.mp4" type="video/mp4">
-</video>
+<body>
+  <div class="sprite"></div>
 </body>
 </html>

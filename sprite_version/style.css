@@ -1,0 +1,33 @@
+/* body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: rgb(135, 81, 81);
+} */
+.sprite {
+  width: 2048px;
+  height: 2048px;
+  background: url('sprite.png') left top no-repeat;
+  background-size: 73728px 2048px;
+  border: 5px solid lime; /* makes the div visible */
+  color: white;
+  font-size: 50px;
+}
+
+
+/* .sprite {
+  width: 2048px; 
+  height: 2048px;
+  background: url('sprite.png') left center no-repeat;
+  background-size: 3600% auto; 
+  animation: play 1.5s steps(36) infinite;
+}
+
+@keyframes play {
+  from { background-position: 0 0; }
+  to   { background-position: 100% 0; }
+} */
+
+/* 4724 */
