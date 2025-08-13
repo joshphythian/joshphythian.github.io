@@ -13,8 +13,9 @@
       min-height: 100vh;
       background: rgb(119, 113, 113);
       overflow: hidden;
-      padding: 20px;
+      padding: 0;
       box-sizing: border-box;
+      position: relative;
     }
 
     .sprite {
@@ -24,8 +25,11 @@
       background-size: 36864px 1024px; /* Keep original sprite dimensions */
       animation: play 1.5s steps(36) infinite;
       transform: scale(0.25); /* Scale down to 1/4 size visually */
-      transform-origin: center;
-      flex-shrink: 0; /* Prevent flex from shrinking it */
+      transform-origin: center center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -512px 0 0 -512px; /* Negative margins = half of original size */
     }
 
     /* Mobile responsive scaling */
@@ -49,5 +53,6 @@
 </head>
 <body>
   <div class="sprite"></div>
+  <!-- https://www.instagram.com/will.hardison/ -->
 </body>
 </html>
