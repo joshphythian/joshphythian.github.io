@@ -10,9 +10,11 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background: rgb(124, 117, 117);
+      min-height: 100vh;
+      background: rgb(135, 81, 81);
       overflow: hidden;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .sprite {
@@ -23,6 +25,20 @@
       animation: play 1.5s steps(36) infinite;
       transform: scale(0.25); /* Scale down to 1/4 size visually */
       transform-origin: center;
+      flex-shrink: 0; /* Prevent flex from shrinking it */
+    }
+
+    /* Mobile responsive scaling */
+    @media (max-width: 480px) {
+      .sprite {
+        transform: scale(0.15); /* Smaller on mobile */
+      }
+    }
+
+    @media (max-width: 320px) {
+      .sprite {
+        transform: scale(0.12); /* Even smaller on very small screens */
+      }
     }
 
     @keyframes play {
