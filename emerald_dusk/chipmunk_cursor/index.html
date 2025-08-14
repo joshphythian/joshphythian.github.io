@@ -49,7 +49,7 @@
     color: var(--gold-1);
     position: relative;
     overflow: hidden;
-    border-radius: 20px;
+    /* border-radius: 20px; */
     background-color: var(--gold-3); /* fallback */
 
     background-image:
@@ -194,6 +194,11 @@
             transform: translate(-300px, 300px) rotate(-720deg); 
             opacity: 0;
         } */
+        }
+        @media (max-width: 600px) {
+        .emerald-text {
+            font-size: 48px; /* smaller size for mobile */
+        }
         }
 </style>
 <head>
