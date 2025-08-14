@@ -55,7 +55,7 @@
     position: relative;
     overflow: hidden;
     background-size: 300% 300%;     /* for animations */
-    animation: goldShimmer 5s infinite linear;
+    animation: goldShimmer 10s infinite linear;
 
     /* border-radius: 20px; */
     background-color: var(--gold-3); /* fallback */
@@ -68,8 +68,13 @@
         linear-gradient(145deg,
         var(--gold-6) 0%,
         var(--gold-5) 10%,
+        var(--gold-2) 14%,
+        var(--gold-3) 18%,
         var(--gold-4) 20%,
         var(--gold-1) 22%, /*bright streak */
+        var(--gold-5) 23%,
+        var(--gold-6) 24%,
+        var(--gold-5) 26%,
         var(--gold-3) 28%,
         var(--gold-1) 32%, /* bright streak 1 */
         var(--gold-2) 34%,
@@ -124,8 +129,11 @@
 
         .emerald-text {
         cursor: url('exact_chipmunk64.png') 64 64, auto;
-
-        font-size: 7rem;
+        user-select: none;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none;    /* Firefox */
+        -ms-user-select: none;
+        font-size: 12rem;
         font-weight: 1500;
         text-transform: uppercase;
         color: rgba(4,99,7,0.25);
@@ -205,9 +213,49 @@
         }
         @media (max-width: 600px) {
         .emerald-text {
-            font-size: 36px; /* smaller size for mobile */
+            font-size: 64px; /* smaller size for mobile */
         }
         }
+        @media (max-width: 768px) {
+        @keyframes sparkleExplosionMobile {
+            0% {
+            transform: translate(10%, -10%) scale(0) rotate(0deg);
+            opacity: 0;
+            background: white;
+            }
+            20% {
+            transform: translate(10%, -10%) scale(1.2) rotate(90deg);
+            opacity: 1;
+            background: gold;
+            }
+            40% {
+            transform: translate(10%, -10%) scale(0.9) rotate(180deg);
+            opacity: 0.9;
+            background: limegreen;
+            }
+            60% {
+            transform: translate(10%, -20%) scale(1.4) rotate(270deg);
+            opacity: 1;
+            background: white;
+            }
+            80% {
+            transform: translate(35%, -45%) scale(0.8) rotate(360deg);
+            opacity: 0.6;
+            background: gold;
+            }
+            100% {
+            transform: translate(50%, -75%) scale(0) rotate(450deg);
+            opacity: 0;
+            background: white;
+            }
+        }
+
+        /* Force sparkle elements to use the smaller mobile animation */
+        .sparkle::after {
+            animation-name: sparkleExplosionMobile !important;
+        }
+        }
+            
         @keyframes goldShimmer {
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
@@ -215,40 +263,89 @@
         50% { background-position: 50% 0%; }
         /* 0% { background-position: 0% 50%; } */
         }
-        .emerald-text span {
-        position: relative;
-        display: inline-block;
-        }
+.emerald-text span {
+  position: relative;
+  display: inline-block;
+  transform-origin: center center;
+  animation: wobble 3s ease-in-out infinite;
+}
+.emerald-text .letter {
+  display: inline-block;
+}
+.sparkle::after {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  transform: translate(-25%, -25%) scale(0) rotate(0deg);
+  width: 24px;
+  height: 24px;
+  background: white;
+  clip-path: polygon(
+    50% 0%, 65% 35%, 100% 50%, 65% 65%,
+    50% 100%, 35% 65%, 0% 50%, 35% 35%
+  );
+  box-shadow:
+    0 0 8px 3px gold,
+    0 0 16px 5px rgba(0, 255, 127, 0.8),
+    0 0 24px 8px rgba(255, 255, 255, 0.6);
+  mix-blend-mode: screen;
+  opacity: 0;
+  animation: sparkleExplosion 2.5s infinite ease-in-out;
+}
 
-        .sparkle::after {
-        content: '';
-        position: absolute;
-        top: -15px;
-        left: 50%;
-        transform: translateX(-50%) scale(0) rotate(45deg);
-        width: 20px;
-        height: 20px;
-        background: white;
-        clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
-        box-shadow: 0 0 6px 2px gold, 0 0 12px 4px rgba(255, 215, 0, 0.8);
-        opacity: 0;
-        animation: sparkleBurst 2s infinite ease-in-out;
-        }
+@keyframes sparkleExplosion {
+  0% {
+    transform: translate(0%, -10%) scale(0) rotate(0deg);
+    opacity: 0;
+    background: white;
+  }
+  20% {
+    transform: translate(0%, -10%) scale(2) rotate(90deg);
+    opacity: 1;
+    background: gold;
+  }
+  40% {
+    transform: translate(0%, -10%) scale(1.3) rotate(180deg);
+    opacity: 0.9;
+    background: limegreen;
+  }
+  60% {
+    transform: translate(0%, -20%) scale(2.2) rotate(270deg);
+    opacity: 1;
+    background: white;
+  }
+  80% {
+    transform: translate(25%, -45%) scale(1) rotate(360deg);
+    opacity: 0.6;
+    background: gold;
+  }
+  100% {
+    transform: translate(50%, -75%) scale(0) rotate(450deg);
+    opacity: 0;
+    background: white;
+  }
+}
+@keyframes wobble {
+  0%, 100% { transform: rotate(var(--base-rot)); }
+  50% { transform: rotate(calc(var(--base-rot) + var(--wobble-amt))); }
+}
 
-        @keyframes sparkleBurst {
-        0%, 100% {
-            transform: translateX(-50%) scale(0) rotate(45deg);
-            opacity: 0;
-        }
-        40% {
-            transform: translateX(-50%) scale(1.5) rotate(45deg);
-            opacity: 1;
-        }
-        60% {
-            transform: translateX(-50%) scale(0.8) rotate(45deg);
-            opacity: 0.8;
-        }
-        }
+/* Random delays so they don't all sparkle at once */
+.sparkle:nth-of-type(1)::after { animation-delay: 0s; }
+.sparkle:nth-of-type(2)::after { animation-delay: 0.7s; }
+.sparkle:nth-of-type(3)::after { animation-delay: 1.4s; }
+.ring {
+  position: absolute;
+  pointer-events: none; /* So clicks pass through */
+  animation: float 3s ease-in-out forwards;
+}
+
+@keyframes float {
+  0%   { transform: scale(0) rotate(0deg); opacity: 0; }
+  20%  { opacity: 1; }
+  100% { transform: scale(1.5) rotate(360deg); opacity: 0; }
+}
 </style>
 <head>
     <meta charset="UTF-8">
@@ -267,7 +364,20 @@
     <div class="gold-bg-crazy">
         <div class="emerald-text">
     <h1>
-    E<span class="sparkle">m</span>e<span class="sparkle">rald D</span>usk
+    <div class="emerald-text" id="emerald">
+        <span class="sparkle"><span class="letter">E</span></span>
+        <span><span class="letter">m</span></span>
+        <span><span class="letter">e</span></span>
+        <span class="sparkle"><span class="letter">r</span></span>
+        <span><span class="letter">a</span></span>
+        <span><span class="letter">l</span></span>
+        <span><span class="letter">d</span></span>
+        <span> </span>
+        <span class="sparkle"><span class="letter">D</span></span>
+        <span><span class="letter">u</span></span>
+        <span><span class="letter">s</span></span>
+        <span class="sparkle"><span class="letter">k</span></span>
+    </div>
     </h1>
     </div>
     <div class="main_content">
@@ -318,6 +428,42 @@ document.querySelector('.emerald-text').addEventListener('click', function(e) {
     poop.remove();
   });
 });
+document.querySelectorAll('#emerald > span').forEach(span => {
+  let baseRot = (Math.random() * 30 - 15).toFixed(2) + 'deg';
+  let wobbleAmt = (Math.random() * 10 - 5).toFixed(2) + 'deg';
+  let duration = (2 + Math.random() * 2).toFixed(2) + 's';
+  
+  span.style.setProperty('--base-rot', baseRot);
+  span.style.setProperty('--wobble-amt', wobbleAmt);
+  span.style.animationDuration = duration;
+});
+function spawnRing() {
+  const ring = document.createElement('img');
+
+  // Pick one of the two images randomly
+  const imgSrc = Math.random() < 0.5 ? 'cropped_golden_ring.png' : 'cropped_golden_ring2.png';
+  ring.src = imgSrc;
+  ring.className = 'ring';
+
+  // Random position in viewport
+  const x = Math.random() * window.innerWidth;
+  const y = Math.random() * window.innerHeight;
+  ring.style.left = `${x}px`;
+  ring.style.top = `${y}px`;
+
+  // Optional random size
+  const size = 40 + Math.random() * 80; // 40–120 px
+  ring.style.width = `${size}px`;
+  ring.style.height = 'auto';
+
+  document.body.appendChild(ring);
+
+  // Remove after animation ends
+  setTimeout(() => ring.remove(), 3000);
+}
+
+// Spawn a new ring every 300ms
+setInterval(spawnRing, 300);
 </script>
 
 </html>
