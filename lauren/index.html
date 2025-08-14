@@ -92,10 +92,17 @@
             text-transform: uppercase;
             line-height: 0.9;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+            text-decoration: none;
+            transition: all 1s ease;
         }
 
         .name:hover {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+        }
+
+        .name.clicked {
+            color: #c82333;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3), 0 0 10px rgba(200, 35, 51, 0.3);
         }
 
         .image-container {
@@ -313,7 +320,9 @@
 <body>
     <div class="container">
         <div class="main-content">
-            <h1 class="name">Lauren Lien</h1>
+            <span class="name" onclick="openEmail()">
+                Lauren Lien
+            </span>
             <div class="image-container" onclick="nextImage()">
                 <img src="Lauren3.jpg" class="image-style" id="main-image">
             </div>
@@ -337,6 +346,22 @@
     </div>
 
     <script>
+        // Email functionality for name
+        function openEmail() {
+            const nameElement = document.querySelector('.name');
+            
+            // Add the red color effect
+            nameElement.classList.add('clicked');
+            
+            // Remove the red color after 1 second
+            setTimeout(() => {
+                nameElement.classList.remove('clicked');
+            }, 1000);
+            
+            // Open email client
+            window.location.href = 'mailto:lauren@example.com';
+        }
+
         function showTab(tabName) {
             // Add a more brutal click feedback
             const clickedTab = event.target;
