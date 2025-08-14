@@ -41,6 +41,11 @@
     }
 
     .gold-bg-crazy{
+    display: flex;                  /* use flexbox */
+    justify-content: center;        /* horizontal centering */
+    align-items: center;            /* vertical centering */
+    height: 50%;
+    width: 100%;                     /* full width */
     cursor: url('exact_chipmunk32.png') 32 32, auto;
     min-height: 60vh;
     display: grid;
@@ -49,6 +54,9 @@
     color: var(--gold-1);
     position: relative;
     overflow: hidden;
+    background-size: 300% 300%;     /* for animations */
+    animation: goldShimmer 5s infinite linear;
+
     /* border-radius: 20px; */
     background-color: var(--gold-3); /* fallback */
 
@@ -197,7 +205,48 @@
         }
         @media (max-width: 600px) {
         .emerald-text {
-            font-size: 48px; /* smaller size for mobile */
+            font-size: 36px; /* smaller size for mobile */
+        }
+        }
+        @keyframes goldShimmer {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+        50% { background-position: 50% 0%; }
+        /* 0% { background-position: 0% 50%; } */
+        }
+        .emerald-text span {
+        position: relative;
+        display: inline-block;
+        }
+
+        .sparkle::after {
+        content: '';
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%) scale(0) rotate(45deg);
+        width: 20px;
+        height: 20px;
+        background: white;
+        clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+        box-shadow: 0 0 6px 2px gold, 0 0 12px 4px rgba(255, 215, 0, 0.8);
+        opacity: 0;
+        animation: sparkleBurst 2s infinite ease-in-out;
+        }
+
+        @keyframes sparkleBurst {
+        0%, 100% {
+            transform: translateX(-50%) scale(0) rotate(45deg);
+            opacity: 0;
+        }
+        40% {
+            transform: translateX(-50%) scale(1.5) rotate(45deg);
+            opacity: 1;
+        }
+        60% {
+            transform: translateX(-50%) scale(0.8) rotate(45deg);
+            opacity: 0.8;
         }
         }
 </style>
@@ -217,7 +266,12 @@
     </div>
     <div class="gold-bg-crazy">
         <div class="emerald-text">
-    <h1>Emerald Dusk</h1>
+    <h1>
+    E<span class="sparkle">m</span>e<span class="sparkle">rald D</span>usk
+    </h1>
+    </div>
+    <div class="main_content">
+        <!-- <h1>Emerald Dusk</h1> -->
     </div>
     </div>
 </body>
