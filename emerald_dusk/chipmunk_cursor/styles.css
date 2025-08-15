@@ -228,6 +228,13 @@
         @media (max-width: 600px) {
         .emerald-text {
             font-size: 64px; /* smaller size for mobile */
+            max-width: 11ch;  /* no more than ~7 characters per line */
+            display: inline-block;
+            text-align: left;
+            white-space: normal;   /* allow wrapping */
+
+            left: -20px;
+            top: 10px;  
         }
         
         .main_content {
@@ -407,7 +414,11 @@
   display: block;
   height: clamp(40px, 5vw, 80px); /* Responsive vertical space */
 }
-
+@media (max-width: 768px) {
+    .spacer {
+        height: 20px; /* or whatever smaller size you want */
+    }
+}
 body {
     margin: 0;
     height: 100vh; /* Full screen height */
@@ -424,3 +435,4 @@ body {
     max-width: 100%;
     height: auto;
 }
+
