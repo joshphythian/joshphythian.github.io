@@ -82,10 +82,11 @@
         }
 
         .name {
-            font-family: 'Anton', 'Arial Black', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;            
             font-size: 7rem;
             font-weight: 400;
-            color: rgb(7, 7, 7);
+            /* color: rgb(7, 7, 7); */
+            color: rgba(218, 23, 202, 0.853);
             text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.3);
             letter-spacing: 4px;
             margin-bottom: 30px;
@@ -139,7 +140,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: rgb(7, 7, 7);
+            /* color: rgb(7, 7, 7); */
+            color: rgba(218, 23, 202, 0.853);
             font-family: 'Oswald', sans-serif;
             font-size: 1.8rem;
             font-weight: 800;
@@ -154,15 +156,19 @@
             backdrop-filter: blur(15px);
             display: flex;
             flex-direction: column;
-            justify-content: space-evenly;
-            padding: 80px 30px;
+            justify-content: flex-start; /* Changed from space-evenly to flex-start */
+            align-items: stretch;
+            padding: 40px 30px; /* Reduced top padding to match main content */
+            gap: 20px; /* Added gap between nav tabs */
         }
 
         .nav-tab {
-            font-family: 'Oswald', 'Arial Black', sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             background: rgba(246, 246, 246, 0.913);
-            border: 3px solid #060606;
-            color: rgb(7, 7, 7);
+            /* border: 3px solid #060606; */
+            border: 3px solid rgba(218, 23, 202, 0.853);
+            color: rgba(218, 23, 202, 0.853);
+            /* color: rgb(7, 7, 7); */
             padding: 25px 30px;
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
             transition: all 0.2s ease;
