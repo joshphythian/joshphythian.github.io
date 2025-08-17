@@ -225,31 +225,59 @@
             opacity: 0;
         } */
         }
-        @media (max-width: 600px) {
+                @media (max-width: 1500px) {
         .emerald-text {
-            font-size: 64px; /* smaller size for mobile */
+            font-size: 6rem; 
             max-width: 11ch;  /* no more than ~7 characters per line */
             display: inline-block;
             text-align: left;
             white-space: normal;   /* allow wrapping */
 
-            left: -20px;
-            top: 10px;  
+            left: -60px;
+            top: 15px;  
         }
-        
         .main_content {
-            font-size: 10;
-            /* font: 20 2.5rem/1.2 system-ui, sans-serif; */
-
+          font-size: 1rem;
         }
         }
         @media (max-width: 999px) {
         .main_content {
             font-size: 10;
-            font: 20 1.5rem/1.2 system-ui, sans-serif;
+            /* font: 20 1.5rem/1.2 system-ui, sans-serif; */
 
         }
         }
+        @media (max-width: 768px) {
+        .emerald-text {
+          font-size: 5rem; /* smaller size for mobile */
+          max-width: 11ch;  /* no more than ~7 characters per line */
+            display: inline-block;
+            text-align: left;
+            white-space: normal;
+
+            left: -5px;
+            top: 30px;  
+        }
+        
+        .main_content {
+            font-size: 1.5rem;
+            /* font: 20 2.5rem/1.2 system-ui, sans-serif; */
+
+        }
+        }
+        @media (max-width: 600px) {
+          .emerald-text {
+              font-size: 4rem;
+            max-width: 11ch;  /* no more than ~7 characters per line */
+            display: inline-block; 
+            text-align: left;
+            white-space: normal;
+              /* font: 20 1.5rem/1.2 system-ui, sans-serif; */
+
+          }
+        }
+
+
         @media (max-width: 768px) {
         @keyframes sparkleExplosionMobile {
             0% {
@@ -392,8 +420,8 @@
 
 .jump-effect {
   animation: mobJumpRotate 0.6s cubic-bezier(0.33, 1.5, 0.66, 1);
-  color: red;
-  text-shadow: 0 0 8px #ff4d4d, 0 0 15px #ff0000, 0 0 30px #ff6666;
+  /* color: red; */
+  /* text-shadow: 0 0 8px #ff4d4d, 0 0 15px #ff0000, 0 0 30px #ff6666; */
 }
 
 /* @keyframes mobJumpRotateLite {
