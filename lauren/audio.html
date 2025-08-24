@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lauren Lien - Audio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Oswald:wght@400;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Arial Black', sans-serif;
+            background: #ececec;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .site-title {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 4rem;
+            font-weight: 400;
+            color: #f2abb9;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            line-height: 0.9;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .site-title:hover {
+            color: #c82333;
+        }
+
+        .section-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f2abb9;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .controls-bar {
+            background: rgba(246, 246, 246, 0.913);
+            border: 3px solid #f2abb9;
+            /* border-radius: 15px; */
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #f2abb9;
+            color: #f2abb9;
+            padding: 8px 16px;
+            /* border-radius: 25px; */
+            cursor: pointer;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #f2abb9;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(242, 171, 185, 0.3);
+        }
+
+        .search-box {
+            border: 2px solid #f2abb9;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 15px;
+            /* border-radius: 25px; */
+            font-family: 'Oswald', sans-serif;
+            font-size: 1rem;
+            outline: none;
+            min-width: 200px;
+            transition: all 0.2s ease;
+        }
+
+        .search-box:focus {
+            border-color: #c82333;
+            box-shadow: 0 0 10px rgba(200, 35, 51, 0.2);
+        }
+
+        .audio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .audio-card {
+            background: rgba(246, 246, 246, 0.913);
+            border: 3px solid #f2abb9;
+            /* border-radius: 20px; */
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(242, 171, 185, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-card:hover::before {
+            left: 100%;
+        }
+
+        .audio-card:hover {
+            transform: translateY(-8px) translateX(-4px);
+            box-shadow: 6px 6px 0px rgba(242, 171, 185, 0.6);
+            border-color: #c82333;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .show-title {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #f2abb9;
+            margin-bottom: 5px;
+            line-height: 1.2;
+        }
+
+        .show-date {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .show-duration {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #c82333;
+            background: rgba(200, 35, 51, 0.1);
+            padding: 4px 8px;
+            /* border-radius: 12px; */
+            letter-spacing: 1px;
+        }
+
+        .waveform-container {
+            height: 60px;
+            background: rgba(242, 171, 185, 0.1);
+            border-radius: 10px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waveform {
+            display: flex;
+            align-items: end;
+            height: 100%;
+            padding: 5px;
+            gap: 1px;
+        }
+
+        .wave-bar {
+            background: #f2abb9;
+            border-radius: 2px;
+            flex: 1;
+            min-height: 2px;
+            transition: all 0.2s ease;
+            opacity: 0.6;
+        }
+
+        .wave-bar.active {
+            background: #c82333;
+            opacity: 1;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background: #c82333;
+            border-radius: 1px;
+            transition: left 0.1s linear;
+            z-index: 2;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .play-btn {
+            width: 50px;
+            height: 50px;
+            border: 3px solid #f2abb9;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.2rem;
+        }
+
+        .play-btn:hover {
+            background: #f2abb9;
+            color: white;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(242, 171, 185, 0.4);
+        }
+
+        .time-info {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #666;
+            letter-spacing: 1px;
+        }
+
+        .volume-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .volume-slider {
+            width: 80px;
+            height: 4px;
+            background: rgba(242, 171, 185, 0.3);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .now-playing {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            background: rgba(246, 246, 246, 0.95);
+            border: 3px solid #f2abb9;
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(15px);
+            display: none;
+            align-items: center;
+            gap: 15px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .now-playing.visible {
+            transform: translateY(0);
+        }
+
+        .now-playing-info {
+            flex: 1;
+        }
+
+        .now-playing-title {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #f2abb9;
+            margin-bottom: 2px;
+        }
+
+        .now-playing-date {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.8rem;
+            color: #999;
+            letter-spacing: 1px;
+        }
+
+        .global-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-btn {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #c82333;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #c82333;
+            transition: all 0.2s ease;
+        }
+
+        .close-btn:hover {
+            background: #c82333;
+            color: white;
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #f2abb9;
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            transform: translate(-50%, -50%);
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .playing .play-btn {
+            animation: pulse 2s infinite;
+            background: #c82333;
+            color: white;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+
+            .site-title {
+                font-size: 2.5rem;
+            }
+
+            .audio-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .audio-card {
+                padding: 20px;
+            }
+
+            .controls-bar {
+                padding: 15px;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .search-box {
+                min-width: 100%;
+            }
+
+            .controls {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .now-playing {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                padding: 15px;
+                flex-wrap: wrap;
+            }
+
+            .global-controls {
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .site-title {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .audio-card {
+                padding: 15px;
+            }
+
+            .show-title {
+                font-size: 1.2rem;
+            }
+
+            .volume-control {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="site-title" onclick="window.location.href='index.html'">lauren lien</div>
+        <div class="section-title">radio shows</div>
+    </div>
+
+    <div class="controls-bar">
+        <div class="filter-btn active" data-year="all">All Shows</div>
+        <div class="filter-btn" data-year="2024">2024</div>
+        <div class="filter-btn" data-year="2023">2023</div>
+        <div class="filter-btn" data-year="2022">2022</div>
+        <div class="filter-btn" data-year="2021">2021</div>
+        <input type="text" class="search-box" placeholder="Search shows..." id="searchBox">
+    </div>
+
+    <div class="audio-grid" id="audioGrid">
+        <!-- Audio cards will be dynamically generated -->
+    </div>
+
+    <div class="now-playing" id="nowPlaying">
+        <div class="now-playing-info">
+            <div class="now-playing-title" id="nowPlayingTitle">Show Title</div>
+            <div class="now-playing-date" id="nowPlayingDate">Date</div>
+        </div>
+        <div class="global-controls">
+            <div class="play-btn" id="globalPlayBtn" onclick="toggleGlobalPlayback()">▶</div>
+            <div class="time-info" id="globalTime">0:00 / 0:00</div>
+            <div class="close-btn" onclick="closeNowPlaying()">×</div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for radio shows (4 years worth)
+        const radioShows = [
+            {
+                id: 1,
+                title: "Midnight Reverie",
+                date: "2024-08-15",
+                year: "2024",
+                duration: "3600", // 1 hour in seconds
+                description: "Late night thoughts and ambient sounds"
+            },
+            {
+                id: 2,
+                title: "Dawn's Whisper",
+                date: "2024-08-08",
+                year: "2024", 
+                duration: "3600",
+                description: "Morning reflections and gentle melodies"
+            },
+            {
+                id: 3,
+                title: "Urban Dreamscape",
+                date: "2024-08-01",
+                year: "2024",
+                duration: "3600",
+                description: "City sounds mixed with ethereal vocals"
+            },
+            {
+                id: 4,
+                title: "Solitude Sessions",
+                date: "2023-12-20",
+                year: "2023",
+                duration: "3600",
+                description: "Intimate acoustic performances"
+            },
+            {
+                id: 5,
+                title: "Echoes of Tomorrow",
+                date: "2023-11-15",
+                year: "2023",
+                duration: "3600",
+                description: "Experimental electronic compositions"
+            },
+            {
+                id: 6,
+                title: "Poetry in Motion",
+                date: "2023-10-30",
+                year: "2023",
+                duration: "3600",
+                description: "Spoken word with ambient backing"
+            },
+            {
+                id: 7,
+                title: "Velvet Hours",
+                date: "2022-09-12",
+                year: "2022",
+                duration: "3600",
+                description: "Smooth jazz and contemplative thoughts"
+            },
+            {
+                id: 8,
+                title: "Digital Serenity",
+                date: "2022-06-08",
+                year: "2022",
+                duration: "3600",
+                description: "Synthesized calm for restless minds"
+            },
+            {
+                id: 9,
+                title: "Autumn Reflections",
+                date: "2021-11-03",
+                year: "2021",
+                duration: "3600",
+                description: "Seasonal musings and warm acoustic tones"
+            },
+            {
+                id: 10,
+                title: "First Light Chronicles",
+                date: "2021-05-20",
+                year: "2021",
+                duration: "3600",
+                description: "Beginning of a creative journey"
+            }
+        ];
+
+        let currentlyPlaying = null;
+        let currentAudio = null;
+        let filteredShows = [...radioShows];
+
+        // Generate random waveform data
+        function generateWaveform() {
+            const bars = [];
+            for (let i = 0; i < 50; i++) {
+                const height = Math.random() * 40 + 10; // Random height between 10-50px
+                bars.push(height);
+            }
+            return bars;
+        }
+
+        // Format duration from seconds to MM:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            });
+        }
+
+        // Create audio card HTML
+        function createAudioCard(show) {
+            const waveform = generateWaveform();
+            const waveformHTML = waveform.map(height => 
+                `<div class="wave-bar" style="height: ${height}px;"></div>`
+            ).join('');
+
+            return `
+                <div class="audio-card" data-id="${show.id}">
+                    <div class="card-header">
+                        <div>
+                            <div class="show-title">${show.title}</div>
+                            <div class="show-date">${formatDate(show.date)}</div>
+                        </div>
+                        <div class="show-duration">${formatTime(show.duration)}</div>
+                    </div>
+                    
+                    <div class="waveform-container" onclick="playShow(${show.id})">
+                        <div class="waveform">${waveformHTML}</div>
+                        <div class="progress-line" style="left: 0%"></div>
+                    </div>
+                    
+                    <div class="controls">
+                        <div class="play-btn" onclick="playShow(${show.id})">▶</div>
+                        <div class="time-info">0:00 / ${formatTime(show.duration)}</div>
+                        <div class="volume-control">
+                            <span style="font-size: 0.8rem;">🔊</span>
+                            <input type="range" class="volume-slider" min="0" max="100" value="80">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render audio cards
+        function renderAudioCards(shows = filteredShows) {
+            const grid = document.getElementById('audioGrid');
+            grid.innerHTML = shows.map(createAudioCard).join('');
+        }
+
+        // Play show
+        function playShow(showId) {
+            const show = radioShows.find(s => s.id === showId);
+            if (!show) return;
+
+            // Stop current playback
+            if (currentAudio) {
+                currentAudio.pause();
+                updatePlayButtonState(currentlyPlaying, false);
+            }
+
+            const card = document.querySelector(`[data-id="${showId}"]`);
+            card.classList.add('loading');
+
+            // Simulate audio loading (replace with actual audio file)
+            setTimeout(() => {
+                card.classList.remove('loading');
+                card.classList.add('playing');
+                
+                currentlyPlaying = showId;
+                
+                // Show now playing bar
+                showNowPlaying(show);
+                
+                // Update play button
+                updatePlayButtonState(showId, true);
+                
+                // Simulate audio progress
+                startProgressSimulation(showId, show.duration);
+            }, 1000);
+        }
+
+        // Update play button state
+        function updatePlayButtonState(showId, isPlaying) {
+            const card = document.querySelector(`[data-id="${showId}"]`);
+            const playBtn = card.querySelector('.play-btn');
+            const globalPlayBtn = document.getElementById('globalPlayBtn');
+            
+            if (isPlaying) {
+                playBtn.innerHTML = '⏸';
+                globalPlayBtn.innerHTML = '⏸';
+                card.classList.add('playing');
+            } else {
+                playBtn.innerHTML = '▶';
+                globalPlayBtn.innerHTML = '▶';
+                card.classList.remove('playing');
+            }
+        }
+
+        // Show now playing bar
+        function showNowPlaying(show) {
+            const nowPlaying = document.getElementById('nowPlaying');
+            const title = document.getElementById('nowPlayingTitle');
+            const date = document.getElementById('nowPlayingDate');
+            
+            title.textContent = show.title;
+            date.textContent = formatDate(show.date);
+            
+            nowPlaying.style.display = 'flex';
+            setTimeout(() => nowPlaying.classList.add('visible'), 10);
+        }
+
+        // Close now playing
+        function closeNowPlaying() {
+            const nowPlaying = document.getElementById('nowPlaying');
+            nowPlaying.classList.remove('visible');
+            
+            if (currentlyPlaying) {
+                updatePlayButtonState(currentlyPlaying, false);
+                const card = document.querySelector(`[data-id="${currentlyPlaying}"]`);
+                card.classList.remove('playing');
+                currentlyPlaying = null;
+            }
+            
+            setTimeout(() => nowPlaying.style.display = 'none', 300);
+        }
+
+        // Toggle global playback
+        function toggleGlobalPlayback() {
+            if (currentlyPlaying) {
+                const card = document.querySelector(`[data-id="${currentlyPlaying}"]`);
+                const isPlaying = card.classList.contains('playing');
+                
+                if (isPlaying) {
+                    updatePlayButtonState(currentlyPlaying, false);
+                    card.classList.remove('playing');
+                } else {
+                    updatePlayButtonState(currentlyPlaying, true);
+                    card.classList.add('playing');
+                }
+            }
+        }
+
+        // Simulate progress animation
+        function startProgressSimulation(showId, duration) {
+            let currentTime = 0;
+            const interval = setInterval(() => {
+                if (currentlyPlaying !== showId) {
+                    clearInterval(interval);
+                    return;
+                }
+                
+                currentTime += 1;
+                const progress = (currentTime / duration) * 100;
+                
+                const card = document.querySelector(`[data-id="${showId}"]`);
+                const progressLine = card.querySelector('.progress-line');
+                const timeInfo = card.querySelector('.time-info');
+                const globalTime = document.getElementById('globalTime');
+                
+                progressLine.style.left = `${progress}%`;
+                timeInfo.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+                globalTime.textContent = `${formatTime(currentTime)} / ${formatTime(duration)}`;
+                
+                // Animate wave bars
+                const waveBars = card.querySelectorAll('.wave-bar');
+                waveBars.forEach((bar, index) => {
+                    const isActive = (index / waveBars.length * 100) < progress;
+                    bar.classList.toggle('active', isActive);
+                });
+                
+                if (currentTime >= duration) {
+                    clearInterval(interval);
+                    closeNowPlaying();
+                }
+            }, 100); // Update every 100ms for smooth animation
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const year = btn.dataset.year;
+                if (year === 'all') {
+                    filteredShows = [...radioShows];
+                } else {
+                    filteredShows = radioShows.filter(show => show.year === year);
+                }
+                
+                renderAudioCards(filteredShows);
+            });
+        });
+
+        // Search functionality
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const activeYear = document.querySelector('.filter-btn.active').dataset.year;
+            
+            let shows = activeYear === 'all' ? [...radioShows] : radioShows.filter(show => show.year === activeYear);
+            
+            if (query) {
+                shows = shows.filter(show => 
+                    show.title.toLowerCase().includes(query) ||
+                    show.description.toLowerCase().includes(query)
+                );
+            }
+            
+            filteredShows = shows;
+            renderAudioCards(filteredShows);
+        });
+
+        // Initialize the player
+        renderAudioCards();
+    </script>
+</body>
+</html>

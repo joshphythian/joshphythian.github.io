@@ -67,6 +67,10 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
         }
 
+        .star-cursor {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23c82333;stroke-width:2;"/></svg>'), auto;
+        }
+
         .container {
             display: flex;
             height: 100vh;
@@ -174,7 +178,8 @@
             /* color: rgba(218, 23, 202, 0.853); */
             /* color: rgb(7, 7, 7); */
             padding: 5px 10px;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+            /* cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto; */
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23c82333;stroke-width:2;"/></svg>'), auto;
             transition: all 0.2s ease;
             font-size: 2rem;
             font-weight: 800;
@@ -341,7 +346,8 @@
         
         <div class="sidebar">
             <div class="nav-tab first" onclick="showTab('about')">about</div>
-            <div class="nav-tab" onclick="showTab('audio')">audio</div>
+            <!-- <div class="nav-tab" onclick="showTab('audio')">audio</div> -->
+            <a href="audio.html" class="nav-tab">audio</a>
             <div class="nav-tab" onclick="showTab('poetry')">poetry</div>
         </div>
     </div>
