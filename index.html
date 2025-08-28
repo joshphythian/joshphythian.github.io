@@ -1,75 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Josh Phythian</title>
-<link rel="stylesheet" href="styles.css" />
-</head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Josh</title>
 <style>
-html {
-    scroll-behavior: smooth;
-}
-</style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #111;
+      font-family: "Akzidenz-Grotesk", "Franklin Gothic Medium", sans-serif;
+      color: #abbbb5;
+      transition: font-family 0.3s ease;
+    }
+
+    /* Font families */
+    body.baskerville { font-family: "Libre Baskerville", Baskerville, serif; }
+    body.garamond { font-family: "EB Garamond", Garamond, serif; }
+    body.caslon { font-family: "Libre Caslon Text", "Adobe Caslon Pro", serif; }
+    body.bodoni { font-family: "Bodoni Moda", "Didot", serif; }
+    body.clarendon { font-family: "Clarendon", "Rockwell", serif; }
+    body.berthold { font-family: "Akzidenz-Grotesk", "Franklin Gothic Medium", sans-serif; }
+    body.times { font-family: "Times New Roman", Times, serif; }
+    body.helvetica { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    body.univers { font-family: "Univers", "Segoe UI", sans-serif; }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(34, 34, 34, 0.8);
+      color: #abbbb5;
+      border: 1px solid #444;
+      padding: 12px 16px;
+      font-size: 12px;
+      /* border-radius: 4px; */
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: rgba(136, 199, 178, 0.2);
+      border-color: #89c7b2;
+      color: #89c7b2;
+      transform: translateY(-2px);
+    }
+
+    .name {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #abbbb5;
+      font-size: 24px;
+      font-weight: bold;
+      z-index: 100;
+    }
+
+    .nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 100;
+    }
+
+    .nav a {
+      color: #abbbb5;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #89c7b2;
+    }
+
+    /* Home Section */
+    .home-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-wrapper {
+      width: 33%;
+      max-width: 400px;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Research Section */
+    .research-section {
+      min-height: 100vh;
+      padding: 80px 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #abbbb5;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 60px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .research-item {
+      aspect-ratio: 4/3;
+      background: #222;
+      /* border-radius: 8px; */
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-height: 300px;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .research-item:hover {
+      transform: scale(1.05);
+      border-radius: 8px;
+    }
+
+    .research-image {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #333, #555);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #abbbb5;
+      font-size: 16px;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+      line-height: 1.3;
+      transition: opacity 0.3s ease;
+    }
+
+    .research-name {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.95);
+      display: block;
+      color: #abbbb5;
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: left;
+      padding: 25px;
+      line-height: 1.4;
+      overflow-y: auto;
+    }
+
+    .research-name p {
+      margin: 0 0 12px 0;
+    }
+
+    .research-name p:last-child {
+      margin-bottom: 0;
+    }
+
+    .research-name strong {
+      color: #89c7b2;
+      font-weight: 600;
+    }
+
+    .research-name a {
+      color: #89c7b2;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    .research-name a:hover {
+      color: #abbbb5;
+      /* border-radius: 8px; */
+    }
+
+    .research-name .list-intro {
+      margin-bottom: 8px;
+    }
+
+    .research-name ul {
+      margin: 0 0 12px 0;
+      padding-left: 18px;
+    }
+
+    .research-name li {
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .research-name ul.tight-list {
+      margin-bottom: 8px;
+    }
+
+    .research-name ul.tight-list li {
+      margin-bottom: 2px;
+    }
+
+    .research-item:hover .research-name {
+      opacity: 1;
+    }
+
+    /* Projects Section */
+    .projects-section {
+      min-height: 100vh;
+      padding: 80px 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project-item {
+      aspect-ratio: 1;
+      background: #222;
+      /* border-radius: 8px; */
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-height: 250px;
+    }
+
+    .project-item:hover {
+      transform: scale(1.05);
+      border-radius: 8px;
+    }
+
+    .project-image {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #333, #555);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #666;
+      font-size: 14px;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-name {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #abbbb5;
+      font-size: 18px;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-item:hover .project-name {
+      opacity: 1;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .research-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .research-item {
+        max-width: none;
+      }
+      
+      .video-wrapper {
+        width: 80%;
+      }
+      
+      .nav {
+        flex-direction: row;
+        gap: 20px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+        margin-bottom: 40px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1300px) {
+      .research-grid {
+        max-width: 1200px;
+        gap: 20px;
+      }
+      
+      .research-item {
+        max-width: 350px;
+      }
+    }
+    a {
+    color: #abbbb5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+
+    a:hover {
+    color: #89c7b2;
+    text-decoration: underline;
+    }
+
+    a:visited {
+    color: #abbbb5;
+    }
+
+    a:active {
+    color: #89c7b2;
+    }
+    /* Individual project backgrounds */
+    .project-item:nth-child(1) .project-image { background: url('images/project1.png') center center no-repeat; background-size: cover; }
+      /*Sprite for 2nd  */
+    .project-item:nth-child(2) .project-image { 
+    position: relative; 
+    overflow: hidden; 
+    }    
+    .project-item:nth-child(3) .project-image { background: url('images/project3.png') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(4) .project-image { background: url('images/project4.png') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(5) .project-image { background: url('images/project5.png') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(6) .project-image { background: url('images/project6.png') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(7) .project-image { background: url('images/project7.png') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(8) .project-image { background: url('images/project8.png') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(9) .project-image { background: url('images/project9.png') center center no-repeat; background-size: cover; }
+
+
+    .project-sprite {
+    width: 1024px;
+    height: 1024px;
+    background: url('images/sprite_1024.png') left top no-repeat;
+    background-size: 36864px 1024px;
+    animation: play 1.5s steps(36) infinite;
+    transform: scale(0.25);
+    transform-origin: center center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -512px 0 0 -512px;
+    }
+
+    @keyframes play {
+    100% { background-position: -36864px; }
+    }
+  </style>
+</head>
 <body>
-<header class="header">
-<div class="header-content">
-  <div class="logo">
-    <a href="index.html" class="logo-with-bg"></a>
+  <div class="name">Josh</div>
+  
+  <nav class="nav">
+    <!-- <a href="#home">Home</a> -->
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+  </nav>
+
+  <!-- Back to Top Button -->
+  <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">Back to Top</button>
+
+  <!-- Home Section -->
+  <section id="home" class="home-section">
+    <div class="video-wrapper">
+      <video autoplay loop muted playsinline>
+        <source src="slow.mp4" type="video/mp4">
+        <source src="animation.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
     </div>
-<nav class="navbar">
-<ul class="nav-list">
-<li><a href="#">Home</a></li>
-<li><a href="#research-section">Research</a></li>
-<li><a href="#project-anchor">Projects</a></li>
-</ul>
-</nav>
-</div>
-<hr class="gradient-line"/>
-</header>
+  </section>
 
-<!-- Section 1 -->
-<div class="opening-text">
-  <div class="text-block">
-    <h1>Josh Phythian</h1>
-    <hr class="gradient-line"/>
-    <!-- <h2>Computational Molecular Biophysics</h2> -->
-    <h2>
-      <span class="desktop-text">BA in Computer Science <br>College of Integrative Sciences <br> @ <strong> Wesleyan University </strong></span>
-      <span class="mobile-text">BA in Computer Science <br>Integrative Sciences <br> @ <strong> Wesleyan University </strong></span>
-    </h2>
-    <!-- <h2> @ Wesleyan University</h2> -->
-  </div>
-<img src="golden_ration_rotate.png" alt="Golden Spiral" class="opening-image" />
-</div>
-<div class="background-shape"></div>
-
-<!-- Section 2 - Textboxes -->
-<section id="research-section" class="textboxes-section"></section>
-<!-- Spacer to create scroll distance -->
-<div class="spacer"></div>
-
-<!-- Container for the three textboxes -->
-<div class="textboxes-container">
-<!-- Textbox 1 -->
-<div id="textbox1" class="textbox">
-<h3>RESEARCH FELLOW @ THAYER LAB</h3>
-<!-- <p>Hi! THIS WEBSITE IS NOT DONE SO SORRY!!! It should be ready by the end of 6/30. I used to host my website at <a href="https://joshphythian.wescreates.wesleyan.edu/">https://joshphythian.wescreates.wesleyan.edu/</a> </p> -->
-<p>The Thayer lab aims to restore the cancer-fighting protein p53 to its normal function after mutation, since mutated p53 is involved in over 50% of cancers. Experimental methods can’t provide the atomic detail needed, so our lab uses High Performance Computing and Molecular Dynamics Simulations to fill the gap.</p>
-</div>
-
-<!-- Textbox 2 -->
-<div id="textbox2" class="textbox">
-<h3>UNDERGRADUATE THESIS</h3>
-<p> I was awarded <strong>High Honors</strong> in the <strong>College of Integrative Sciences</strong> and <strong>Honors</strong> in <strong>Computer Science</strong> for my undergraduate thesis, "Sector Analysis of the p53 Tumor Suppressor Protein". </p>
-<p> Here is a pdf of my thesis: <a href="./files/Complete_Thesis_W_TitlePage.pdf" target="_blank">link</a></p>
-</div>
-
-<!-- Textbox 3 -->
-<div id="textbox3" class="textbox">
-<h3>UNDERGRADUATE RESEARCH</h3>
-<p><strong>SKILLS: LINUX/UNIX, Python, Bash</strong></p>
+  <!-- Research Section -->
+  <section id="research" class="research-section">
+    <!-- <h2 class="section-title">Research</h2> -->
+    <div class="research-grid">
+      <div class="research-item">
+        <div class="research-image">RESEARCH FELLOW<br>Thayer Lab</div>
+        <div class="research-name">The Thayer lab aims to restore the cancer-fighting protein p53 to its normal function after mutation, since mutated p53 is involved in over 50% of cancers. Experimental methods can’t provide the atomic detail needed, so our lab uses High Performance Computing and Molecular Dynamics Simulations to fill the gap.</div>
+      </div>
+      <div class="research-item">
+        <div class="research-image">UNDERGRADUATE THESIS<br>Wesleyan University</div>
+        <div class="research-name">I was awarded <strong>High Honors</strong> in the <strong>College of Integrative Sciences</strong> and <strong>Honors</strong> in <strong>Computer Science</strong> for my undergraduate thesis, "Sector Analysis of the p53 Tumor Suppressor Protein". Here is a pdf of my thesis: <a href="./files/Complete_Thesis_W_TitlePage.pdf" target="_blank">link</a></div>
+      </div>
+      <div class="research-item">
+        <div class="research-image">UNDERGRADUATE RESEARCH<br>Wesleyan University</div>
+        <div class="research-name"><p><strong>SKILLS: LINUX/UNIX, Python, Bash</strong></p>
 <p class="list-intro">I worked in optimization where I would use:</p>
 <ul class="tight-list">
 <li>Python modules, such as NumPy, Cython</li>
@@ -78,134 +452,90 @@ html {
 <li>Custom Data Structures</li>
 <li>UNIX shell scripting, profiler</li>
 </ul>
-<p> in order to create and speedup drug design pipelines on Wesleyan's High Performance Computing Cluster </p>
-<!-- <p> My thesis focuses on allosteric networks, which are capable of sending signals across a protein.</p> -->
-<!-- <p>  identifies key residues, or the sector that hypothetically, when perturbed will send signals to reactivate mutant p53</p> -->
-</div>
-</div>
-</section>
-<!-- More spacer for scroll -->
-<div class="spacer"></div>
-
-<div id="project-anchor" style="position: relative; top: -250px;"></div>
-
-<section id="project-section">
-
-
-<!-- Project Section -->
-<div id="wrapper">
-  <div id="content">
-    <div class="spacer"></div>
-    <div class="accordions">
-      <div class="accordion">
-        <div class="title">
-          <a href="/teareview/" target="_blank">Tea Review</a>
-        </div>
-        <div class="text">
-          I wanted to test some brutalist web design techniques and had an animation that my friend Will made for a class website on tea my friend and I were teaching.
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="title">
-          <a href="/timer/" target="_blank">Timer</a>
-        </div>
-        <div class="text">
-          This website serves two purposes: to be a timer and to test new color pallete.
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="title">
-          <a href="/tea_forum_website/" target="_blank">Tea Forum Website</a>
-        </div>
-        <div class="text">
-          I taught a tea forum with a friend of mine Spring 2025 and wanted to make a website to present the scheduling information.
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="title">
-          <a href="/monster_website/" target="_blank">Monster Zero Drink Ranking</a>
-        </div>
-        <div class="text">
-          I wanted to try some more web design stuff and I have a ranking of most monster zero flavors, so I made this. First I tried webscraping the monster page to get images, but they had an anti scraping protocol, so I just tediously downloaded them all. Next I used PIL to pick the font and can color for each can, and add that to a dictionary with my ranking for the flavor. Then I used the dictionary to create the images seen in the background. Then I used scroll trigger to implement some animations. 
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="title"> 
-          <a href="/celsius_website/" target="_blank">Celsius Energy Drink Ranking</a>
-        </div>
-        <div class="text">
-          I wanted to explore some basic web design, webscraping and put my rankings for each celsius flavor somewhere. After a lot of selenium and bs4 testing, I could not get past the captchas to get images for all the celsius, so I had to download them all manually, hence the uneven sizing across the images.
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="title">
-          <a href="https://jphythian.pythonanywhere.com/" target="_blank">Run Sectors Website </a>
-        </div>
-        <div class="text">
-          Explore my work on analyzing sectors and running models. To use this: input a correlation matrix from applying cpptraj on an MD output and the corresponding pdb file. I used flask to just make a simple webpage and connect it to my python code for sector identification.
-        </div>
-      </div>
-      <div class="accordion">
-        <div class="title">Germanic Latin Game</div>
-        <div class="text"><strong>This link is currently down. I have to make a new pythonanywhere account to start running it.</strong> A game where you guess if a word has germanic or latin roots. A friend was playing this game using wikipedia, and I thought, that wouldn't be too hard to automate. I wanted to use the wikipedia API and request a random term each time, but it was just kinda easier to scrape wikipedia, then make a table using the scraped data, and randomly pick a term from that table. I may add another gamemode soon.</div>
-      </div>
-      <div class="accordion">
-        <div class="title"><a href="https://vahnk.itch.io/game-design-final" target="_blank">Virtual Escape Room </a>
-        </div>
-        <div class="text">This is an escape room about a musician who has to get his life back together and write some music . It was my first time using git and unity together. Also it is not designed to be played on the web so it is a little glitchy.</div>
+<p> in order to create and speedup drug design pipelines on Wesleyan's High Performance Computing Cluster </p></div>
       </div>
     </div>
-    <!-- <div class="spacer"></div> -->
-  </div>
-</div>
-</section>
+  </section>
 
-<!-- Info Section -->
-<!-- <section class="info-section">
-  <div class="info-container">
-  <div class="info-left">
-  <div class="info-block">
-  <h3>Dr. Kelly Thayer</h3>
-  <ul>
-  <li>Associate Professor of the Practice in Integrative Sciences</li>
-  <li>Associate Professor of the Practice, National Education Equity Lab</li>
-  <li>Associate Professor of the Practice in Liberal Studies</li>
-  </ul>
-  </div>
-  <div class="info-block">
-  <h3>Contact Information</h3>
-  <p><a href="tel:860-685-2017">860-685-2017</a></p>
-  <p><a href="mailto:kthayer@wesleyan.edu">kthayer@wesleyan.edu</a></p>
-  </div>
-  </div>
-  <div class="info-right">
-  <h3>Thayer Lab</h3>
-  <ul class="info-nav-list">
-  <li><a href="#">Research</a></li>
-  <li><a href="#">People</a></li>
-  <li><a href="#">Publications</a></li>
-  <li><a href="#">Contact</a></li>
-  </ul>
-  </div>
-  </div>
-  </section>   -->
+  <!-- Projects Section -->
+  <section id="projects" class="projects-section">
+    <!-- <h2 class="section-title">Projects</h2> -->
+    <div class="projects-grid">
+      <div class="project-item">
+        <!-- <div class="project-image">Project1</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"><a href="/old_website" target="_blank">Old Website</a></div>
+      </div>
+      <!-- <div class="project-item">
+        <div class="project-image">Image Placeholder</div>
+        <div class="project-name"><a href="/teareview" target="_blank">Tea Review</a></div>
+      </div> -->
+      <div class="project-item">
+        <div class="project-image">
+            <div class="project-sprite"></div>
+        </div>
+            <div class="project-name"><a href="/teareview" target="_blank">Tea Review</a></div>
+        </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project3</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"> <a href="/timer" target="_blank">Timer</a></div>
+      </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project4</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"><a href="/tea_forum_website" target="_blank">Tea Forum Website</a></div>
+      </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project5</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"><a href="/monster_website" target="_blank">Monster Drink Ranking</a></div>
+      </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project6</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"><a href="/celsius_website" target="_blank">Celsius Drink Ranking</a></div>
+      </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project7</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"><a href="https://jphythian.pythonanywhere.com/" target="_blank">Run Sectors Website </a></div>
+      </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project8</div> -->
+        <div class="project-image"></div>
+        <div class="project-name">Germanic Latin Game</div>
+      </div>
+      <div class="project-item">
+        <!-- <div class="project-image">Project9</div> -->
+        <div class="project-image"></div>
+        <div class="project-name"><a href="https://vahnk.itch.io/game-design-final" target="_blank">Virtual Escape Room </a></div>
+      </div>
+    </div>
+  </section>
 
+  <script>
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
 
-<!-- Footer -->
-<footer class="footer">
-  <p>Designed by <a href="https://www.joshphythian.com" target="_blank" rel="noopener noreferrer">www.joshphythian.com</a></p>
-  </footer>
-
-<!-- Load ScrollMagic before your custom script -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-<script src="script.js"></script> -->
-<!-- Load GSAP libraries FIRST -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
-<!-- Load ScrollMagic after GSAP -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
-<script src="script.js"></script>
-
+    // Show/hide back to top button based on scroll position
+    window.addEventListener('scroll', function() {
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      const scrollHeight = document.documentElement.scrollHeight;
+      const scrollTop = document.documentElement.scrollTop;
+      const clientHeight = document.documentElement.clientHeight;
+      
+      // Check if user is at the very bottom (within 50px threshold)
+      if (scrollTop + clientHeight >= scrollHeight - 50) {
+        backToTopBtn.classList.add('show');
+      } else {
+        backToTopBtn.classList.remove('show');
+      }
+    });
+  </script>
 </body>
 </html>
