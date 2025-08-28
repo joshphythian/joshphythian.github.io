@@ -425,10 +425,23 @@
     @keyframes play {
     100% { background-position: -36864px; }
     }
+    @media (max-width: 768px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        /* background: #222;       */
+        padding: 0.5rem 0;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="name">Josh</div>
+  <div class="name"> <a href="#home">Josh</a></div>
   
   <nav class="nav">
     <!-- <a href="#home">Home</a> -->
