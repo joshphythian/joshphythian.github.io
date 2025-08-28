@@ -425,30 +425,68 @@
     @keyframes play {
     100% { background-position: -36864px; }
     }
-    @media (max-width: 768px) {
+    /* @media (max-width: 768px) {
       .nav {
         position: sticky;
         top: 0;
         left: 0;
         right: 0;
-        /* background: #222;       */
         padding: 0.5rem 0;
         flex-direction: row;
         justify-content: center;
         gap: 15px;
       }
-    }
+    } */
+    .header {
+  display: flex;
+  justify-content: space-between; /* Josh on left, nav on right */
+  align-items: center;
+  width: 100%;
+  padding: 20px 40px;
+}
+.nav.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* background: #111;        */
+  padding: 10px 20px;
+  z-index: 100;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;      /* stack Josh above nav */
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+  }
+  .nav {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .name a {
+    font-size: 1.5rem;
+  }
+}
   </style>
 </head>
 <body>
-  <div class="name"> <a href="#home">Josh</a></div>
+  <!-- <div class="name"> <a href="#home">Josh</a></div>
   
   <nav class="nav">
-    <!-- <a href="#home">Home</a> -->
+    <a href="#research">Research</a>
+    <a href="#projects">Projects</a>
+  </nav> -->
+<header class="header">
+  <div class="name"><a href="#home">Josh</a></div>
+  <nav class="nav">
     <a href="#research">Research</a>
     <a href="#projects">Projects</a>
   </nav>
-
+</header>
   <!-- Back to Top Button -->
   <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">Back to Top</button>
 
