@@ -471,15 +471,22 @@
     font-size: 1.5rem;
   }
 }
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 15px;
   }
 
   .project-item .project-image {
-    padding-top: 50%;   /* optional: taller ratio on mobile */
-    max-height: 300px;  /* caps height */
+    padding-top: 50%;  
+    max-height: 300px; 
+  }
+} */
+@media (hover: hover) and (pointer: fine) {
+  /* Only applies on desktop/laptops (mouse/trackpad) */
+  .project-link:hover .project-image {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
   }
 }
   </style>
@@ -542,57 +549,59 @@
 
   <!-- Projects Section -->
   <section id="projects" class="projects-section">
-    <!-- <h2 class="section-title">Projects</h2> -->
     <div class="projects-grid">
       <div class="project-item">
-        <!-- <div class="project-image">Project1</div> -->
+        <a href="/old_website" target="_blank">
         <div class="project-image"></div>
-        <div class="project-name"><a href="/old_website" target="_blank">Old Website</a></div>
-      </div>
-      <!-- <div class="project-item">
-        <div class="project-image">Image Placeholder</div>
-        <div class="project-name"><a href="/teareview" target="_blank">Tea Review</a></div>
-      </div> -->
+        <div class="project-name">Old Website</div>
+      </a></div>
       <div class="project-item">
         <div class="project-image">
+          <a href="/teareview" target="_blank">
             <div class="project-sprite"></div>
         </div>
-            <div class="project-name"><a href="/teareview" target="_blank">Tea Review</a></div>
+            <div class="project-name">Tea Review</div>
+            </a>
         </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project3</div> -->
+        <a href="/timer" target="_blank">
         <div class="project-image"></div>
-        <div class="project-name"> <a href="/timer" target="_blank">Timer</a></div>
+        <div class="project-name">Timer</div>
+        </a>
       </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project4</div> -->
+        <a href="/tea_forum_website" target="_blank">
         <div class="project-image"></div>
-        <div class="project-name"><a href="/tea_forum_website" target="_blank">Tea Forum Website</a></div>
+        <div class="project-name">Tea Forum Website</div>
+      </a>
       </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project5</div> -->
-        <div class="project-image"></div>
-        <div class="project-name"><a href="/monster_website" target="_blank">Monster Drink Ranking</a></div>
+        <a href="/monster_website" target="_blank">
+          <div class="project-image"></div>
+          <div class="project-name">Monster Drink Ranking</div>
+        </a>
       </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project6</div> -->
-        <div class="project-image"></div>
-        <div class="project-name"><a href="/celsius_website" target="_blank">Celsius Drink Ranking</a></div>
+        <a href="/celsius_website" target="_blank">
+          <div class="project-image"></div>
+          <div class="project-name">Celsius Drink Ranking</div>
+        </a>
       </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project7</div> -->
-        <div class="project-image"></div>
-        <div class="project-name"><a href="https://jphythian.pythonanywhere.com/" target="_blank">Run Sectors Website </a></div>
+        <a href="https://jphythian.pythonanywhere.com/" target="_blank">
+          <div class="project-image"></div>
+          <div class="project-name">Sectors Website</div>
+        </a>
       </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project8</div> -->
         <div class="project-image"></div>
         <div class="project-name">Germanic Latin Game</div>
       </div>
       <div class="project-item">
-        <!-- <div class="project-image">Project9</div> -->
-        <div class="project-image"></div>
-        <div class="project-name"><a href="https://vahnk.itch.io/game-design-final" target="_blank">Virtual Escape Room </a></div>
+        <a href="https://vahnk.itch.io/game-design-final" target="_blank">
+          <div class="project-image"></div>
+          <div class="project-name">Virtual Escape Room</div>
+        </a>
       </div>
     </div>
   </section>
