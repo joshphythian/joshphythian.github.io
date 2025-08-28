@@ -489,6 +489,15 @@
     transition: transform 0.3s ease;
   }
 }
+#backToTopBtn {
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .back-to-top:hover {
+    /* only apply hover effects on desktop */
+    background: #444;
+  }
+}
   </style>
 </head>
 <body>
@@ -506,7 +515,7 @@
   </nav>
 </header>
   <!-- Back to Top Button -->
-  <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">Back to Top</button>
+  <button class="back-to-top" id="backToTopBtn" onclick="scrollToTop()">↑ Top ↑</button>
 
   <!-- Home Section -->
   <section id="home" class="home-section">
@@ -606,28 +615,30 @@
     </div>
   </section>
 
-  <script>
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-
-    // Show/hide back to top button based on scroll position
-    window.addEventListener('scroll', function() {
-      const backToTopBtn = document.getElementById('backToTopBtn');
-      const scrollHeight = document.documentElement.scrollHeight;
-      const scrollTop = document.documentElement.scrollTop;
-      const clientHeight = document.documentElement.clientHeight;
-      
-      // Check if user is at the very bottom (within 50px threshold)
-      if (scrollTop + clientHeight >= scrollHeight - 50) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
-      }
+<script>
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
-  </script>
+  }
+
+  const backToTopBtn = document.getElementById('backToTopBtn');
+  backToTopBtn.addEventListener('click', scrollToTop);
+  backToTopBtn.addEventListener('touchstart', scrollToTop); // ensures immediate tap on iOS
+
+  // Show/hide back to top button
+  window.addEventListener('scroll', function() {
+    const scrollHeight = document.documentElement.scrollHeight;
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+
+    if (scrollTop + clientHeight >= scrollHeight - 50) {
+      backToTopBtn.classList.add('show');
+    } else {
+      backToTopBtn.classList.remove('show');
+    }
+  });
+</script>
 </body>
 </html>
