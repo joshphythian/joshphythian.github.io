@@ -353,6 +353,27 @@
         max-width: 350px;
       }
     }
+
+    .project-item .project-image {
+      width: 100%;                /* fills the grid cell */
+      aspect-ratio: 16 / 9;       /* maintain proportional height (adjust to your image ratio) */
+      background-size: cover;      /* keeps cover behavior */
+      background-position: center; /* centers the image */
+      border-radius: 8px;          /* optional: nice rounding */
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 15px;
+      }
+
+      .project-item .project-image {
+        aspect-ratio: auto;         /* optional: let image height adjust naturally */
+        max-height: 300px;          /* caps very tall images */
+      }
+    }
     a {
     color: #abbbb5;
     text-decoration: none;
