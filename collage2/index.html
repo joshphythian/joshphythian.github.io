@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Emerald Dusk</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("photo-one.jpg") center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+    }
+
+    h1 {
+      position: relative;
+      font-family: 'Rubik Glitch', cursive;
+      font-size: clamp(3rem, 10vw, 7rem);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, #00ff88, #00cc44, #33ff99, #008844);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow:
+        0 0 10px rgba(0,255,136,0.8),
+        0 0 20px rgba(0,255,136,0.7),
+        0 0 40px rgba(0,255,136,0.6),
+        0 0 80px rgba(0,255,136,0.5);
+      overflow: hidden;
+    }
+
+    /* ✨ Shimmer sweep effect for Emerald Dusk */
+    h1::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      height: 100%;
+      background: linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%
+      );
+      animation: shimmer 4s infinite;
+    }
+
+    @keyframes shimmer {
+      0%   { left: -100%; }
+      50%  { left: 120%; }
+      100% { left: 120%; }
+    }
+
+    iframe {
+      position: absolute;
+      top: 40px;
+      left: 50px;
+      border: none;
+    }
+
+    /* Transparent vertical navbar */
+    nav {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: transparent;
+    }
+
+    nav a {
+      display: block;
+      margin: 20px 0;
+      padding: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      font-family: sans-serif;
+      color: #fff8dc;
+      background: linear-gradient(145deg, #FFD700, #FFA500, #FFFACD);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    /* Wiggle + bounce animation on hover */
+    nav a:hover {
+      animation: wiggle-bounce 0.6s ease;
+    }
+
+    @keyframes wiggle-bounce {
+      0%   { transform: rotate(0deg) scale(1); }
+      20%  { transform: rotate(-5deg) scale(1.1); }
+      40%  { transform: rotate(5deg) scale(1.1); }
+      60%  { transform: rotate(-3deg) scale(1.05); }
+      80%  { transform: rotate(3deg) scale(1.05); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Video in corner -->
+  <iframe 
+    src="https://drive.google.com/file/d/1HfIRTdwS9wNkXbFxwEMvKPHR2ZpOeAX0/preview" 
+    width="400" height="225" allow="autoplay">
+  </iframe>
+
+  <!-- Centered heading with shimmer -->
+  <h1>emerald dusk</h1>
+
+  <!-- Transparent vertical navbar -->
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Gallery</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+
+</body>
+<script src="script.js"></script>
+</html>
