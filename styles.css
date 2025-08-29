@@ -154,8 +154,11 @@
       height: 100%;
       background-size: cover;   /* makes the image cover the whole div */
       background-position: center; /* centers the image */
+        display: block; /* Change from flex to block */
+    position: relative; /* Add relative positioning */
+    overflow: hidden; /* Add overflow hidden */
       /* background: linear-gradient(45deg, #333, #555); */
-      display: flex;
+      /* display: flex; */
       align-items: center;
       justify-content: center;
       color: #abbbb5;
