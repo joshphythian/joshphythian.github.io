@@ -1,0 +1,718 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #111;
+      font-family: "Akzidenz-Grotesk", "Franklin Gothic Medium", sans-serif;
+      color: #abbbb5;
+      transition: font-family 0.3s ease;
+    }
+
+    /* Font families */
+    body.baskerville { font-family: "Libre Baskerville", Baskerville, serif; }
+    body.garamond { font-family: "EB Garamond", Garamond, serif; }
+    body.caslon { font-family: "Libre Caslon Text", "Adobe Caslon Pro", serif; }
+    body.bodoni { font-family: "Bodoni Moda", "Didot", serif; }
+    body.clarendon { font-family: "Clarendon", "Rockwell", serif; }
+    body.berthold { font-family: "Akzidenz-Grotesk", "Franklin Gothic Medium", sans-serif; }
+    body.times { font-family: "Times New Roman", Times, serif; }
+    body.helvetica { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+    body.univers { font-family: "Univers", "Segoe UI", sans-serif; }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(34, 34, 34, 0.8);
+      color: #abbbb5;
+      border: 1px solid #444;
+      padding: 12px 16px;
+      font-size: 12px;
+      
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: rgba(136, 199, 178, 0.2);
+      border-color: #89c7b2;
+      color: #89c7b2;
+      transform: translateY(-2px);
+    }
+
+    .name {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      color: #abbbb5;
+      font-size: 24px;
+      font-weight: bold;
+      z-index: 100;
+    }
+
+    .nav {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 100;
+    }
+
+    .nav a {
+      color: #abbbb5;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav a:hover {
+      color: #89c7b2;
+    }
+
+    /* Home Section */
+    .home-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-wrapper {
+      width: 33%;
+      max-width: 400px;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Research Section */
+    .research-section {
+      min-height: 100vh;
+      padding: 80px 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-title {
+      text-align: center;
+      color: #abbbb5;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 60px;
+    }
+
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .research-item {
+      aspect-ratio: 4/3;
+      background: #222;
+      
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-height: 300px;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .research-item:hover {
+      transform: scale(1.05);
+      
+    }
+
+    .research-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover;   /* makes the image cover the whole div */
+      background-position: center; /* centers the image */
+      /* background: linear-gradient(45deg, #333, #555); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #abbbb5;
+      font-size: 32px;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+      line-height: 1.3;
+      transition: opacity 0.3s ease;
+    }
+    
+    .research-image:nth-child(1) {
+      background-image: url("images/concrete_rec.jpg");
+    }
+
+    .research-image:nth-child(2) {
+      background-image: url("images/concrete_square.jpg");
+    }
+
+    .research-image:nth-child(3) {
+      background-image: url("images/concrete_90_rec.jpg");
+    }
+
+    .research-name {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: 60px;
+      background: rgba(17, 17, 17, 0.95);
+      display: block;
+      color: #abbbb5;
+      font-size: 18px;
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      text-align: left;
+      padding: 25px;
+      line-height: 1.4;
+      overflow-y: auto;
+    }
+
+    .research-name p {
+      margin: 0 0 12px 0;
+    }
+
+    .research-name p:last-child {
+      margin-bottom: 0;
+    }
+
+    .research-name strong {
+      color: #89c7b2;
+      font-weight: 600;
+    }
+
+    .research-name a {
+      color: #89c7b2;
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    .research-name a:hover {
+      color: #abbbb5;
+      /* border-radius: 8px; */
+    }
+
+    .research-name .list-intro {
+      margin-bottom: 8px;
+    }
+
+    .research-name ul {
+      margin: 0 0 12px 0;
+      padding-left: 18px;
+    }
+
+    .research-name li {
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .research-name ul.tight-list {
+      margin-bottom: 8px;
+    }
+
+    .research-name ul.tight-list li {
+      margin-bottom: 2px;
+    }
+
+    .research-item:hover .research-name {
+      opacity: 1;
+    }
+
+    /* Projects Section */
+    .projects-section {
+      min-height: 100vh;
+      padding: 80px 40px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .project-item {
+      aspect-ratio: 1;
+      background: #222;
+      /* border-radius: 8px; */
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      min-height: 250px;
+    }
+
+    .project-item:hover {
+      transform: scale(1.05);
+      /* border-radius: 8px; */
+    }
+
+    .project-image {
+      width: 100%;
+      height: 100%;
+      background-image: url("images/1.jpg");
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      color: #e7e7e7;
+      font-size: 20px;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-name {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(17, 17, 17, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #abbbb5;
+      font-size: 18px;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-item:hover .project-name {
+      opacity: 1;
+    }
+
+    /* Smooth scrolling */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+      }
+      
+      .research-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .research-item {
+        max-width: none;
+      }
+      
+      .video-wrapper {
+        width: 80%;
+      }
+      
+      .nav {
+        flex-direction: row;
+        gap: 20px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+        margin-bottom: 40px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1300px) {
+      .research-grid {
+        max-width: 1200px;
+        gap: 20px;
+      }
+      
+      .research-item {
+        max-width: 350px;
+      }
+    }
+
+    .project-item .project-image {
+      width: 100%;                
+      aspect-ratio: 16 / 9;       
+      background-size: cover;     
+      background-position: center;
+      
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 768px) {
+      .projects-grid {
+        grid-template-columns: 1fr; /* single column on mobile */
+        gap: 15px;
+      }
+
+      .project-item .project-image {
+        aspect-ratio: auto;         /* optional: let image height adjust naturally */
+        max-height: 300px;          /* caps very tall images */
+      }
+    }
+    a {
+    color: #abbbb5;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    }
+
+    a:hover {
+    color: #89c7b2;
+    text-decoration: underline;
+    }
+
+    a:visited {
+    color: #abbbb5;
+    }
+
+    a:active {
+    color: #89c7b2;
+    }
+    /* Individual project backgrounds */
+    .project-item:nth-child(1) .project-image { background: url('images/project1.jpg') center center no-repeat; background-size: cover; }
+      /*Sprite for 2nd  */
+    .project-item:nth-child(2) .project-image { 
+    position: relative; 
+    overflow: hidden; 
+    }    
+    .project-item:nth-child(3) .project-image { background: url('images/project3.jpg') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(4) .project-image { background: url('images/project4.jpg') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(5) .project-image { background: url('images/project5.jpg') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(6) .project-image { background: url('images/project6.jpg') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(7) .project-image { background: url('images/project7.jpg') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(8) .project-image { background: url('images/project8.jpg') center center no-repeat; background-size: cover; }
+    .project-item:nth-child(9) .project-image { background: url('images/project9.jpg') center center no-repeat; background-size: cover; }
+/* 
+
+    .project-sprite {
+    width: 1024px;
+    height: 1024px;
+    background: url('images/sprite_1024.png') left top no-repeat;
+    background-size: 36864px 1024px;
+    animation: play 1.5s steps(36) infinite;
+    transform: scale(0.25);
+    transform-origin: center center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -512px 0 0 -512px;
+
+    } */
+
+
+    @keyframes play {
+    100% { background-position: -36864px; }
+    }
+    /* @media (max-width: 768px) {
+      .nav {
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 0.5rem 0;
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+      }
+    } */
+    .header {
+  display: flex;
+  justify-content: space-between; /* Josh on left, nav on right */
+  align-items: center;
+  width: 100%;
+  padding: 20px 40px;
+}
+.nav.sticky {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  /* background: #111;        */
+  padding: 10px 20px;
+  z-index: 100;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;      /* stack Josh above nav */
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+  }
+  .nav {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  .name a {
+    font-size: 1.5rem;
+  }
+}
+/* @media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .project-item .project-image {
+    padding-top: 50%;  
+    max-height: 300px; 
+  }
+} */
+@media (hover: hover) and (pointer: fine) {
+  /* Only applies on desktop/laptops (mouse/trackpad) */
+  .project-link:hover .project-image {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+}
+#backToTopBtn {
+  cursor: pointer;
+}
+@media (hover: hover) and (pointer: fine) {
+  .back-to-top:hover {
+    /* only apply hover effects on desktop */
+    background: #444;
+  }
+}
+
+.project-item {
+  aspect-ratio: 1;
+  /* background: #222; */
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  min-height: 250px;
+}
+
+/* shared rules for image and video containers */
+.project-item .project-image,
+.project-item .project-video {
+  width: 100%;
+  aspect-ratio: 1 / 1;   /* square */
+  overflow: hidden;
+  position: relative;
+}
+
+.project-item .project-video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-item {
+  aspect-ratio: 1 / 1;   /* square card */
+  background: #222;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  min-height: 250px;
+}
+
+/* shared media container used for either background-image OR video/img */
+.project-item .project-media,
+.project-item .project-image {
+  width: 100%;
+  height: 100%;               /* fill the .project-item box */
+  position: relative;         /* anchor absolute children */
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  display: block;             /* keep it simple */
+}
+
+/* If you use an img or video inside .project-media, make it fill/cover exactly */
+.project-item .project-media img,
+.project-item .project-media video {
+  position: absolute;
+  inset: 0;                   /* top:0; right:0; bottom:0; left:0; */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;          /* behave like background-size: cover */
+  display: block;
+  z-index: 0;
+}
+
+/* bottom-centered label that is always at the bottom of the card */
+.project-item .project-media .media-text,
+.project-item .project-image .media-text {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;               /* adjust as needed */
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #e7e7e7;
+  font-size: 20px;
+  padding: 8px 12px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* Optional subtle bottom gradient (helps contrast on busy footage) */
+.project-item .project-media::before,
+.project-item .project-image::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 35%;
+  background: linear-gradient(transparent, rgba(0,0,0,0.45));
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* === sprite fix: center it with transform rather than negative margins === */
+.project-sprite {
+  width: 1024px;
+  height: 1024px;
+  background: url('images/sprite_1024.png') left top no-repeat;
+  background-size: 36864px 1024px;
+  animation: play 1.5s steps(36) infinite;
+  transform-origin: center center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.25); /* much more robust on mobile */
+  /* remove the large negative margin */
+}
+
+/* === mobile overrides (ensure fill behavior on small screens) === */
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr; /* single column on mobile */
+    gap: 15px;
+  }
+
+  /* ensure the media fills the square parent on mobile too */
+  .project-item .project-media,
+  .project-item .project-image {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;    /* no conflicting ratio on the child */
+    max-height: none;      /* remove earlier max-height cap */
+  }
+
+  /* if you have <img> tags, avoid default inline spacing */
+  .project-item .project-media img { display: block; }
+}
+
+.project-item .project-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* make it a positioning context */
+  display: block;     /* don’t need flex here */
+}
+
+.project-sprite {
+  width: 1024px;
+  height: 1024px;
+  background: url('images/sprite_1024.png') left top no-repeat;
+  background-size: 36864px 1024px;
+  animation: play 1.5s steps(36) infinite;
+  transform: scale(0.25);
+  transform-origin: center center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -512px 0 0 -512px;
+  z-index: 0; /* behind text */
+}
+
+/* bottom centered text */
+.project-item .project-image .image-text {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;              /* adjust padding from bottom */
+  transform: translateX(-50%);
+  color: #e7e7e7;
+  font-size: 20px;
+  text-align: center;
+  z-index: 2;
+  padding: 6px 10px;
+  pointer-events: none;      /* so hover still works */
+    white-space: nowrap;   /* forces text to stay in one line */
+
+}
+
+
+.project-description {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(17, 17, 17, 0.95);
+  display: block;
+  color: #abbbb5;
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  text-align: left;
+  padding: 25px;
+  line-height: 1.4;
+  overflow-y: auto;
+  cursor: pointer;
+}
+
+.project-item:hover .project-description {
+  opacity: 1;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .project-description {
+    font-size: 14px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-description {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
+/* Ensure the parent container has relative positioning */
+.project-image {
+  position: relative;
+}

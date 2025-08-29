@@ -4,501 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Josh</title>
-<style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+  <link rel="stylesheet" href="styles.css" />
 
-    body {
-      background: #111;
-      font-family: "Akzidenz-Grotesk", "Franklin Gothic Medium", sans-serif;
-      color: #abbbb5;
-      transition: font-family 0.3s ease;
-    }
-
-    /* Font families */
-    body.baskerville { font-family: "Libre Baskerville", Baskerville, serif; }
-    body.garamond { font-family: "EB Garamond", Garamond, serif; }
-    body.caslon { font-family: "Libre Caslon Text", "Adobe Caslon Pro", serif; }
-    body.bodoni { font-family: "Bodoni Moda", "Didot", serif; }
-    body.clarendon { font-family: "Clarendon", "Rockwell", serif; }
-    body.berthold { font-family: "Akzidenz-Grotesk", "Franklin Gothic Medium", sans-serif; }
-    body.times { font-family: "Times New Roman", Times, serif; }
-    body.helvetica { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
-    body.univers { font-family: "Univers", "Segoe UI", sans-serif; }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(34, 34, 34, 0.8);
-      color: #abbbb5;
-      border: 1px solid #444;
-      padding: 12px 16px;
-      font-size: 12px;
-      /* border-radius: 4px; */
-      cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      z-index: 100;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(20px);
-    }
-
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .back-to-top:hover {
-      background: rgba(136, 199, 178, 0.2);
-      border-color: #89c7b2;
-      color: #89c7b2;
-      transform: translateY(-2px);
-    }
-
-    .name {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      color: #abbbb5;
-      font-size: 24px;
-      font-weight: bold;
-      z-index: 100;
-    }
-
-    .nav {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      z-index: 100;
-    }
-
-    .nav a {
-      color: #abbbb5;
-      text-decoration: none;
-      font-size: 16px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .nav a:hover {
-      color: #89c7b2;
-    }
-
-    /* Home Section */
-    .home-section {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .video-wrapper {
-      width: 33%;
-      max-width: 400px;
-    }
-
-    video {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* Research Section */
-    .research-section {
-      min-height: 100vh;
-      padding: 80px 40px 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .section-title {
-      text-align: center;
-      color: #abbbb5;
-      font-size: 32px;
-      font-weight: bold;
-      margin-bottom: 60px;
-    }
-
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 40px;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .research-item {
-      aspect-ratio: 4/3;
-      background: #222;
-      /* border-radius: 8px; */
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      min-height: 300px;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-
-    .research-item:hover {
-      transform: scale(1.05);
-      border-radius: 8px;
-    }
-
-    .research-image {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #333, #555);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #abbbb5;
-      font-size: 16px;
-      font-weight: 600;
-      text-align: center;
-      padding: 20px;
-      line-height: 1.3;
-      transition: opacity 0.3s ease;
-    }
-
-    .research-name {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(17, 17, 17, 0.95);
-      display: block;
-      color: #abbbb5;
-      font-size: 13px;
-      font-weight: 400;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      text-align: left;
-      padding: 25px;
-      line-height: 1.4;
-      overflow-y: auto;
-    }
-
-    .research-name p {
-      margin: 0 0 12px 0;
-    }
-
-    .research-name p:last-child {
-      margin-bottom: 0;
-    }
-
-    .research-name strong {
-      color: #89c7b2;
-      font-weight: 600;
-    }
-
-    .research-name a {
-      color: #89c7b2;
-      text-decoration: underline;
-      transition: color 0.3s ease;
-    }
-
-    .research-name a:hover {
-      color: #abbbb5;
-      /* border-radius: 8px; */
-    }
-
-    .research-name .list-intro {
-      margin-bottom: 8px;
-    }
-
-    .research-name ul {
-      margin: 0 0 12px 0;
-      padding-left: 18px;
-    }
-
-    .research-name li {
-      margin-bottom: 4px;
-      line-height: 1.3;
-    }
-
-    .research-name ul.tight-list {
-      margin-bottom: 8px;
-    }
-
-    .research-name ul.tight-list li {
-      margin-bottom: 2px;
-    }
-
-    .research-item:hover .research-name {
-      opacity: 1;
-    }
-
-    /* Projects Section */
-    .projects-section {
-      min-height: 100vh;
-      padding: 80px 40px 60px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .project-item {
-      aspect-ratio: 1;
-      background: #222;
-      /* border-radius: 8px; */
-      overflow: hidden;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      min-height: 250px;
-    }
-
-    .project-item:hover {
-      transform: scale(1.05);
-      border-radius: 8px;
-    }
-
-    .project-image {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #333, #555);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #666;
-      font-size: 14px;
-      transition: opacity 0.3s ease;
-    }
-
-    .project-name {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(17, 17, 17, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #abbbb5;
-      font-size: 18px;
-      font-weight: 600;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .project-item:hover .project-name {
-      opacity: 1;
-    }
-
-    /* Smooth scrolling */
-    html {
-      scroll-behavior: smooth;
-    }
-
-    /* Responsive design */
-    @media (max-width: 768px) {
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-      }
-      
-      .research-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .research-item {
-        max-width: none;
-      }
-      
-      .video-wrapper {
-        width: 80%;
-      }
-      
-      .nav {
-        flex-direction: row;
-        gap: 20px;
-      }
-      
-      .section-title {
-        font-size: 28px;
-        margin-bottom: 40px;
-      }
-    }
-
-    @media (min-width: 769px) and (max-width: 1300px) {
-      .research-grid {
-        max-width: 1200px;
-        gap: 20px;
-      }
-      
-      .research-item {
-        max-width: 350px;
-      }
-    }
-
-    .project-item .project-image {
-      width: 100%;                /* fills the grid cell */
-      aspect-ratio: 16 / 9;       /* maintain proportional height (adjust to your image ratio) */
-      background-size: cover;      /* keeps cover behavior */
-      background-position: center; /* centers the image */
-      border-radius: 8px;          /* optional: nice rounding */
-    }
-
-    /* Mobile adjustments */
-    @media (max-width: 768px) {
-      .projects-grid {
-        grid-template-columns: 1fr; /* single column on mobile */
-        gap: 15px;
-      }
-
-      .project-item .project-image {
-        aspect-ratio: auto;         /* optional: let image height adjust naturally */
-        max-height: 300px;          /* caps very tall images */
-      }
-    }
-    a {
-    color: #abbbb5;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    }
-
-    a:hover {
-    color: #89c7b2;
-    text-decoration: underline;
-    }
-
-    a:visited {
-    color: #abbbb5;
-    }
-
-    a:active {
-    color: #89c7b2;
-    }
-    /* Individual project backgrounds */
-    .project-item:nth-child(1) .project-image { background: url('images/project1.png') center center no-repeat; background-size: cover; }
-      /*Sprite for 2nd  */
-    .project-item:nth-child(2) .project-image { 
-    position: relative; 
-    overflow: hidden; 
-    }    
-    .project-item:nth-child(3) .project-image { background: url('images/project3.png') center center no-repeat; background-size: cover; }
-    .project-item:nth-child(4) .project-image { background: url('images/project4.png') center center no-repeat; background-size: cover; }
-    .project-item:nth-child(5) .project-image { background: url('images/project5.png') center center no-repeat; background-size: cover; }
-    .project-item:nth-child(6) .project-image { background: url('images/project6.png') center center no-repeat; background-size: cover; }
-    .project-item:nth-child(7) .project-image { background: url('images/project7.png') center center no-repeat; background-size: cover; }
-    .project-item:nth-child(8) .project-image { background: url('images/project8.png') center center no-repeat; background-size: cover; }
-    .project-item:nth-child(9) .project-image { background: url('images/project9.png') center center no-repeat; background-size: cover; }
-
-
-    .project-sprite {
-    width: 1024px;
-    height: 1024px;
-    background: url('images/sprite_1024.png') left top no-repeat;
-    background-size: 36864px 1024px;
-    animation: play 1.5s steps(36) infinite;
-    transform: scale(0.25);
-    transform-origin: center center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -512px 0 0 -512px;
-    }
-
-    @keyframes play {
-    100% { background-position: -36864px; }
-    }
-    /* @media (max-width: 768px) {
-      .nav {
-        position: sticky;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: 0.5rem 0;
-        flex-direction: row;
-        justify-content: center;
-        gap: 15px;
-      }
-    } */
-    .header {
-  display: flex;
-  justify-content: space-between; /* Josh on left, nav on right */
-  align-items: center;
-  width: 100%;
-  padding: 20px 40px;
-}
-.nav.sticky {
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  /* background: #111;        */
-  padding: 10px 20px;
-  z-index: 100;
-}
-
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;      /* stack Josh above nav */
-    align-items: center;
-    gap: 15px;
-    padding: 10px 20px;
-  }
-  .nav {
-    flex-direction: row;
-    gap: 15px;
-  }
-
-  .name a {
-    font-size: 1.5rem;
-  }
-}
-/* @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 15px;
-  }
-
-  .project-item .project-image {
-    padding-top: 50%;  
-    max-height: 300px; 
-  }
-} */
-@media (hover: hover) and (pointer: fine) {
-  /* Only applies on desktop/laptops (mouse/trackpad) */
-  .project-link:hover .project-image {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-  }
-}
-#backToTopBtn {
-  cursor: pointer;
-}
-@media (hover: hover) and (pointer: fine) {
-  .back-to-top:hover {
-    /* only apply hover effects on desktop */
-    background: #444;
-  }
-}
-  </style>
 </head>
 <body>
   <!-- <div class="name"> <a href="#home">Josh</a></div>
@@ -542,16 +49,16 @@
       </div>
       <div class="research-item">
         <div class="research-image">UNDERGRADUATE RESEARCH<br>Wesleyan University</div>
-        <div class="research-name"><p><strong>SKILLS: LINUX/UNIX, Python, Bash</strong></p>
-<p class="list-intro">I worked in optimization where I would use:</p>
-<ul class="tight-list">
-<li>Python modules, such as NumPy, Cython</li>
+        <div class="research-name"><p><strong>SKILLS: LINUX/UNIX shell scripting, Python, Bash, NumPy, Jupyter, Seaborn, Matplotlib, Algorithm Dev, GPU Acceleration, Custom Data Structures, Profiler</strong></p>
+<!-- <p class="list-intro">Optimization with:</p> -->
+<!-- <ul class="tight-list">
+<li>NumPy, Cython</li>
 <li>Algorithm Building</li>
 <li>GPU Acceleration</li>
 <li>Custom Data Structures</li>
 <li>UNIX shell scripting, profiler</li>
-</ul>
-<p> in order to create and speedup drug design pipelines on Wesleyan's High Performance Computing Cluster </p></div>
+</ul> -->
+<p> Creating and optimizing drug design pipelines on Wesleyan's High Performance Computing Cluster </p></div>
       </div>
     </div>
   </section>
@@ -561,55 +68,110 @@
     <div class="projects-grid">
       <div class="project-item">
         <a href="/old_website" target="_blank">
-        <div class="project-image"></div>
-        <div class="project-name">Old Website</div>
-      </a></div>
-      <div class="project-item">
         <div class="project-image">
-          <a href="/teareview" target="_blank">
-            <div class="project-sprite"></div>
+        <div class="image-text">Old Portfolio Website</div>
         </div>
-            <div class="project-name">Tea Review</div>
-            </a>
-        </div>
+        <div class="project-name"></div>
+      </a></div>
+
+  <div class="project-item">
+    <a href="/teareview" target="_blank">
+      <div class="project-image">
+        <div class="project-sprite"></div>
+        <div class="image-text">Tea Review</div>
+      </div>
+      <div class="project-description">
+        <p>Friend made a web animation and I wanted a place to put it.</p>
+      </div>
+    </a>
+  </div>
+
       <div class="project-item">
         <a href="/timer" target="_blank">
-        <div class="project-image"></div>
-        <div class="project-name">Timer</div>
+        <div class="project-image">
+          <div class="image-text">Timer</div>
+        </div>
+        <div class="project-description">
+      
+      <!-- <strong>SKILLS:</strong> Web Design, Git, HTML/CSS, JavaScript -->
+      <p>I frequently use a timer, so I designed an online one that is simple and easy to use.</p>
+    </div>
         </a>
       </div>
-      <div class="project-item">
+      <!-- <div class="project-item">
         <a href="/tea_forum_website" target="_blank">
-        <div class="project-image"></div>
-        <div class="project-name">Tea Forum Website</div>
-      </a>
-      </div>
+        <div class="project-image">Tea Forum Website</div>
+        <div class="project-name"></div> -->
+      <!-- </a> -->
+<div class="project-item">
+  <a href="/tea_forum_website" target="_blank">
+    <div class="project-image">
+      <video autoplay muted loop playsinline class="project-video">
+        <source src="images/project4.mp4" type="video/mp4">
+        <source src="videos/project4.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+      <div class="image-text">Tea Forum Website</div>
+    </div>
+    <div class="project-description">
+      <!-- <strong>SKILLS:</strong> Teaching, Web Design, Scroll based Animation, Git, HTML/CSS, JavaScript -->
+      <p>A friend and I Taught a college forum (class) about the economics, history, and culture of tea.</p>
+
+    </div>
+  </a>
+</div>
       <div class="project-item">
         <a href="/monster_website" target="_blank">
-          <div class="project-image"></div>
-          <div class="project-name">Monster Drink Ranking</div>
+          <!-- <div class="project-image">Monster Drink Ranking</div> -->
+          <div class="project-image">
+              <div class="image-text">Monster Drink Ranking</div>
+
+          </div>
+          <div class="project-description">
+            <strong>SKILLS:</strong> Web Design, Algorithmically Generated Imaging, Scroll based Animation, HTML/CSS, JavaScript
+            <p>Used PIL to generate images to display rank of each drink, automatically picking based on the can.</p>
+
+          </div>
         </a>
       </div>
       <div class="project-item">
         <a href="/celsius_website" target="_blank">
-          <div class="project-image"></div>
-          <div class="project-name">Celsius Drink Ranking</div>
+          <div class="project-image">
+            <div class="image-text">Celsius Drink Ranking</div>
+          </div>
+          <div class="project-description">
+            <strong>SKILLS:</strong> Web Design, Scroll based Animation, Git, HTML/CSS, JavaScript
+             <p>Originally this was webscraping project, but that's illegal so its this</p>
+
+          </div>
         </a>
       </div>
       <div class="project-item">
         <a href="https://jphythian.pythonanywhere.com/" target="_blank">
-          <div class="project-image"></div>
-          <div class="project-name">Sectors Website</div>
+          <div class="project-image">
+            <div class="image-text">Sectors Website</div>
+            <div class="project-description">
+              <strong>SKILLS:</strong> Python, Flask, Git, HTML/CSS, JavaScript
+            </div>
+          </div>
         </a>
       </div>
       <div class="project-item">
-        <div class="project-image"></div>
-        <div class="project-name">Germanic Latin Game</div>
+        <div class="project-image">
+          <div class="image-text">Germanic Latin Game</div>
+          <div class="project-description">
+              <strong>SKILLS:</strong> Python, Flask, Git, HTML/CSS, JavaScript
+            </div>
+        </div>
       </div>
       <div class="project-item">
         <a href="https://vahnk.itch.io/game-design-final" target="_blank">
-          <div class="project-image"></div>
-          <div class="project-name">Virtual Escape Room</div>
+          <div class="project-image">
+            <div class="image-text">Virtual Escape Room</div>
+            <div class="project-description">
+              <strong>SKILLS:</strong> Unity, C#, Game Design, Level Design, UI/UX, Puzzle Creation, Github, Custom Shader Creation
+            </div>
+          </div>
         </a>
       </div>
     </div>
