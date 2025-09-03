@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latte Art</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Baskerville', 'Libre Baskerville', 'Times New Roman', serif;
+            background: #1a1a1a;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .video-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .video-section video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 33.33vh;
+            height: 33.33vh;
+            object-fit: cover;
+        }
+
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .video-header {
+            text-align: center;
+            padding: 40px 20px;
+            z-index: 2;
+        }
+
+        .video-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .scroll-indicator {
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .scroll-arrow {
+            font-size: 2rem;
+            font-weight: 900;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .gallery-header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid white;
+        }
+
+        .gallery-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-info {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #999;
+        }
+
+        .gallery-container {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .images-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .image-item {
+            aspect-ratio: 1;
+            overflow: hidden;
+            /* border: 2px solid white; */
+            position: relative;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: none;
+        }
+
+        .image-item:hover {
+            border-color: #ccc;
+        }
+
+        .image-number {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: white;
+            color: #1a1a1a;
+            padding: 5px 10px;
+            font-weight: 900;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .loading-placeholder {
+            background: #333;
+            border: 2px solid #555;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { background: #333; }
+            50% { background: #444; }
+        }
+
+        .error-placeholder {
+            background: #1a1a1a;
+            border: 2px solid #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .video-header h1,
+            .gallery-header h1 {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .gallery-container {
+                padding: 20px 10px;
+            }
+
+            .images-grid {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .scroll-arrow {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .video-header,
+            .gallery-header {
+                padding: 20px 10px;
+            }
+
+            .video-header h1,
+            .gallery-header h1 {
+                font-size: 1.5rem;
+                letter-spacing: 1px;
+            }
+
+            .gallery-info {
+                font-size: 0.8rem;
+            }
+
+            .images-grid {
+                gap: 5px;
+            }
+
+            .image-number {
+                padding: 3px 6px;
+                font-size: 0.7rem;
+            }
+
+            .scroll-arrow {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="video-section">
+        <video autoplay muted loop>
+            <source src="videos/latte_10.mp4" type="video/mp4">
+            <source src="videos/latte_10.webm" type="video/webm">
+            Your browser does not support the video tag.
+        </video>
+        
+        <div class="video-overlay">
+            <div class="video-header">
+                <h1>Latte</h1>
+            </div>
+            
+            <div class="scroll-indicator">
+                <div class="scroll-arrow" onclick="scrollToGallery()">↓</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gallery-header">
+        <h1>Gallery</h1>
+        <div class="gallery-info">72 • Scroll to view</div>
+    </div>
+
+    <div class="gallery-container">
+        <!-- Images will be loaded here -->
+    </div>
+
+    <script>
+        const totalImages = 72;
+        const imagesPerGrid = 9;
+        const totalGrids = Math.ceil(totalImages / imagesPerGrid);
+
+        function createImageElement(imageNumber) {
+            const imageNumberPadded = String(imageNumber).padStart(3, '0');
+            const imageItem = document.createElement('div');
+            imageItem.className = 'image-item';
+            
+            // Add loading placeholder initially
+            imageItem.classList.add('loading-placeholder');
+            
+            const img = document.createElement('img');
+            img.src = `images/${imageNumberPadded}.jpg`;
+            img.alt = `Image ${imageNumberPadded}`;
+            img.loading = 'lazy';
+            
+            const imageNumberLabel = document.createElement('div');
+            imageNumberLabel.className = 'image-number';
+            imageNumberLabel.textContent = imageNumberPadded;
+            
+            img.onload = function() {
+                imageItem.classList.remove('loading-placeholder');
+                imageItem.appendChild(imageNumberLabel);
+            };
+            
+            img.onerror = function() {
+                imageItem.classList.remove('loading-placeholder');
+                imageItem.classList.add('error-placeholder');
+                imageItem.textContent = imageNumberPadded;
+            };
+            
+            imageItem.appendChild(img);
+            return imageItem;
+        }
+
+        function loadGallery() {
+            const container = document.querySelector('.gallery-container');
+            let imageNumber = 1;
+
+            for (let grid = 1; grid <= totalGrids; grid++) {
+                const imagesGrid = document.createElement('div');
+                imagesGrid.className = 'images-grid';
+                
+                const imagesInThisGrid = Math.min(imagesPerGrid, totalImages - imageNumber + 1);
+                
+                for (let i = 0; i < imagesInThisGrid; i++) {
+                    const imageElement = createImageElement(imageNumber);
+                    imagesGrid.appendChild(imageElement);
+                    imageNumber++;
+                }
+                
+                container.appendChild(imagesGrid);
+            }
+        }
+
+        function scrollToGallery() {
+            document.querySelector('.gallery-header').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Initialize the gallery
+        loadGallery();
+
+        // Add smooth scrolling behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
