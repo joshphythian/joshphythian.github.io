@@ -75,6 +75,10 @@
             font-weight: 900;
             animation: bounce 2s infinite;
             cursor: pointer;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         @keyframes bounce {
@@ -232,7 +236,7 @@
 </head>
 <body>
     <div class="video-section">
-        <video autoplay muted loop>
+        <video autoplay muted loop playsinline>
             <source src="videos/latte_10.mp4" type="video/mp4">
             <source src="videos/latte_10.webm" type="video/webm">
             Your browser does not support the video tag.
@@ -240,7 +244,7 @@
         
         <div class="video-overlay">
             <div class="video-header">
-                <h1>Latte</h1>
+                <h1>Gallery</h1>
             </div>
             
             <div class="scroll-indicator">
@@ -250,7 +254,7 @@
     </div>
 
     <div class="gallery-header">
-        <h1>Gallery</h1>
+        <h1>Latte Art</h1>
         <div class="gallery-info">72 • Scroll to view</div>
     </div>
 
