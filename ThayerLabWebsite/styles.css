@@ -203,6 +203,8 @@
             width: 100%;
             max-width: 100%;
         }
+        
+        
 
         /* Container for textboxes */
         .textboxes-container {
@@ -282,23 +284,36 @@
             line-height: 1.6;
             font-size: 1rem;
         }
-
-        /* Red semicircle background element */
-        .textboxes-container::before {
-            content: '';
-            position: absolute;
-            left: -25vw;
-            top: 0;
-            width: 70vw;
-            height: 120%;
-            background-color: rgb(175, 43, 57);
-            border-radius: 0 50vw 50vw 0;
-            z-index: 1;
-            opacity: 0.2;
-            pointer-events: none;
-            transform: translateY(-10vw);
-        }
-
+.textboxes-container::before {
+    content: 'RESEARCH';
+    position: absolute;
+    left: -25vw;
+    top: 0;
+    width: 70vw;
+    height: 120%;
+    background-color: rgb(175, 43, 57);
+    border-radius: 0 50vw 50vw 0;
+    z-index: 1;
+    opacity: 0.2;
+    pointer-events: none;
+    transform: translateY(-10vw);
+    
+    /* Text styling */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-right: 2.5vw;  /* Add some padding from the right edge */
+    padding-left: 7vw;
+    font-size: 10vw;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "Times New Roman", Times, serif;
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.15em;
+    writing-mode: vertical-rl;  /* ADD THIS - vertical right-to-left */
+    text-orientation: upright;   /* ADD THIS - keeps letters upright */
+}
+        
         /* publications/Team Section */
         .publications-section {
             position: relative;
@@ -312,20 +327,35 @@
         }
 
         /* Red rounded rectangle on the right */
-        .publications-section::before {
-            content: '';
-            position: absolute;
-            right: -10vw;
-            top: 0;
-            width: 60vw;
-            height: 100%;
-            background-color: rgb(175, 43, 57);
-            border-radius: 0 0 0 50px;
-            z-index: 1;
-            opacity: 0.2;
-            pointer-events: none;
-            transform: translateY(-10vw);
-        }
+.publications-section::before {
+    content: 'PUBLICATIONS';
+    position: absolute;
+    right: -10vw;
+    top: 0;
+    width: 50vw;
+    height: 100%;
+    background-color: rgb(175, 43, 57);
+    border-radius: 0 0 0 50px;
+    z-index: 1;
+    opacity: 0.2;
+    pointer-events: none;
+    transform: translateY(-10vw);
+    
+    /* Add text styling */
+    display: flex;
+    align-items: left;
+    justify-content: left;
+    padding-right: 12.5vw;  
+    /* padding-left: 5vw; */
+    font-size: 6vw;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "Times New Roman", Times, serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.05em;
+    writing-mode: vertical-rl;  /* ADD THIS */
+    text-orientation: upright;   /* ADD THIS */
+}
 
         /* Bubble styling */
         .bubble {
