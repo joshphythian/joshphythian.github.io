@@ -343,11 +343,11 @@
     
     /* Add text styling */
     display: flex;
-    align-items: left;
-    justify-content: left;
-    padding-right: 12.5vw;  
-    /* padding-left: 5vw; */
-    font-size: 6vw;
+    align-items: flex-end;
+    justify-content: center;
+    /* padding-right: 12.5vw;   */
+    padding-left: 5vw;
+    font-size: 6.5vw;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.8);
     font-family: "Times New Roman", Times, serif;
@@ -358,26 +358,27 @@
 }
 
         /* Bubble styling */
-        .bubble {
-            position: absolute;
-            width: 30vw;
-            height: 10vw;
-            background: rgba(255, 255, 255, 0.95);
-            border: 2px solid rgb(175, 43, 57);
-            border-radius: 50px 0 50px 50px;
-            padding: 2rem;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            z-index: 15;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            opacity: 0;
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
+.bubble {
+    position: absolute;
+    width: 30vw;
+    min-height: 10vw;  /* Changed from height */
+    height: auto;      /* Added */
+    background: rgba(255, 255, 255, 0.95);
+    border: 2px solid rgb(175, 43, 57);
+    border-radius: 50px 0 50px 50px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 15;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
 
         /* Position each bubble on the left side */
         #bubble1 {

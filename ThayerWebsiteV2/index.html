@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thayer Lab - Computational Molecular Biophysics</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(175, 43, 57, 0.2);
+            padding: 1.5rem 5%;
+            transition: all 0.3s ease;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('lobster.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.9;
+            z-index: 1;
+        }
+
+        .logo span {
+            position: relative;
+            z-index: 2;
+            font-size: 1rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #af2b39 0%, #ff4458 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #af2b39, #ff4458);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(175, 43, 57, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-50px) scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            display: grid;
+            grid-template-columns: 1.618fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text h2 {
+            font-size: clamp(1.5rem, 3vw, 2rem);
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-text .location {
+            font-size: 1.2rem;
+            color: #af2b39;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+
+        .gradient-line {
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, #af2b39, #ff4458);
+            margin: 2rem 0;
+            border-radius: 2px;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image img {
+            max-width: 350px;
+            width: 100%;
+            filter: drop-shadow(0 20px 60px rgba(175, 43, 57, 0.3));
+        }
+
+        /* Research Section */
+        .research-section {
+            padding: 8rem 5%;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.1rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(175, 43, 57, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #af2b39, #ff4458);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(175, 43, 57, 0.4);
+            transform: translateY(-10px);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card h3 {
+            color: #af2b39;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        /* Publications Section */
+        .publications-section {
+            padding: 8rem 5%;
+            background: rgba(175, 43, 57, 0.03);
+        }
+
+        .publications-grid {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .publication {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(175, 43, 57, 0.15);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .publication:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-left-color: #af2b39;
+            transform: translateX(10px);
+        }
+
+        .publication h3 {
+            color: #ffffff;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .publication p {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.95rem;
+        }
+
+        .publication a {
+            color: #af2b39;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .publication a:hover {
+            color: #ff4458;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-info h3 {
+            color: #af2b39;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-info h4 {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .contact-info p, .contact-info ul {
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info ul {
+            list-style: none;
+        }
+
+        .contact-info li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #af2b39;
+        }
+
+        .contact-info a {
+            color: #af2b39;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: #ff4458;
+        }
+
+        .quick-links {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(175, 43, 57, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .quick-links h3 {
+            color: #af2b39;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .quick-links ul {
+            list-style: none;
+        }
+
+        .quick-links li {
+            margin-bottom: 1rem;
+        }
+
+        .quick-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 1.1rem;
+            display: block;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .quick-links a:hover {
+            background: rgba(175, 43, 57, 0.1);
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 1px solid rgba(175, 43, 57, 0.2);
+            padding: 2rem 5%;
+            text-align: center;
+        }
+
+        footer p {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #af2b39;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: #ff4458;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .hero-image img {
+                max-width: 250px;
+            }
+
+            .gradient-line {
+                margin: 2rem auto;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            nav a {
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding-top: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#home" class="logo">
+                <span>Thayer Lab</span>
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Thayer Lab</h1>
+                <div class="gradient-line"></div>
+                <h2>Computational Molecular Biophysics</h2>
+                <p class="location">@ Wesleyan University</p>
+            </div>
+            <div class="hero-image">
+                <img src="wesleyan_shield.png" alt="Wesleyan University Shield" onerror="this.style.display='none'">
+            </div>
+        </div>
+    </section>
+
+    <section id="research" class="research-section">
+        <div class="section-header">
+            <h2>Research</h2>
+            <!-- <p>Exploring protein regulation at the molecular level</p> -->
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <h3>Our Research</h3>
+                <p>Our lab focuses on p53: the tumor suppressor protein. When it mutates, it ceases to function, implicated in over 50% of human cancers. We develop new methods and software to understand it better, including Sector Analysis, Markov State and electrostatic models.</p>
+            </div>
+            <div class="card">
+                <h3>Goals</h3>
+                <p>We want to uncover the fundamental mechanisms that govern protein regulation, allosteric signaling, and misfunction in disease. Specifically, we study how proteins operate at the atomic level and how molecular failures contribute to pathological states.</p>
+            </div>
+            <div class="card">
+                <h3>Our Approach</h3>
+                <p>Molecular Dynamics Simulations, Machine Learning, Structural Bioinformatics, Mathematical Modeling, Sector Analysis</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="publications" class="publications-section">
+        <div class="section-header">
+            <h2>Recent Publications</h2>
+            <!-- <p>Recent work from the lab</p> -->
+        </div>
+        <div class="publications-grid">
+            <div class="publication">
+                <h3>Navigating the complexity of p53-DNA binding: implications for cancer therapy</h3>
+                <p><a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Thayer+KM&cauthor_id=38737036">Kelly M. Thayer</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Stetson+S&cauthor_id=40173308">Sean Stetson</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Caballero+F&cauthor_id=39309126">Fernando Callabero</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Chiu+CA&cauthor_id=40173308">Christopher A Chiu</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Han+ISM&cauthor_id=38737036">In Sub Han</a></p>
+            </div>
+            <div class="publication">
+                <h3>MD Multi-Sector Selector: Recursive Extraction and Refinement of Molecular Dynamics Based Sectors</h3>
+                <p><a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Chiu+CA&cauthor_id=40173308">Christopher A Chiu</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Stetson+S&cauthor_id=40173308">Sean Stetson</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Thayer+KM&cauthor_id=38737036">Kelly M. Thayer</a></p>
+            </div>
+            <div class="publication">
+                <h3>Structural and mechanistic diversity in p53-mediated regulation of organismal longevity across taxonomical orders</h3>
+                <p><a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Osbourne+R&cauthor_id=40315252">Romani Osbourne</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Thayer+KM&cauthor_id=38737036">Kelly M. Thayer</a></p>
+            </div>
+            <div class="publication">
+                <h3>Network Theory Analysis of Allosteric Drug-Rescue Mechanisms in the Tumor Suppressor Protein p53 Y220C Mutant</h3>
+                <p><a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Cowan+BSM&cauthor_id=38737036">Benjamin S. Cowan</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Thayer+KM&cauthor_id=38737036">Kelly M. Thayer</a></p>
+            </div>
+            <div class="publication">
+                <h3>Reconnaissance of Allostery via the Restoration of Native p53 DNA-Binding Domain Dynamics in Y220C Mutant p53 Tumor Suppressor Protein</h3>
+                <p><a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Han+ISM&cauthor_id=38737036">In Sub Han</a>, <a href="https://pubmed.ncbi.nlm.nih.gov/?sort=date&term=Thayer+KM&cauthor_id=38737036">Kelly M. Thayer</a></p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="section-header">
+            <h2>Contact</h2>
+            <!-- <p>Get in touch with the lab</p> -->
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h3>Dr. Kelly Thayer</h3>
+                <ul>
+                    <li>Associate Professor of the Practice in Integrative Sciences</li>
+                    <li>Associate Professor of the Practice, National Education Equity Lab</li>
+                    <li>Associate Professor of the Practice in Liberal Studies</li>
+                </ul>
+                <h4>Contact Information</h4>
+                <p>Hall-Atwater 37 (Office) or Hall-Atwater 66 (Lab)<br>
+                212 Church Street<br>
+                Middletown, CT</p>
+                <p><a href="tel:860-685-2017">860-685-2017</a></p>
+                <p><a href="mailto:kthayer@wesleyan.edu">kthayer@wesleyan.edu</a></p>
+            </div>
+            <div class="quick-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Thayer Lab. All rights reserved. | Designed by <a href="http://www.joshphythian.com">Josh Phythian</a></p>
+    </footer>
+</body>
+</html>
