@@ -71,14 +71,11 @@
         .logo span {
             position: relative;
             z-index: 2;
-            font-size: 1rem;
+            font-size: 1.4rem;
             font-weight: 700;
-            background: linear-gradient(135deg, #af2b39 0%, #ff4458 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: #ffffff;
             letter-spacing: -0.5px;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
 
         nav ul {
@@ -175,7 +172,15 @@
             font-size: 1.2rem;
             color: #af2b39;
             font-weight: 600;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 400;
+            font-style: italic;
+            margin-top: 1rem;
         }
 
         .gradient-line {
@@ -202,6 +207,12 @@
         .research-section {
             padding: 8rem 5%;
             position: relative;
+            background: linear-gradient(to bottom, 
+                rgba(10, 10, 10, 0) 0%, 
+                rgba(175, 43, 57, 0.01) 30%,
+                rgba(175, 43, 57, 0.025) 70%,
+                rgba(175, 43, 57, 0.03) 100%
+            );
         }
 
         .section-header {
@@ -212,7 +223,7 @@
         .section-header h2 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 0;
             background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.6) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -220,8 +231,7 @@
         }
 
         .section-header p {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 1.1rem;
+            display: none;
         }
 
         .cards-grid {
@@ -280,7 +290,10 @@
         /* Publications Section */
         .publications-section {
             padding: 8rem 5%;
-            background: rgba(175, 43, 57, 0.03);
+            background: linear-gradient(to bottom,
+                rgba(175, 43, 57, 0.03) 0%,
+                rgba(175, 43, 57, 0.03) 100%
+            );
         }
 
         .publications-grid {
@@ -331,6 +344,12 @@
         /* Contact Section */
         .contact-section {
             padding: 8rem 5%;
+            background: linear-gradient(to bottom,
+                rgba(175, 43, 57, 0.03) 0%,
+                rgba(175, 43, 57, 0.025) 30%,
+                rgba(175, 43, 57, 0.01) 70%,
+                rgba(10, 10, 10, 0) 100%
+            );
         }
 
         .contact-grid {
@@ -375,7 +394,7 @@
             content: '→';
             position: absolute;
             left: 0;
-            color: #af2b39;
+            color: #ffffff;
         }
 
         .contact-info a {
@@ -393,37 +412,20 @@
             border: 1px solid rgba(175, 43, 57, 0.2);
             border-radius: 20px;
             padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .quick-links h3 {
-            color: #af2b39;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            font-weight: 700;
+        .quick-links img {
+            max-width: 250px;
+            width: 100%;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
         }
 
-        .quick-links ul {
-            list-style: none;
-        }
-
-        .quick-links li {
-            margin-bottom: 1rem;
-        }
-
-        .quick-links a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            font-size: 1.1rem;
-            display: block;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .quick-links a:hover {
-            background: rgba(175, 43, 57, 0.1);
-            color: #ffffff;
-            transform: translateX(5px);
+        .quick-links img:hover {
+            opacity: 1;
         }
 
         /* Footer */
@@ -520,9 +522,10 @@
                 <div class="gradient-line"></div>
                 <h2>Computational Molecular Biophysics</h2>
                 <p class="location">@ Wesleyan University</p>
+                <p class="tagline">Curing cancer with computers</p>
             </div>
             <div class="hero-image">
-                <img src="wesleyan_shield.png" alt="Wesleyan University Shield" onerror="this.style.display='none'">
+                <img src="wesleyan_university_shield.png" alt="Wesleyan University Shield" onerror="this.style.display='none'">
             </div>
         </div>
     </section>
@@ -530,16 +533,17 @@
     <section id="research" class="research-section">
         <div class="section-header">
             <h2>Research</h2>
-            <!-- <p>Exploring protein regulation at the molecular level</p> -->
         </div>
         <div class="cards-grid">
             <div class="card">
-                <h3>Our Research</h3>
-                <p>Our lab focuses on p53: the tumor suppressor protein. When it mutates, it ceases to function, implicated in over 50% of human cancers. We develop new methods and software to understand it better, including Sector Analysis, Markov State and electrostatic models.</p>
+                <h3>Focus</h3>
+<p>p53: the Tumor Supressor Protein. </p>
+   <p>Mutated p53 is implicated in over 50% of human cancers</p>
+    <p>We develop new methods and software to understand it better</p>
             </div>
             <div class="card">
                 <h3>Goals</h3>
-                <p>We want to uncover the fundamental mechanisms that govern protein regulation, allosteric signaling, and misfunction in disease. Specifically, we study how proteins operate at the atomic level and how molecular failures contribute to pathological states.</p>
+                <p>Uncover the fundamental mechanisms that govern protein regulation, allosteric signaling, and misfunction in disease. </p>
             </div>
             <div class="card">
                 <h3>Our Approach</h3>
@@ -550,8 +554,7 @@
 
     <section id="publications" class="publications-section">
         <div class="section-header">
-            <h2>Recent Publications</h2>
-            <!-- <p>Recent work from the lab</p> -->
+            <h2>Publications</h2>
         </div>
         <div class="publications-grid">
             <div class="publication">
@@ -580,7 +583,6 @@
     <section id="contact" class="contact-section">
         <div class="section-header">
             <h2>Contact</h2>
-            <!-- <p>Get in touch with the lab</p> -->
         </div>
         <div class="contact-grid">
             <div class="contact-info">
@@ -598,12 +600,7 @@
                 <p><a href="mailto:kthayer@wesleyan.edu">kthayer@wesleyan.edu</a></p>
             </div>
             <div class="quick-links">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                <img src="lobster.png" alt="Thayer Lab Lobster" onerror="this.style.display='none'">
             </div>
         </div>
     </section>
