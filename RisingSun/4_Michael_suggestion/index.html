@@ -142,7 +142,7 @@
   
   .bottom-text-container{
     position:absolute;
-    top:calc(100vh - 100px);
+    top:calc(100vh - 50px);
     left:0;
     right:0;
     height:150vh;
@@ -157,7 +157,7 @@
     max-width:900px;
     margin-left:10%;
     color:#000;
-    font-size:clamp(16px,2.5vw,24px);
+    font-size:clamp(20px,2.5vw,28px);
     line-height:1.6;
   }
 
@@ -260,14 +260,19 @@
 <div class="content-wrapper">
   <section id="hero">
     <div class="hero-text">
+
       Gen Z, POC<br>Design + Consulting
+<p>
+  Driven by:<br>
+  ★ Story <br>
+  ★ Value <br>
+  ★ Purpose
+</p>
     </div>
     <div class="bottom-text-container">
       <div class="bottom-text">
-        Ad agencies and brand marketers are overwhelmingly white<br>
-        and old. We are not white or old, we are POC and Gen-Z.<br>
-        We meet you where you're at and professionally call you<br>
-        out because you're in the way of your business.
+        Ad agencies and brand marketers are overwhelmingly <b>white and old</b>. We are not white or old, we are POC and Gen-Z.<br>
+        We meet you where you're at and professionally <br> call you out because you're in the way of your business.
       </div>
     </div>
   </section>
@@ -338,7 +343,7 @@
   const state = { angle: 0, circleAngle: 0 };
   
   gsap.to(state, {
-    angle: 360,
+    angle: 180,
     ease: 'none',
     scrollTrigger: {
       trigger: '#hero',
@@ -354,7 +359,7 @@
   // Subtle continuous rotation for the circle
   gsap.to(state, {
     circleAngle: 360,
-    duration: 120,
+    duration: 60,
     ease: 'none',
     repeat: -1,
     onUpdate: () => {
