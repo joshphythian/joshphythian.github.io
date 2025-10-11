@@ -57,14 +57,14 @@
             position: absolute;
             top: 45px;
             left: 20px;
+            letter-spacing: 1.0px;
+
         }
 
         .still-container {
             width: 80%;
             max-width: 900px;
             margin-bottom: 3rem;
-            border: 3px solid #000;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
         .still-container video {
@@ -94,11 +94,13 @@
             padding: 80px 40px;
             line-height: 1.8;
             font-size: 1.1rem;
-            font-weight: 300;
         }
-
+        
         .content-section p {
             margin-bottom: 1.5rem;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: 1.0px;
         }
 
         .content-section h2 {
@@ -143,19 +145,39 @@
 
         @media (max-width: 768px) {
             .title {
-                font-size: 2.5rem;
+                font-size: 0.9rem;
+                top: 15px;
+                left: 15px;
             }
             
             .subtitle {
-                font-size: 1.2rem;
+                font-size: 0.7rem;
+                top: 38px;
+                left: 15px;
             }
             
             .still-container {
                 width: 95%;
             }
             
+            .support-link {
+                font-size: 1.2rem;
+                padding: 12px 30px;
+            }
+            
             .content-section {
                 padding: 60px 20px;
+                font-size: 1rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .unmute-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 25px;
                 font-size: 1rem;
             }
         }
@@ -190,7 +212,258 @@
 
         <p>Cold Deerfield winters brought about interest in the strategy of sport, the power of movement, and the distance between order and chaos.</p>
 
-        <p class="image-caption">Michael Fadugbagbe, age 11, before practice</p>
+        <p>Last fall we successfully crowdfunded over $1,500 for production, it was given generously and spent prudently. We're asking for help again.</p>
+
+        <p>Costs like finishing and festival fees are producing a financial mountain.</p>
+
+        <p>We have to raise $2500 to conquer the mountain.</p>
+
+        <p>Festival fees limit access to first-generation and working class filmmakers like myself, and those I graduated with.</p>
+
+        <p>I know we are in turbulent times.</p>
+
+        <p>I know we are in trying times.</p>
+
+        <p>I believe art creates our future.</p>
+
+        <p>Thank you for taking the time to read, donate, and share.</p>
+
+        <p>Peace</p>
+
+        <h2>Script Synopsis:</h2>
+        <p>One day before playing the best team in their Conference, the worst high school football team in the state of Connecticut must choose between the brutish strategy of their coach or the chaotic one of their waterboy.</p>
+
+        <p><em>No raffles, sweepstakes, giveaways, or returns on investment are offered in exchange for any donations made to this GoFundMe.</em></p>
+
+        <h2>Crew:</h2>
+        <div class="crew-list">
+            <p><strong>Director, Writer:</strong> Michael Fadugbagbe</p>
+            <p><strong>Director of Photography:</strong> Spencer Turner</p>
+            <p><strong>Executive Producer:</strong> Lia Franklin</p>
+            <p><strong>Producers:</strong> Olivia Berger, Michael Fadugbagbe</p>
+            <p><strong>Assistant Director:</strong> Liz Pace</p>
+            <p><strong>1st Assistant Camera:</strong> Tracy Wu</p>
+            <p><strong>2nd Assistant Camera:</strong> Muhammad Abdur-Rahman</p>
+            <p><strong>Gaffer:</strong> Pelumi Sokunbi</p>
+            <p><strong>Script Supervisor:</strong> Reese Chahal</p>
+            <p><strong>Casting:</strong> Georgia Reed-Stamm</p>
+            <p><strong>Associate Producers:</strong> Candice Walker, Theo Baldwin-Edwards</p>
+            <p><strong>Production Design:</strong> Sanaa Mia</p>
+            <p><strong>Production Assistant:</strong> Isidor Marcus</p>
+        </div>
+    </section>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waterboy - A Film by Michael Fadugbagbe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Custom font - you'll need to add your TTF file */
+        @font-face {
+            font-family: 'Generic';
+            src: url('Fonts/Generic-G20-FR.woff2') format('woff2'),
+                 url('Fonts/Generic-G20-FR.woff') format('woff'),
+                 url('Fonts/Generic-G20-FR.ttf') format('truetype');
+            font-weight: 100 900;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        body {
+            font-family: 'Generic', Arial, sans-serif;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 0.25rem;
+            letter-spacing: 1px;
+            text-align: left;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .subtitle {
+            font-size: 0.8rem;
+            color: #000;
+            font-weight: normal;
+            text-align: left;
+            position: absolute;
+            top: 45px;
+            left: 20px;
+        }
+
+        .still-container {
+            width: 80%;
+            max-width: 900px;
+            margin-bottom: 3rem;
+        }
+
+        .still-container video {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .support-link {
+            font-size: 1.5rem;
+            color: #000;
+            text-decoration: none;
+            padding: 15px 40px;
+            border: 2px solid #000;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .support-link:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        .content-section {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 40px;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        
+        .content-section p {
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: 0.5px;
+        }
+
+        .content-section h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem 0;
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .unmute-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #fff;
+            color: #000;
+            border: 3px solid #000;
+            padding: 20px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            font-family: 'Generic', Arial, sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .unmute-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .crew-list {
+            margin-top: 1rem;
+            line-height: 2;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 0.9rem;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .subtitle {
+                font-size: 0.7rem;
+                top: 38px;
+                left: 15px;
+            }
+            
+            .still-container {
+                width: 95%;
+            }
+            
+            .support-link {
+                font-size: 1.2rem;
+                padding: 12px 30px;
+            }
+            
+            .content-section {
+                padding: 60px 20px;
+                font-size: 1rem;
+            }
+            
+            .content-section h2 {
+                font-size: 1.5rem;
+            }
+            
+            .unmute-btn {
+                bottom: 20px;
+                right: 20px;
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <h1 class="title">WATERBOY</h1>
+        <p class="subtitle">Dir. Michael Fadugbagbe</p>
+        
+        <div class="still-container">
+            <video autoplay muted loop playsinline>
+                <source src="your-video.webm" type="video/webm">
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <a href="https://www.gofundme.com/f/shvsrw-support-michael-fadugbagbes-film-waterboy" class="support-link" target="_blank">SUPPORT</a>
+    </section>
+
+    <section class="content-section">
+        <p>My name is Michael Fadugbagbe, a Nigerian-American artist and filmmaker from Jamaica, Queens and writer-director of WATERBOY.</p>
+
+        <p>This film began 8 years ago in the state of Massachusetts. It was my first year at Deerfield Academy, a New England boarding school, and my parents had forbade me from playing with the football team.</p>
+
+        <p>I became their waterboy.</p>
+
+        <p>Deerfield was my first time outside of a strict & religious family. We never listened to worldly music, just Gospel, Bluegrass, and African praise.</p>
+
+        <p>Away from Queens, filling water and collecting jerseys, I inadvertently developed a love of music.</p>
+
+        <p>Cold Deerfield winters brought about interest in the strategy of sport, the power of movement, and the distance between order and chaos.</p>
 
         <p>Last fall we successfully crowdfunded over $1,500 for production, it was given generously and spent prudently. We're asking for help again.</p>
 
