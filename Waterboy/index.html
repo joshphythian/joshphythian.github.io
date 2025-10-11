@@ -10,18 +10,22 @@
             padding: 0;
             box-sizing: border-box;
         }
+
+        /* Custom font - you'll need to add your TTF file */
         @font-face {
             font-family: 'Generic';
             src: url('Fonts/Generic-G20-FR.woff2') format('woff2'),
-                url('Fonts/Generic-G20-FR.woff') format('woff'),
-                url('Fonts/Generic-G20-FR.ttf') format('truetype');
-            font-weight: normal;
+                 url('Fonts/Generic-G20-FR.woff') format('woff'),
+                 url('Fonts/Generic-G20-FR.ttf') format('truetype');
+            font-weight: 100 900;
             font-style: normal;
+            font-display: swap;
         }
+
         body {
             font-family: 'Generic', Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
+            background-color: #fff;
+            color: #000;
         }
 
         .hero-section {
@@ -32,31 +36,38 @@
             align-items: center;
             text-align: center;
             padding: 20px;
-
         }
 
         .title {
-            font-size: 4rem;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-            font-family: 'Generic', Arial, sans-serif;
-
+            font-size: 1rem;
+            font-weight: normal;
+            margin-bottom: 0.25rem;
+            letter-spacing: 1px;
+            text-align: left;
+            position: absolute;
+            top: 20px;
+            left: 20px;
         }
 
         .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 3rem;
-            color: #ccc;
+            font-size: 0.8rem;
+            color: #000;
+            font-weight: normal;
+            text-align: left;
+            position: absolute;
+            top: 45px;
+            left: 20px;
         }
 
         .still-container {
             width: 80%;
             max-width: 900px;
             margin-bottom: 3rem;
+            border: 3px solid #000;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
-        .still-container img {
+        .still-container video {
             width: 100%;
             height: auto;
             display: block;
@@ -64,17 +75,17 @@
 
         .support-link {
             font-size: 1.5rem;
-            color: #fff;
+            color: #000;
             text-decoration: none;
             padding: 15px 40px;
-            border: 2px solid #fff;
+            border: 2px solid #000;
             transition: all 0.3s ease;
             display: inline-block;
         }
 
         .support-link:hover {
-            background-color: #fff;
-            color: #000;
+            background-color: #000;
+            color: #fff;
         }
 
         .content-section {
@@ -83,6 +94,7 @@
             padding: 80px 40px;
             line-height: 1.8;
             font-size: 1.1rem;
+            font-weight: 300;
         }
 
         .content-section p {
@@ -96,9 +108,32 @@
 
         .image-caption {
             font-style: italic;
-            color: #999;
+            color: #666;
             margin-top: 0.5rem;
             text-align: center;
+        }
+
+        .unmute-btn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background-color: #fff;
+            color: #000;
+            border: 3px solid #000;
+            padding: 20px 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 9999;
+            transition: all 0.3s ease;
+            font-family: 'Generic', Arial, sans-serif;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        .unmute-btn:hover {
+            background-color: #000;
+            color: #fff;
+            transform: scale(1.05);
         }
 
         .crew-list {
@@ -129,25 +164,51 @@
 <body>
     <section class="hero-section">
         <h1 class="title">WATERBOY</h1>
-        <p class="subtitle">by Michael Fadugbagbe</p>
+        <p class="subtitle">Dir. Michael Fadugbagbe</p>
         
-        <video autoplay muted loop playsinline>
+        <div class="still-container">
+            <video autoplay muted loop playsinline>
                 <source src="Videos/vid.webm" type="video/webm">
                 <source src="Videos/vid.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
+        </div>
         
         <a href="https://www.gofundme.com/f/shvsrw-support-michael-fadugbagbes-film-waterboy" class="support-link" target="_blank">SUPPORT</a>
     </section>
 
     <section class="content-section">
-        <p>I'm the writer and director of "Waterboy". It's a film inspired by my experience as the waterboy freshman year of high school. That was six years ago and since then I've worked as a Director of Photography on three thesis films, crewed on four, and acted in two; not to mention performing improv comedy for 24 hours straight (twice!) and even designed my own fashion line.</p>
+        <p>My name is Michael Fadugbagbe, a Nigerian-American artist and filmmaker from Jamaica, Queens and writer-director of WATERBOY.</p>
 
-        <p>I've always had a lot of creative interests, but right now, with the help of a great and diverse group of students, I'm focused completely on creating an ambitious project about special people coming from unlikely places.</p>
+        <p>This film began 8 years ago in the state of Massachusetts. It was my first year at Deerfield Academy, a New England boarding school, and my parents had forbade me from playing with the football team.</p>
+
+        <p>I became their waterboy.</p>
+
+        <p>Deerfield was my first time outside of a strict & religious family. We never listened to worldly music, just Gospel, Bluegrass, and African praise.</p>
+
+        <p>Away from Queens, filling water and collecting jerseys, I inadvertently developed a love of music.</p>
+
+        <p>Cold Deerfield winters brought about interest in the strategy of sport, the power of movement, and the distance between order and chaos.</p>
 
         <p class="image-caption">Michael Fadugbagbe, age 11, before practice</p>
 
-        <p>Please consider supporting me and my wonderful crew with finishing our film and gaining access to film festivals, so that we can bring this wonderful project to life.</p>
+        <p>Last fall we successfully crowdfunded over $1,500 for production, it was given generously and spent prudently. We're asking for help again.</p>
+
+        <p>Costs like finishing and festival fees are producing a financial mountain.</p>
+
+        <p>We have to raise $2500 to conquer the mountain.</p>
+
+        <p>Festival fees limit access to first-generation and working class filmmakers like myself, and those I graduated with.</p>
+
+        <p>I know we are in turbulent times.</p>
+
+        <p>I know we are in trying times.</p>
+
+        <p>I believe art creates our future.</p>
+
+        <p>Thank you for taking the time to read, donate, and share.</p>
+
+        <p>Peace</p>
 
         <h2>Script Synopsis:</h2>
         <p>One day before playing the best team in their Conference, the worst high school football team in the state of Connecticut must choose between the brutish strategy of their coach or the chaotic one of their waterboy.</p>
