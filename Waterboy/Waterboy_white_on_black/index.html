@@ -10,11 +10,18 @@
             padding: 0;
             box-sizing: border-box;
         }
-
+        @font-face {
+            font-family: 'Generic';
+            src: url('Fonts/Generic-G20-FR.woff2') format('woff2'),
+                url('Fonts/Generic-G20-FR.woff') format('woff'),
+                url('Fonts/Generic-G20-FR.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }   
         body {
-            font-family: Arial, sans-serif;
-            background-color: #fff;
-            color: #000;
+            font-family: 'Generic', Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
         }
 
         /* Custom font - you'll need to add your TTF file */
@@ -128,8 +135,11 @@
         <p class="subtitle">by Michael Fadugbagbe</p>
         
         <div class="still-container">
-            <!-- Replace with your actual image -->
-            <img src="../Michael.jpg" alt="Waterboy Film Still">
+            <video autoplay muted loop playsinline>
+                <source src="../Videos/vid.webm" type="video/webm">
+                <source src="../Videos/vid.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
         
         <a href="https://www.gofundme.com/f/shvsrw-support-michael-fadugbagbes-film-waterboy" class="support-link" target="_blank">SUPPORT</a>
