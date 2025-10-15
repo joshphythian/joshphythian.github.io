@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sushi Easy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Libre+Baskerville:wght@400&family=Crimson+Text:wght@400;600&family=EB+Garamond:wght@400;500&family=Spectral:wght@300;400&family=Judson:wght@400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background: #fafaf8;
+            color: #2a2a2a;
+            position: relative;
+        }
+
+        /* Complex animated wood grain background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(0deg, transparent 0px, rgba(139, 119, 101, 0.015) 1px, transparent 2px, transparent 40px),
+                repeating-linear-gradient(90deg, rgba(101, 84, 69, 0.02) 0px, transparent 3px, transparent 15px),
+                repeating-linear-gradient(45deg, transparent 0px, rgba(120, 100, 85, 0.008) 1px, transparent 2px, transparent 60px),
+                radial-gradient(ellipse at 30% 40%, rgba(139, 119, 101, 0.03) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 60%, rgba(101, 84, 69, 0.025) 0%, transparent 50%),
+                linear-gradient(180deg, #fafaf8 0%, #f5f3f0 50%, #f0ede8 100%);
+            animation: subtleShift 60s ease-in-out infinite;
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 119, 101, 0.01) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(101, 84, 69, 0.015) 0%, transparent 35%),
+                radial-gradient(circle at 50% 50%, rgba(120, 100, 85, 0.008) 0%, transparent 50%);
+            animation: pulseGrain 45s ease-in-out infinite alternate;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes subtleShift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-1%, 1%) rotate(0.5deg); }
+            50% { transform: translate(1%, -0.5%) rotate(-0.3deg); }
+            75% { transform: translate(-0.5%, -1%) rotate(0.4deg); }
+        }
+
+        @keyframes pulseGrain {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        /* Particle system */
+        .particle-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(139, 119, 101, 0.1);
+            border-radius: 50%;
+        }
+
+        /* Navigation */
+        .hamburger {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 7px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hamburger:hover {
+            transform: scale(1.1);
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 1.5px;
+            background: #2a2a2a;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .hamburger span::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 100%;
+            background: #8b7765;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .hamburger:hover span::after {
+            width: 100%;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8.5px) rotate(45deg);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8.5px) rotate(-45deg);
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, rgba(250, 250, 248, 0.98) 0%, rgba(245, 243, 240, 0.98) 100%);
+            backdrop-filter: blur(20px);
+            transition: right 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, transparent 0px, rgba(139, 119, 101, 0.02) 1px, transparent 2px, transparent 80px),
+                repeating-linear-gradient(90deg, rgba(101, 84, 69, 0.015) 0px, transparent 2px, transparent 80px);
+            animation: menuPattern 30s linear infinite;
+        }
+
+        @keyframes menuPattern {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(80px, 80px); }
+        }
+
+        .menu.active {
+            right: 0;
+        }
+
+        .menu-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .menu a {
+            display: block;
+            padding: 20px 0;
+            color: #2a2a2a;
+            text-decoration: none;
+            font-size: 48px;
+            font-weight: 400;
+            letter-spacing: 4px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(50px);
+        }
+
+        .menu.active a {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu.active a:nth-child(1) { transition-delay: 0.1s; }
+        .menu.active a:nth-child(2) { transition-delay: 0.15s; }
+        .menu.active a:nth-child(3) { transition-delay: 0.2s; }
+        .menu.active a:nth-child(4) { transition-delay: 0.25s; }
+        .menu.active a:nth-child(5) { transition-delay: 0.3s; }
+
+        .menu a::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            width: 0;
+            height: 1px;
+            background: #8b7765;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(-50%);
+        }
+
+        .menu a:hover {
+            color: #8b7765;
+            transform: scale(1.05);
+            letter-spacing: 8px;
+        }
+
+        .menu a:hover::before {
+            width: 80%;
+        }
+
+        /* Main content */
+        .main-content {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .title-text {
+            font-size: 96px;
+            font-weight: 400;
+            letter-spacing: 16px;
+            color: #2a2a2a;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+            text-shadow: 0 0 40px rgba(139, 119, 101, 0.1);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .image-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            animation: rotate 60s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .image-container::before,
+        .image-container::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+
+        .image-container::before {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(139, 119, 101, 0.1) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        .image-container::after {
+            width: 220px;
+            height: 220px;
+            border: 1px solid rgba(139, 119, 101, 0.1);
+            animation: pulse 3s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .title-container img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 0 1px rgba(139, 119, 101, 0.1),
+                0 10px 40px rgba(0, 0, 0, 0.1),
+                0 0 80px rgba(139, 119, 101, 0.05);
+            position: relative;
+            z-index: 1;
+            animation: rotateReverse 60s linear infinite;
+            transition: all 0.4s ease;
+        }
+
+        @keyframes rotateReverse {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+
+        .title-container img:hover {
+            transform: scale(1.1);
+            box-shadow: 
+                0 0 0 1px rgba(139, 119, 101, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.15),
+                0 0 120px rgba(139, 119, 101, 0.1);
+        }
+
+        /* Font selector */
+        .font-selector {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .font-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 1px solid rgba(139, 119, 101, 0.2);
+            color: #2a2a2a;
+            cursor: pointer;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .font-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 119, 101, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .font-btn:hover::before {
+            left: 100%;
+        }
+
+        .font-btn:hover {
+            border-color: #8b7765;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(139, 119, 101, 0.2);
+        }
+
+        .font-btn.active {
+            background: #2a2a2a;
+            color: #fafaf8;
+            border-color: #2a2a2a;
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 40px;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            height: 100px;
+            background: linear-gradient(to bottom, transparent, rgba(139, 119, 101, 0.3), transparent);
+        }
+
+        .section h2 {
+            font-size: 64px;
+            font-weight: 400;
+            letter-spacing: 12px;
+            margin-bottom: 40px;
+            color: #2a2a2a;
+            position: relative;
+            text-transform: lowercase;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 1px;
+            background: #8b7765;
+        }
+
+        .section-content {
+            max-width: 700px;
+            text-align: center;
+            line-height: 2;
+            font-size: 18px;
+            letter-spacing: 1px;
+            color: #4a4a4a;
+            position: relative;
+        }
+
+        .section-content::before,
+        .section-content::after {
+            content: '"';
+            font-size: 120px;
+            position: absolute;
+            color: rgba(139, 119, 101, 0.1);
+            font-family: Georgia, serif;
+        }
+
+        .section-content::before {
+            top: -40px;
+            left: -40px;
+        }
+
+        .section-content::after {
+            bottom: -80px;
+            right: -40px;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            opacity: 0;
+            animation: fadeInOut 3s ease-in-out infinite;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+            50% { opacity: 0.5; transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .scroll-indicator span {
+            display: block;
+            width: 1px;
+            height: 30px;
+            background: linear-gradient(to bottom, transparent, #8b7765, transparent);
+        }
+
+        @media (max-width: 768px) {
+            .title-text {
+                font-size: 48px;
+                letter-spacing: 8px;
+            }
+
+            .image-container,
+            .title-container img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .section h2 {
+                font-size: 36px;
+                letter-spacing: 6px;
+            }
+
+            .menu a {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particle-container" id="particles"></div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <nav class="menu">
+        <div class="menu-content">
+            <a href="#about">About</a>
+            <a href="#menu">Menu</a>
+            <a href="#visit">Visit</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="title-container">
+            <span class="title-text">sushi</span>
+            <div class="image-container">
+                <img src="../miso_soup.jpg" alt="Miso Soup" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22180%22 height=%22180%22%3E%3Cdefs%3E%3CradialGradient id=%22a%22%3E%3Cstop offset=%220%25%22 stop-color=%22%23e8dcc8%22/%3E%3Cstop offset=%22100%25%22 stop-color=%22%23d4c5b0%22/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle fill=%22url(%23a)%22 cx=%2290%22 cy=%2290%22 r=%2290%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%233d3d3d%22 font-family=%22serif%22 font-size=%2216%22 opacity=%220.4%22%3Emiso_soup%3C/text%3E%3C/svg%3E'">
+            </div>
+            <span class="title-text">easy</span>
+        </div>
+
+        <div class="font-selector">
+            <button class="font-btn active" onclick="changeFont('Playfair Display')">Playfair</button>
+            <button class="font-btn" onclick="changeFont('Libre Baskerville')">Baskerville</button>
+            <button class="font-btn" onclick="changeFont('Crimson Text')">Crimson</button>
+            <button class="font-btn" onclick="changeFont('EB Garamond')">Garamond</button>
+            <button class="font-btn" onclick="changeFont('Spectral')">Spectral</button>
+            <button class="font-btn" onclick="changeFont('Judson')">Judson</button>
+        </div>
+    </div>
+
+    <div class="scroll-indicator">
+        <span></span>
+    </div>
+
+    <section class="section" id="about">
+        <h2>about</h2>
+        <div class="section-content">
+            Traditional Japanese craftsmanship meets contemporary dining. Every piece of sushi is prepared with precision and care, honoring centuries-old techniques while embracing modern culinary innovation.
+        </div>
+    </section>
+
+    <section class="section" id="menu">
+        <h2>menu</h2>
+        <div class="section-content">
+            Our menu features the finest seasonal ingredients, sourced daily from local markets and trusted suppliers. From delicate nigiri to signature rolls, each dish tells a story of flavor and tradition.
+        </div>
+    </section>
+
+    <section class="section" id="visit">
+        <h2>visit</h2>
+        <div class="section-content">
+            Located in the heart of the city, Sushi Easy offers an intimate dining experience. Open Tuesday through Sunday, reservations are recommended for the ultimate omakase journey.
+        </div>
+    </section>
+
+    <section class="section" id="gallery">
+        <h2>gallery</h2>
+        <div class="section-content">
+            Experience the artistry behind every plate. Our gallery showcases the beauty of Japanese cuisine, from the careful selection of ingredients to the final presentation at your table.
+        </div>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>contact</h2>
+        <div class="section-content">
+            We welcome your inquiries and reservations. Reach out to our team for private dining experiences, catering services, or to learn more about our commitment to authentic Japanese cuisine.
+        </div>
+    </section>
+
+    <script>
+        // Particle system
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 20 + 30) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                const size = Math.random() * 3 + 1;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                particle.style.animation = `floatParticle ${Math.random() * 30 + 40}s ease-in-out infinite`;
+                
+                container.appendChild(particle);
+            }
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes floatParticle {
+                0%, 100% { transform: translate(0, 0); opacity: 0; }
+                10% { opacity: 1; }
+                90% { opacity: 1; }
+                100% { transform: translate(${Math.random() * 200 - 100}px, ${Math.random() * 200 - 100}px); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        createParticles();
+
+        // Menu toggle
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.menu');
+            hamburger.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
+
+        // Font changer
+        function changeFont(font) {
+            document.body.style.fontFamily = `'${font}', serif`;
+            
+            const btns = document.querySelectorAll('.font-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Close menu on link click
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                toggleMenu();
+                const target = document.querySelector(link.getAttribute('href'));
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            });
+        });
+
+        // Intersection observer for sections
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Parallax effect on scroll
+        let ticking = false;
+        
+        function updateParallax() {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.title-text, .image-container');
+            
+            parallaxElements.forEach((el, index) => {
+                const speed = (index + 1) * 0.05;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+            
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(updateParallax);
+                ticking = true;
+            }
+        });
+
+        // Hide scroll indicator after scroll
+        window.addEventListener('scroll', () => {
+            const indicator = document.querySelector('.scroll-indicator');
+            if (window.pageYOffset > 100) {
+                indicator.style.display = 'none';
+            }
+        }, { once: true });
+
+        // Add mouse follow effect
+        document.addEventListener('mousemove', (e) => {
+            const particles = document.querySelectorAll('.particle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            particles.forEach((particle, index) => {
+                const speed = (index % 5 + 1) * 0.5;
+                const xOffset = (x - 0.5) * speed * 20;
+                const yOffset = (y - 0.5) * speed * 20;
+                particle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
