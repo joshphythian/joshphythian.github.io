@@ -311,7 +311,7 @@
     <div class="container">
         <div class="main-content">
             <span class="name">
-                lauren lien
+                ☆ lauren lien ☆
             </span>
             <div class="content-area">
                 <div class="image-container" id="imageContainer" onclick="nextImage()">
@@ -320,7 +320,7 @@
                 
                 <div class="archive-content" id="aboutContent">
                     <div class="archive-section">
-                        <h2>ABOUT</h2>
+                        <h2>about</h2>
                         <!-- <div class="archive-item">more here later</div> -->
                         <h3>Hello! I'm Lauren Tran-Muchowski (she/they), a writing and audio enthusiast with a passion for journalism, podcast production, and editorial writing. I graduated with Honors from Wesleyan University with B.A. in American Studies and English with a certificate in Social, Cultural, and Critical Theory. 
 
@@ -331,7 +331,7 @@
 
                 <div class="archive-content" id="audioJournalismContent">
                     <div class="archive-section">
-                        <h2>AUDIO JOURNALISM</h2>
+                        <h2>audio journalism</h2>
                         
                         <h3><a href="https://www.npr.org/2025/06/18/nx-s1-5436854/honorable-mention-npr-college-podcast-challenge">NPR Student Podcast Challenge Honorable Mention</a></h3>
                         
@@ -407,7 +407,7 @@
 
                 <div class="archive-content" id="writingContent">
                     <div class="archive-section">
-                        <h2>WRITING</h2>
+                        <h2>writing</h2>
                         <h3>Honors Thesis</h3>
                         <div class="archive-item"><a href="https://digitalcollections.wesleyan.edu/islandora/residing-within-affect-and-critical-inscrutability-contemporary-asian-american-culture">Residing Within: Affect and Critical Inscrutability in Contemporary Asian American Culture</a></div>
                     </div>
@@ -415,17 +415,24 @@
 
                 <div class="archive-content" id="photoContent">
                     <div class="archive-section">
-                        <h2>PHOTO WORK</h2>
+                        <h2>photo work</h2>
                         <div class="archive-item">06/28/2024 <a href="https://whyy.org/articles/prevention-point-philadelphia-hiv-testing-kensington/">As Philly health providers push HIV testing, advocates stress the role of syringe services programs to keep infections down</a></div>
                     </div>
                 </div>
 
                 <div class="archive-content" id="djRadioContent">
                     <div class="archive-section">
-                        <h2>DJ/RADIO</h2>
+                        <h2>dj/radio</h2>
                         <div class="archive-item"><a href="#">Minivan, Mega Fun</a></div>
                         <div class="archive-item"><a href="#">Supercuts</a></div>
                         <div class="archive-item"><a href="#">Sister Sound</a></div>
+                    </div>
+                </div>
+
+                <div class="archive-content" id="contactContent">
+                    <div class="archive-section">
+                        <h2>contact</h2>
+                        <div class="archive-item"><a href="#">Emaillllll</a></div>
                     </div>
                 </div>
             </div>
@@ -437,6 +444,8 @@
             <div class="nav-tab" onclick="showTab('writing')">writing</div>
             <div class="nav-tab" onclick="showTab('photo')">photo work</div>
             <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
+            <div class="nav-tab" onclick="showTab('contact')">contact</div>
+
         </div>
     </div>
 
@@ -494,6 +503,8 @@
                 photoContent.classList.add('active');
             } else if (tabName === 'dj-radio') {
                 djRadioContent.classList.add('active');
+            } else if (tabName === 'contact') {
+                contactContent.classList.add('active');
             } else {
                 imageContainer.style.display = 'flex';
                 console.log('Showing:', tabName);
