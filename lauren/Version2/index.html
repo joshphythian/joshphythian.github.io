@@ -339,7 +339,7 @@
                     </div>
                 </div>
 
-                <div class="archive-content" id="audioJournalismContent">
+                <div class="archive-content" id="audioContent">
                     <div class="archive-section">
                         <h2>audio</h2>
                         
@@ -487,7 +487,7 @@
         
         <div class="sidebar">
             <div class="nav-tab first" onclick="showTab('about')">about</div>
-            <div class="nav-tab" onclick="showTab('audio-journalism')">audio journalism</div>
+            <div class="nav-tab" onclick="showTab('audio')">audio</div>
             <div class="nav-tab" onclick="showTab('writing')">writing</div>
             <div class="nav-tab" onclick="showTab('photo')">photo</div>
             <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
@@ -526,7 +526,7 @@
             
             const imageContainer = document.getElementById('imageContainer');
             const aboutContent = document.getElementById('aboutContent');
-            const audioJournalismContent = document.getElementById('audioJournalismContent');
+            const audioContent = document.getElementById('audioContent');
             const writingContent = document.getElementById('writingContent');
             const photoContent = document.getElementById('photoContent');
             const djRadioContent = document.getElementById('djRadioContent');
@@ -544,8 +544,8 @@
             // Show the selected content
             if (tabName === 'about') {
                 aboutContent.classList.add('active');
-            } else if (tabName === 'audio-journalism') {
-                audioJournalismContent.classList.add('active');
+            } else if (tabName === 'audio') {
+                audioContent.classList.add('active');
             } else if (tabName === 'writing') {
                 writingContent.classList.add('active');
             } else if (tabName === 'photo') {
