@@ -51,14 +51,14 @@
         }
 
         .footer a {
-            color: #c82333;
+            color: #bb0065;
             text-decoration: none;
             transition: color 0.2s ease;
         }
 
         .footer a:hover {
-            color: #a71e2a;
-            text-shadow: 0 0 5px rgba(200, 35, 51, 0.3);
+            color: #8a004d;
+            text-shadow: 0 0 5px rgba(187, 0, 101, 0.3);
         }
 
         .container {
@@ -83,17 +83,17 @@
             letter-spacing: 4px;
             margin-bottom: 30px;
             line-height: 0.9;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23bb0065" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
             text-decoration: none;
             transition: all 1s ease;
         }
 
         .name:hover {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23bb0065" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
         }
 
         .name.clicked {
-            color: #c82333;
+            color: #bb0065;
         }
 
         .content-area {
@@ -113,7 +113,7 @@
             overflow: hidden;
             position: relative;
             transition: transform 0.3s ease;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23bb0065" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
         }
 
         .image-container:hover {
@@ -149,7 +149,7 @@
         .archive-section h2 {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 2rem;
-            color: #c82333;
+            color: #bb0065;
             margin-bottom: 15px;
             padding-bottom: 10px;
             border-bottom: 2px solid #f2abb9;
@@ -170,7 +170,6 @@
             margin-top: 20px;
             margin-bottom: 10px;
             font-weight: 400;
-
         }
 
         .archive-item {
@@ -187,15 +186,67 @@
         }
 
         .archive-item a, .archive-section h3 a {
-            color: #c82333;
+            color: #bb0065;
             text-decoration: none;
             transition: all 0.2s ease;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23c82333;stroke-width:2;"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23bb0065;stroke-width:2;"/></svg>'), auto;
         }
 
         .archive-item a:hover, .archive-section h3 a:hover {
             color: #f2abb9;
             text-shadow: 0 0 8px rgba(242, 171, 185, 0.5);
+        }
+
+        .about-content-wrapper {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            width: 300px;
+            height: auto;
+            border: 3px solid #f2abb9;
+            flex-shrink: 0;
+        }
+
+        .audio-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .audio-tab {
+            padding: 10px 20px;
+            background: rgba(246, 246, 246, 0.913);
+            border: 2px solid #f2abb9;
+            color: #bb0065;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 600;
+        }
+
+        .audio-tab:hover {
+            background: rgba(242, 171, 185, 0.3);
+        }
+
+        .audio-tab.active {
+            background: #f2abb9;
+            color: white;
+        }
+
+        .audio-section-content {
+            display: none;
+        }
+
+        .audio-section-content.active {
+            display: block;
         }
 
         .sidebar {
@@ -216,7 +267,7 @@
             border: 3px solid #f2abb9;
             color: #f2abb9;
             padding: 5px 10px;
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23c82333;stroke-width:2;"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23bb0065;stroke-width:2;"/></svg>'), auto;
             transition: all 0.2s ease;
             font-size: 2rem;
             font-weight: 800;
@@ -236,7 +287,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(174, 47, 47, 0.2), transparent);
+            background: linear-gradient(90deg, transparent, rgba(187, 0, 101, 0.2), transparent);
             transition: left 0.5s;
         }
 
@@ -245,7 +296,7 @@
         }
 
         .nav-tab:hover {
-            border-color: rgba(205, 42, 42, 0.92);
+            border-color: rgba(187, 0, 101, 0.92);
             transform: translateX(-5px) translateY(-3px);
             box-shadow: 2px 2px 0px #f2abb9;
         }
@@ -262,16 +313,6 @@
                 min-height: 100vh;
             }
             
-            .main-content {
-                width: 100%;
-                height: auto;
-                padding: 20px 20px 0 20px;
-                flex: none;
-                order: 1;
-                display: flex;
-                flex-direction: column;
-            }
-            
             .sidebar {
                 width: 100%;
                 height: auto;
@@ -279,7 +320,17 @@
                 justify-content: flex-start;
                 padding: 20px;
                 gap: 15px;
+                order: 1;
+            }
+
+            .main-content {
+                width: 100%;
+                height: auto;
+                padding: 20px 20px 0 20px;
+                flex: none;
                 order: 2;
+                display: flex;
+                flex-direction: column;
             }
             
             .nav-tab {
@@ -299,14 +350,14 @@
             
             .content-area {
                 min-height: 300px;
-                order: 3;
+                order: 2;
             }
 
             .footer {
                 position: static;
                 transform: translateY(0);
                 margin-top: 20px;
-                order: 4;
+                order: 3;
                 justify-content: center;
                 gap: 20px;
             }
@@ -314,11 +365,38 @@
             .footer-left, .footer-right {
                 font-size: 1rem;
             }
+
+            .about-content-wrapper {
+                flex-direction: column;
+            }
+
+            .about-image {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .audio-tabs {
+                flex-direction: column;
+            }
+
+            .audio-tab {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="sidebar">
+            <div class="nav-tab first" onclick="showTab('about')">about</div>
+            <div class="nav-tab" onclick="showTab('audio')">audio</div>
+            <div class="nav-tab" onclick="showTab('writing')">writing</div>
+            <div class="nav-tab" onclick="showTab('photo')">photo</div>
+            <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
+            <div class="nav-tab" onclick="showTab('contact')">contact</div>
+        </div>
+
         <div class="main-content">
             <span class="name">
                 ☆ lauren lien ☆
@@ -331,11 +409,15 @@
                 <div class="archive-content" id="aboutContent">
                     <div class="archive-section">
                         <h2>about</h2>
-                        <!-- <div class="archive-item">more here later</div> -->
-                        <h4>Hello! I'm Lauren Tran-Muchowski (she/they), a writing and audio enthusiast with a passion for journalism, podcast production, and editorial writing. I graduated with Honors from Wesleyan University with B.A. in American Studies and English with a certificate in Social, Cultural, and Critical Theory. 
+                        <div class="about-content-wrapper">
+                            <div class="about-text">
+                                <h4>Hello! I'm Lauren Tran-Muchowski (she/they), a writing and audio enthusiast with a passion for journalism, podcast production, and editorial writing. I graduated with Honors from Wesleyan University with B.A. in American Studies and English with a certificate in Social, Cultural, and Critical Theory. 
 
-<p><br>While at Wes, I was the Public Affairs Director of WESU, co-coordinator of the Wesleyan Doula Project, and co-host of Engage Radio, a collaboration with the Jewett Center for Community Partnerships and WESU. My work has appeared on WHYY, NPR’s The World, Voice of America, and KALW. A deep appreciator of language, I am passionate about informing the public, deconstructing social norms, and showcasing underrepresented voices. </p>
-</h4> 
+                                <p><br>While at Wes, I was the Public Affairs Director of WESU, co-coordinator of the Wesleyan Doula Project, and co-host of Engage Radio, a collaboration with the Jewett Center for Community Partnerships and WESU. My work has appeared on WHYY, NPR's The World, Voice of America, and KALW. A deep appreciator of language, I am passionate about informing the public, deconstructing social norms, and showcasing underrepresented voices.</p>
+                                </h4>
+                            </div>
+                            <img src="headshot.jpg" alt="Lauren Lien" class="about-image">
+                        </div>
                     </div>
                 </div>
 
@@ -343,108 +425,89 @@
                     <div class="archive-section">
                         <h2>audio</h2>
                         
-                        <h3><a href="https://www.npr.org/2025/06/18/nx-s1-5436854/honorable-mention-npr-college-podcast-challenge">NPR Student Podcast Challenge Honorable Mention</a></h3>
-                        
-                        <h3>Wonder Media Network/Acast Creative Studios' Womanica:</h3>
-                        <div class="archive-item"><strong>Production</strong></div>
-                        <div class="archive-item indent">07/31/2025 <a href="https://open.spotify.com/episode/0F6BRlhR93dklbLkTnREqc?si=1689ca50b0564ada">Dido</a></div>
-                        
-                        <div class="archive-item"><strong>Writing</strong></div>
-                        <div class="archive-item indent">09/04/2025 <a href="https://open.spotify.com/episode/2togPj1T8SZ7mjxtp9Bb8O?si=37f6c79a0228413c">Fortuna</a></div>
-                        <div class="archive-item indent">09/08/2025 <a href="https://open.spotify.com/episode/40KaX8uTvY0V3oL2MAB4oE?si=153b5169c4d44dcd">Eliska Junkova</a></div>
-                        <div class="archive-item indent">09/11/2025 <a href="https://open.spotify.com/episode/7BR4aZUEAVlwhVEPD7cpOH?si=ffa9c4549fe342b2">Caroline LeCount</a></div>
-                        <div class="archive-item indent">09/16/2025 <a href="https://open.spotify.com/episode/4NGTur32aDl6mtUl2jZTv8?si=4d81ac2f11394993">Ana Delfosse</a></div>
-                        <div class="archive-item indent">09/19/2025 <a href="https://open.spotify.com/episode/0VNvD1uQq18oPnHFsuiTxn?si=d8f7098e06794448">DJ Sumirock</a></div>
-                        <div class="archive-item indent">09/23/2025 <a href="https://open.spotify.com/episode/3aAymJBA452dJktxtqr6vX?si=1753dd6643ce44c5">Kittie Knox</a></div>
-                        <div class="archive-item indent">09/29/2025 <a href="https://open.spotify.com/episode/2qvGDzjAzxAcevUuPkmgL8?si=6282081450f34fc0">Darlene Anderson</a></div>
-                        <div class="archive-item indent">09/30/2025 <a href="https://open.spotify.com/episode/3LPK1yOOOKPLs2KLkwAaHv?si=34c33a8456024bfb">DJ Spinderella</a></div>
-                        
-                        <!-- <h3>WESU</h3>
-                        <div class="archive-item"><a href="https://drive.google.com/drive/folders/1RMjJBcQv02c2X7CnQ0jcqpkUk_f42Jgm?usp=drive_link">Lotus Talk</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/drive/folders/1xK3XQ5SbO2YQjj49e8Tf9tZkzRKRsDIt?usp=drive_link">Engage Radio</a></div>
-                         -->
-                        <h3>WESU Lotus Talk</h3>
-                        <div class="archive-item"><strong>Season 1</strong></div>
-                        <div class="archive-item indent">02/20/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-stay-true-by-hua-hsu?si=6e30d5c4c4884d31a5b12fd01eaa36e2&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Feature on Stay True by Hua Hsu</a></div>
-                        <div class="archive-item indent">04/11/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with?si=f349af6124a14a858a963b3e92f643e4&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Shasekh Augustyn</a></div>
-                        <div class="archive-item indent">05/07/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-leevon-matthews-05072023?si=d190a9165e6f4839a39087bef11cff98&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Leevon Matthews</a></div>
-                        <div class="archive-item indent">05/21/2023 <a href="https://on.soundcloud.com/90aVlQWcwGbW0UyZeS">Interview with Abbi Abraham</a></div>
+                        <div class="audio-tabs">
+                            <div class="audio-tab active" onclick="showAudioSection('npr')">NPR</div>
+                            <div class="audio-tab" onclick="showAudioSection('womanica')">Womanica</div>
+                            <div class="audio-tab" onclick="showAudioSection('lotus')">Lotus Talk</div>
+                            <div class="audio-tab" onclick="showAudioSection('engage')">Engage Radio</div>
+                            <div class="audio-tab" onclick="showAudioSection('world')">The World</div>
+                            <div class="audio-tab" onclick="showAudioSection('whyy')">WHYY</div>
+                            <div class="audio-tab" onclick="showAudioSection('voa')">VOA</div>
+                        </div>
 
-                        <div class="archive-item"><strong>Season 2</strong></div>
-                        <div class="archive-item indent">02/04/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-crystal-pena-02042024?si=18ab762a0bc54894a54acedb6b8d1759&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Crystal Pena</a></div>
-                        <div class="archive-item indent">02/18/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-ava-yuanshun-guralnick-02182024?si=0558ca91ae7a458199399bf92868c3d7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Ava Yuanshun Guralnick</a></div>
-                        <div class="archive-item indent">03/13/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-kathy-liang-03132024?si=d4f7a2b63b4c40b9bb65a9832c748003&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Kathy Liang</a></div>
-                        <div class="archive-item indent">03/31/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-judeley-jean-charles-03312024?si=4958511662ab4ec794909409a182139b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Judeley Jean-Charles</a></div>
-                        <div class="archive-item indent">04/21/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-alisha-simmons-04212024?si=1ec2cde2da054d058211329df485927c&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Alisha Simmons</a></div>
-                        <div class="archive-item indent">05/15/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-natalie-williams-05152024?si=312b152a026646a3920c24f6e8f24e1b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Natalie Williams</a></div>
-                        <div class="archive-item indent">05/19/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-neo-fleurimond-05192025?si=190c4539be334cf69a9d01e66ac437bb&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Neo Fleurimond</a></div>
+                        <div class="audio-section-content active" id="npr-section">
+                            <h3><a href="https://www.npr.org/2025/06/18/nx-s1-5436854/honorable-mention-npr-college-podcast-challenge">NPR Student Podcast Challenge Honorable Mention</a></h3>
+                        </div>
 
-                        <div class="archive-item"><strong>Season 3</strong></div>
-                        <div class="archive-item indent">09/15/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-ava-liberace-09152024?si=bb31292aec68495e8ad93fb497a4f905&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Ava Liberace</a></div>
-                        <div class="archive-item indent">11/03/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-akhil-joondeph-11032024?si=a5ebd12ab1d24737b1d3a68b7e2b40b7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Akhill Joondeph</a></div>
-                        <div class="archive-item indent">11/17/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-danae-williams-11172024?si=78b351b0d5b14eedaafb9d804fd03da6&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Danae Williams</a></div>
+                        <div class="audio-section-content" id="womanica-section">
+                            <h3>Wonder Media Network/Acast Creative Studios' Womanica:</h3>
+                            <div class="archive-item"><strong>Production</strong></div>
+                            <div class="archive-item indent">07/31/2025 <a href="https://open.spotify.com/episode/0F6BRlhR93dklbLkTnREqc?si=1689ca50b0564ada">Dido</a></div>
+                            
+                            <div class="archive-item"><strong>Writing</strong></div>
+                            <div class="archive-item indent">09/04/2025 <a href="https://open.spotify.com/episode/2togPj1T8SZ7mjxtp9Bb8O?si=37f6c79a0228413c">Fortuna</a></div>
+                            <div class="archive-item indent">09/08/2025 <a href="https://open.spotify.com/episode/40KaX8uTvY0V3oL2MAB4oE?si=153b5169c4d44dcd">Eliska Junkova</a></div>
+                            <div class="archive-item indent">09/11/2025 <a href="https://open.spotify.com/episode/7BR4aZUEAVlwhVEPD7cpOH?si=ffa9c4549fe342b2">Caroline LeCount</a></div>
+                            <div class="archive-item indent">09/16/2025 <a href="https://open.spotify.com/episode/4NGTur32aDl6mtUl2jZTv8?si=4d81ac2f11394993">Ana Delfosse</a></div>
+                            <div class="archive-item indent">09/19/2025 <a href="https://open.spotify.com/episode/0VNvD1uQq18oPnHFsuiTxn?si=d8f7098e06794448">DJ Sumirock</a></div>
+                            <div class="archive-item indent">09/23/2025 <a href="https://open.spotify.com/episode/3aAymJBA452dJktxtqr6vX?si=1753dd6643ce44c5">Kittie Knox</a></div>
+                            <div class="archive-item indent">09/29/2025 <a href="https://open.spotify.com/episode/2qvGDzjAzxAcevUuPkmgL8?si=6282081450f34fc0">Darlene Anderson</a></div>
+                            <div class="archive-item indent">09/30/2025 <a href="https://open.spotify.com/episode/3LPK1yOOOKPLs2KLkwAaHv?si=34c33a8456024bfb">DJ Spinderella</a></div>
+                        </div>
 
-                        <div class="archive-item"><strong>Season 4</strong></div>
-                        <div class="archive-item indent">02/16/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-woody-woody-02162025?si=24af01a07dd3495fa2478bb7653fa9a1&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Woody Woody</a></div>
-                        <div class="archive-item indent">03/02/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-noah-king-03022025?si=29fea6b84dd4479d9b979f4be0113c51&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Noah King</a></div>
-                        <div class="archive-item indent">03/31/2025 <a href=" ">Interview with Michael Fadugbagbe</a></div>
-                        <div class="archive-item indent">04/07/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-jasmin-wong-04072025?si=1d4f46d52663460b9a0af27ef33c585e&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Jasmin Wong</a></div>
-                        <div class="archive-item indent">05/05/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-nolan-lewis-05052025?si=5750ef0a470142d1a9091f34fd0bf188&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Nolan Lewis</a></div>
-                        <div class="archive-item indent">05/18/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-jess-jara-williams-05182025?si=a1282f3eac00409db50aca86989902af&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Jess Jara-Williams</a></div>
+                        <div class="audio-section-content" id="lotus-section">
+                            <h3>WESU Lotus Talk</h3>
+                            <div class="archive-item"><strong>Season 1</strong></div>
+                            <div class="archive-item indent">02/20/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-stay-true-by-hua-hsu?si=6e30d5c4c4884d31a5b12fd01eaa36e2&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Feature on Stay True by Hua Hsu</a></div>
+                            <div class="archive-item indent">04/11/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with?si=f349af6124a14a858a963b3e92f643e4&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Shasekh Augustyn</a></div>
+                            <div class="archive-item indent">05/07/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-leevon-matthews-05072023?si=d190a9165e6f4839a39087bef11cff98&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Leevon Matthews</a></div>
+                            <div class="archive-item indent">05/21/2023 <a href="https://on.soundcloud.com/90aVlQWcwGbW0UyZeS">Interview with Abbi Abraham</a></div>
 
+                            <div class="archive-item"><strong>Season 2</strong></div>
+                            <div class="archive-item indent">02/04/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-crystal-pena-02042024?si=18ab762a0bc54894a54acedb6b8d1759&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Crystal Pena</a></div>
+                            <div class="archive-item indent">02/18/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-ava-yuanshun-guralnick-02182024?si=0558ca91ae7a458199399bf92868c3d7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Ava Yuanshun Guralnick</a></div>
+                            <div class="archive-item indent">03/13/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-kathy-liang-03132024?si=d4f7a2b63b4c40b9bb65a9832c748003&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Kathy Liang</a></div>
+                            <div class="archive-item indent">03/31/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-judeley-jean-charles-03312024?si=4958511662ab4ec794909409a182139b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Judeley Jean-Charles</a></div>
+                            <div class="archive-item indent">04/21/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-alisha-simmons-04212024?si=1ec2cde2da054d058211329df485927c&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Alisha Simmons</a></div>
+                            <div class="archive-item indent">05/15/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-natalie-williams-05152024?si=312b152a026646a3920c24f6e8f24e1b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Natalie Williams</a></div>
+                            <div class="archive-item indent">05/19/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-neo-fleurimond-05192025?si=190c4539be334cf69a9d01e66ac437bb&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Neo Fleurimond</a></div>
 
-                        <!-- <div class="archive-item indent">02/04/2024 <a href=" ">Interview with </a></div> -->
+                            <div class="archive-item"><strong>Season 3</strong></div>
+                            <div class="archive-item indent">09/15/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-ava-liberace-09152024?si=bb31292aec68495e8ad93fb497a4f905&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Ava Liberace</a></div>
+                            <div class="archive-item indent">11/03/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-akhil-joondeph-11032024?si=a5ebd12ab1d24737b1d3a68b7e2b40b7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Akhill Joondeph</a></div>
+                            <div class="archive-item indent">11/17/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-danae-williams-11172024?si=78b351b0d5b14eedaafb9d804fd03da6&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Danae Williams</a></div>
 
-                        <!-- <div class="archive-item"><a href="https://drive.google.com/file/d/1BOw7PZYLfPEN5V3FNsTYcjdfT7Tw3YSc/view?usp=drive_link">Variety Show</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1eNWVEQW7hxHnsCdgM-xChKadpgxLli-t/view?usp=drive_link">Found Sounds</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/14s8wLtxXucxIIEzCAqybdtJWJkNmR6VH/view?usp=drive_link">Al Green</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1hj7F1qLtFP3AsQ6eyfM9anE-e_7tutSw/view?usp=drive_link">Blood Orange</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1-NGWrdEEESMtc6UuP8IqG-GLu_lZVxO3/view?usp=drive_link">Cleo Sol</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1BfyuIQj-rqC48m6gEfUfgpooqWt7wzm7/view?usp=drive_link">Donny Hathaway</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1-XghqMVtfWnZ8eJwo6-yYCNDy0JbqZ_o/view?usp=drive_link">Interview with Abbi Abraham</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1EY1LGUIUQeTOZhHCEE81QJkblz3n2wEd/view?usp=drive_link">Interview with Akhil Joondeph</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1__FQqGMaktgt1vfJrVOrAemfKSWa2lVx/view?usp=drive_link">Interview with Alisha Simmons</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1lsWJeN7hFT_vYYp6CJqhRh9yTPpfAoGZ/view?usp=drive_link">Interview with Ava Guralnick</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1r4R6IYc3JMRGnmbm4GO3wMQHqsycmCWG/view?usp=drive_link">Interview with Ava Liberace</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1GIsmnKTgKuRTwWuB5taGvMqoECK7fFvj/view?usp=drive_link">Interview with Crystal Peña</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1SepBkHuvHA82GJeC3uQ0I-VpSUmxOvf4/view?usp=drive_link">Danae Williams</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1kCseFxvryGHpihqA-CzGWjLSaO1oPzRp/view?usp=drive_link">Interview with Jasmin Wong</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1qbGDVmfJ3n-F5x4g7W7kFjz__48efvj0/view?usp=drive_link">Interview with Jess Jara Williams</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1nO0jj6TErYjKkLjD2RP72SqaevAdZgha/view?usp=drive_link">Interview with Judely Jean-Charles</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1n5ZO9VuCIz0rlyh8wlM1duh_H4G0GSMm/view?usp=drive_link">Interview with Kathy Liang</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1XdpLF8wVqVA2cF0I9Z_iihVoilVaanm0/view?usp=drive_link">Interview with Leevon Matthews</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/18EhvHCTvCJ25bVaZItv5h0lyEML-9C8R/view?usp=drive_link">Interview with Maseo Refuerzo</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/11J13P4Eb_T8YQhGe4WxIz3Kc39sxJUl1/view?usp=drive_link">Interview with Michael Fadugbagbe</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1qCUn04bi9PIHAh-UoW9V9TPOlVISXcvk/view?usp=drive_link">Interview with Natalie Williams</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1YLEmSGP5fsZVjL23FVFeoUIEBrQrwSbK/view?usp=drive_link">Interview with Neo Fleurimond</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1EeApOFGiUYd0XCtI_-1__T7naNSw9mm0/view?usp=drive_link">Interview with Noah King</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1w6Bma_RkeiEl-HHvVddlWAVmyjqWoEvL/view?usp=drive_link">Interview with Nolan Lewis</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1VPbNpdqMzOvK7iZG0yN2Ts3chg3LxqWB/view?usp=drive_link">Interview with Shasekh Augustin</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1-1CdoVyhXz8hN5paoxcAk-K0DY-iFtn9/view?usp=drive_link">Interview with Woody Woody</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1x63SgrV9wfELqs_hHjEJkV6c76RHIQkQ/view?usp=drive_link">Lauryn Hill</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1mN6B3yZlMIgKUj0J7gNAvkRaXduXdxCY/view?usp=drive_link">Shortcomings by Adrian Tomine</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1QicQ80WJd_eScIa3zdrVqBH1fs_qXRO5/view?usp=drive_link">Stay True by Hua Hsu</a></div>
+                            <div class="archive-item"><strong>Season 4</strong></div>
+                            <div class="archive-item indent">02/16/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-woody-woody-02162025?si=24af01a07dd3495fa2478bb7653fa9a1&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Woody Woody</a></div>
+                            <div class="archive-item indent">03/02/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-noah-king-03022025?si=29fea6b84dd4479d9b979f4be0113c51&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Noah King</a></div>
+                            <div class="archive-item indent">03/31/2025 <a href=" ">Interview with Michael Fadugbagbe</a></div>
+                            <div class="archive-item indent">04/07/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-jasmin-wong-04072025?si=1d4f46d52663460b9a0af27ef33c585e&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Jasmin Wong</a></div>
+                            <div class="archive-item indent">05/05/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-nolan-lewis-05052025?si=5750ef0a470142d1a9091f34fd0bf188&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Nolan Lewis</a></div>
+                            <div class="archive-item indent">05/18/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-jess-jara-williams-05182025?si=a1282f3eac00409db50aca86989902af&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Jess Jara-Williams</a></div>
+                        </div>
 
+                        <div class="audio-section-content" id="engage-section">
+                            <h3>WESU Engage Radio</h3>
+                            <div class="archive-item"><a href="https://drive.google.com/file/d/1Q-3ljGaxa_30Mzh1iUC95AteTKnZF_Jc/view?usp=drive_link">Engage Radio</a></div>
+                            <div class="archive-item"><a href="https://drive.google.com/file/d/1pTpt2GYwqL83-vNu0arIr9fz_1Fiq5ZO/view?usp=drive_link">Bishop Monts Interview</a></div>
+                            <div class="archive-item"><a href="https://drive.google.com/file/d/1IpigKnzZKz1U9pNjgKdMVkWVjKV6Myxx/view?usp=drive_link">MYRP 85th Anniversary Final</a></div>
+                            <div class="archive-item"><a href="https://drive.google.com/file/d/1kljWuwXRzx1QteqhiyEehICvs-xiONJj/view?usp=drive_link">Student of Color (SOC) Fashion Show Interview</a></div>
+                        </div>
 
-                    -->
-                        <!-- <div class="archive-item"><a href="#">Interview with</a></div> -->
-                        <!-- <div class="archive-item"><a href="#">Lotus Talk</a></div> -->
+                        <div class="audio-section-content" id="world-section">
+                            <h3><a href="#">NPR's The World</a></h3>
+                            <div class="archive-item">08/29/2024 <a href="https://theworld.org/segments/2024/08/29/why-retirees-gather-in-shanghai-parks-to-dance-to-pop-music">Why retirees in Shanghai gather in Shanghai parks to dance to pop music, The World</a></div>
+                        </div>
 
+                        <div class="audio-section-content" id="whyy-section">
+                            <h3>WHYY</h3>
+                            <div class="archive-item">07/29/2024 <a href="https://whyy.org/segments/megalodons-and-what-researchers-have-learned-of-their-extinction/">The Pulse - Why megalodons have captured our imagination and what researchers have learned from their extinction</a></div>
+                            <div class="archive-item">08/28/2024 <a href="https://whyy.org/articles/andrew-robinson-english-channel-swim-new-jersey/">main newsroom - Just keep swimming: A New Jersey Swimmer's Journey to the English Channel</a></div>
+                        </div>
 
-                        <h3>WESU Engage Radio</h3>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1Q-3ljGaxa_30Mzh1iUC95AteTKnZF_Jc/view?usp=drive_link">Engage Radio</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1pTpt2GYwqL83-vNu0arIr9fz_1Fiq5ZO/view?usp=drive_link">Bishop Monts Interview</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1IpigKnzZKz1U9pNjgKdMVkWVjKV6Myxx/view?usp=drive_link">MYRP 85th Anniversary Final</a></div>
-                        <div class="archive-item"><a href="https://drive.google.com/file/d/1kljWuwXRzx1QteqhiyEehICvs-xiONJj/view?usp=drive_link">Student of Color (SOC) Fashion Show Interview</a></div>
-                        
-                        <h3><a href="#">NPR's The World</a></h3>
-                        <div class="archive-item">08/29/2024 <a href="https://theworld.org/segments/2024/08/29/why-retirees-gather-in-shanghai-parks-to-dance-to-pop-music">Why retirees in Shanghai gather in Shanghai parks to dance to pop music, The World</a></div>
-                        
-                        <h3>WHYY</h3>
-                        <div class="archive-item">07/29/2024 <a href="https://whyy.org/segments/megalodons-and-what-researchers-have-learned-of-their-extinction/">The Pulse - Why megalodons have captured our imagination and what researchers have learned from their extinction</a></div>
-                        <div class="archive-item">08/28/2024 <a href="https://whyy.org/articles/andrew-robinson-english-channel-swim-new-jersey/">main newsroom - Just keep swimming: A New Jersey Swimmer's Journey to the English Channel</a></div>
-                        
-                        <h3><a href="#">VOA Border Crossings</a></h3>
+                        <div class="audio-section-content" id="voa-section">
+                            <h3><a href="#">VOA Border Crossings</a></h3>
+                        </div>
                     </div>
                 </div>
 
@@ -478,21 +541,9 @@
                         <div class="archive-item"><a href="#">laurenmuchowski@gmail.com</a></div>
                         <div class="archive-item"><a href="https://www.linkedin.com/in/lauren-tran-muchowski-852a1a22b/">linkedin</a></div>
                         <div class="archive-item"><a href="https://soundcloud.com/user-174818463">soundcloud archive</a></div>
-
-                        
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="sidebar">
-            <div class="nav-tab first" onclick="showTab('about')">about</div>
-            <div class="nav-tab" onclick="showTab('audio')">audio</div>
-            <div class="nav-tab" onclick="showTab('writing')">writing</div>
-            <div class="nav-tab" onclick="showTab('photo')">photo</div>
-            <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
-            <div class="nav-tab" onclick="showTab('contact')">contact</div>
-
         </div>
     </div>
 
@@ -535,7 +586,7 @@
             // Hide all content first
             imageContainer.style.display = 'none';
             aboutContent.classList.remove('active');
-            audioJournalismContent.classList.remove('active');
+            audioContent.classList.remove('active');
             writingContent.classList.remove('active');
             photoContent.classList.remove('active');
             djRadioContent.classList.remove('active');
@@ -557,6 +608,25 @@
             } else {
                 imageContainer.style.display = 'flex';
                 console.log('Showing:', tabName);
+            }
+        }
+
+        function showAudioSection(sectionName) {
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.audio-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Hide all audio sections
+            const sections = document.querySelectorAll('.audio-section-content');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionName + '-section');
+            if (selectedSection) {
+                selectedSection.classList.add('active');
             }
         }
 

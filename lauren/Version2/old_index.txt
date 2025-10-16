@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lauren Lien</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anton:wght@400&family=Oswald:wght@400;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Oswald', 'Arial Black', sans-serif;
+            background: #ececec;
+            min-height: 100vh;
+            overflow: auto;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(236, 236, 236, 0.95);
+            backdrop-filter: blur(15px);
+            border-top: 2px solid rgba(0, 0, 0, 0.8);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .footer.visible {
+            transform: translateY(0);
+        }
+
+        .footer-left, .footer-right {
+            color: rgb(7, 7, 7);
+        }
+
+        .footer a {
+            color: #c82333;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer a:hover {
+            color: #a71e2a;
+            text-shadow: 0 0 5px rgba(200, 35, 51, 0.3);
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .main-content {
+            width: 66.67%;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .name {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;            
+            font-size: 7rem;
+            font-weight: 400;
+            color: #f2abb9;
+            letter-spacing: 4px;
+            margin-bottom: 30px;
+            line-height: 0.9;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+            text-decoration: none;
+            transition: all 1s ease;
+        }
+
+        .name:hover {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M7 17l10-10M17 7H7v10" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+        }
+
+        .name.clicked {
+            color: #c82333;
+        }
+
+        .content-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container {
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="%23c82333" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>'), auto;
+        }
+
+        .image-container:hover {
+            transform: translateY(-8px) translateX(-4px);
+        }
+
+        .image-style {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .archive-content {
+            display: none;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 3px solid #f2abb9;
+        }
+
+        .archive-content.active {
+            display: block;
+        }
+
+        .archive-section {
+            margin-bottom: 40px;
+        }
+
+        .archive-section h2 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 2rem;
+            color: #c82333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f2abb9;
+        }
+
+        .archive-section h3 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1.5rem;
+            color: #f2abb9;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .archive-section h4 {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1rem;
+            color: #f2abb9;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: 400;
+
+        }
+
+        .archive-item {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 8px;
+            padding-left: 15px;
+        }
+
+        .archive-item.indent {
+            padding-left: 30px;
+        }
+
+        .archive-item a, .archive-section h3 a {
+            color: #c82333;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23c82333;stroke-width:2;"/></svg>'), auto;
+        }
+
+        .archive-item a:hover, .archive-section h3 a:hover {
+            color: #f2abb9;
+            text-shadow: 0 0 8px rgba(242, 171, 185, 0.5);
+        }
+
+        .sidebar {
+            width: 33.33%;
+            backdrop-filter: blur(15px);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            padding: 40px 30px;
+            gap: 20px;
+        }
+
+        .nav-tab {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            transition: transform 0.3s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            background: rgba(246, 246, 246, 0.913);
+            border: 3px solid #f2abb9;
+            color: #f2abb9;
+            padding: 5px 10px;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,1 12,7 19,7 14,11 16,18 10,14 4,18 6,11 1,7 8,7" style="fill:%23f2abb9;stroke:%23c82333;stroke-width:2;"/></svg>'), auto;
+            transition: all 0.2s ease;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        .nav-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(174, 47, 47, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-tab:hover::before {
+            left: 100%;
+        }
+
+        .nav-tab:hover {
+            border-color: rgba(205, 42, 42, 0.92);
+            transform: translateX(-5px) translateY(-3px);
+            box-shadow: 2px 2px 0px #f2abb9;
+        }
+
+        .nav-tab:active {
+            transform: translateX(-5px) translateY(-1px) scale(0.98);
+            box-shadow: 2px 2px 0px #f2abb9;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .main-content {
+                width: 100%;
+                height: auto;
+                padding: 20px 20px 0 20px;
+                flex: none;
+                order: 1;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 20px;
+                gap: 15px;
+                order: 2;
+            }
+            
+            .nav-tab {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 0;
+                font-size: 1.3rem;
+                padding: 10px;
+            }
+            
+            .name {
+                font-size: 3.5rem;
+                margin-bottom: 20px;
+                text-align: center;
+                order: 1;
+            }
+            
+            .content-area {
+                min-height: 300px;
+                order: 3;
+            }
+
+            .footer {
+                position: static;
+                transform: translateY(0);
+                margin-top: 20px;
+                order: 4;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .footer-left, .footer-right {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="main-content">
+            <span class="name">
+                ☆ lauren lien ☆
+            </span>
+            <div class="content-area">
+                <div class="image-container" id="imageContainer" onclick="nextImage()">
+                    <img src="Lauren3.jpg" class="image-style" id="main-image">
+                </div>
+                
+                <div class="archive-content" id="aboutContent">
+                    <div class="archive-section">
+                        <h2>about</h2>
+                        <!-- <div class="archive-item">more here later</div> -->
+                        <h4>Hello! I'm Lauren Tran-Muchowski (she/they), a writing and audio enthusiast with a passion for journalism, podcast production, and editorial writing. I graduated with Honors from Wesleyan University with B.A. in American Studies and English with a certificate in Social, Cultural, and Critical Theory. 
+
+<p><br>While at Wes, I was the Public Affairs Director of WESU, co-coordinator of the Wesleyan Doula Project, and co-host of Engage Radio, a collaboration with the Jewett Center for Community Partnerships and WESU. My work has appeared on WHYY, NPR’s The World, Voice of America, and KALW. A deep appreciator of language, I am passionate about informing the public, deconstructing social norms, and showcasing underrepresented voices. </p>
+</h4> 
+                    </div>
+                </div>
+
+                <div class="archive-content" id="audioContent">
+                    <div class="archive-section">
+                        <h2>audio</h2>
+                        
+                        <h3><a href="https://www.npr.org/2025/06/18/nx-s1-5436854/honorable-mention-npr-college-podcast-challenge">NPR Student Podcast Challenge Honorable Mention</a></h3>
+                        
+                        <h3>Wonder Media Network/Acast Creative Studios' Womanica:</h3>
+                        <div class="archive-item"><strong>Production</strong></div>
+                        <div class="archive-item indent">07/31/2025 <a href="https://open.spotify.com/episode/0F6BRlhR93dklbLkTnREqc?si=1689ca50b0564ada">Dido</a></div>
+                        
+                        <div class="archive-item"><strong>Writing</strong></div>
+                        <div class="archive-item indent">09/04/2025 <a href="https://open.spotify.com/episode/2togPj1T8SZ7mjxtp9Bb8O?si=37f6c79a0228413c">Fortuna</a></div>
+                        <div class="archive-item indent">09/08/2025 <a href="https://open.spotify.com/episode/40KaX8uTvY0V3oL2MAB4oE?si=153b5169c4d44dcd">Eliska Junkova</a></div>
+                        <div class="archive-item indent">09/11/2025 <a href="https://open.spotify.com/episode/7BR4aZUEAVlwhVEPD7cpOH?si=ffa9c4549fe342b2">Caroline LeCount</a></div>
+                        <div class="archive-item indent">09/16/2025 <a href="https://open.spotify.com/episode/4NGTur32aDl6mtUl2jZTv8?si=4d81ac2f11394993">Ana Delfosse</a></div>
+                        <div class="archive-item indent">09/19/2025 <a href="https://open.spotify.com/episode/0VNvD1uQq18oPnHFsuiTxn?si=d8f7098e06794448">DJ Sumirock</a></div>
+                        <div class="archive-item indent">09/23/2025 <a href="https://open.spotify.com/episode/3aAymJBA452dJktxtqr6vX?si=1753dd6643ce44c5">Kittie Knox</a></div>
+                        <div class="archive-item indent">09/29/2025 <a href="https://open.spotify.com/episode/2qvGDzjAzxAcevUuPkmgL8?si=6282081450f34fc0">Darlene Anderson</a></div>
+                        <div class="archive-item indent">09/30/2025 <a href="https://open.spotify.com/episode/3LPK1yOOOKPLs2KLkwAaHv?si=34c33a8456024bfb">DJ Spinderella</a></div>
+                        
+                        <!-- <h3>WESU</h3>
+                        <div class="archive-item"><a href="https://drive.google.com/drive/folders/1RMjJBcQv02c2X7CnQ0jcqpkUk_f42Jgm?usp=drive_link">Lotus Talk</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/drive/folders/1xK3XQ5SbO2YQjj49e8Tf9tZkzRKRsDIt?usp=drive_link">Engage Radio</a></div>
+                         -->
+                        <h3>WESU Lotus Talk</h3>
+                        <div class="archive-item"><strong>Season 1</strong></div>
+                        <div class="archive-item indent">02/20/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-stay-true-by-hua-hsu?si=6e30d5c4c4884d31a5b12fd01eaa36e2&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Feature on Stay True by Hua Hsu</a></div>
+                        <div class="archive-item indent">04/11/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with?si=f349af6124a14a858a963b3e92f643e4&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Shasekh Augustyn</a></div>
+                        <div class="archive-item indent">05/07/2023 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-leevon-matthews-05072023?si=d190a9165e6f4839a39087bef11cff98&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Leevon Matthews</a></div>
+                        <div class="archive-item indent">05/21/2023 <a href="https://on.soundcloud.com/90aVlQWcwGbW0UyZeS">Interview with Abbi Abraham</a></div>
+
+                        <div class="archive-item"><strong>Season 2</strong></div>
+                        <div class="archive-item indent">02/04/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-crystal-pena-02042024?si=18ab762a0bc54894a54acedb6b8d1759&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Crystal Pena</a></div>
+                        <div class="archive-item indent">02/18/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-ava-yuanshun-guralnick-02182024?si=0558ca91ae7a458199399bf92868c3d7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Ava Yuanshun Guralnick</a></div>
+                        <div class="archive-item indent">03/13/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-kathy-liang-03132024?si=d4f7a2b63b4c40b9bb65a9832c748003&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Kathy Liang</a></div>
+                        <div class="archive-item indent">03/31/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-judeley-jean-charles-03312024?si=4958511662ab4ec794909409a182139b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Judeley Jean-Charles</a></div>
+                        <div class="archive-item indent">04/21/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-alisha-simmons-04212024?si=1ec2cde2da054d058211329df485927c&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Alisha Simmons</a></div>
+                        <div class="archive-item indent">05/15/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-natalie-williams-05152024?si=312b152a026646a3920c24f6e8f24e1b&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Natalie Williams</a></div>
+                        <div class="archive-item indent">05/19/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-neo-fleurimond-05192025?si=190c4539be334cf69a9d01e66ac437bb&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Neo Fleurimond</a></div>
+
+                        <div class="archive-item"><strong>Season 3</strong></div>
+                        <div class="archive-item indent">09/15/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-ava-liberace-09152024?si=bb31292aec68495e8ad93fb497a4f905&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Ava Liberace</a></div>
+                        <div class="archive-item indent">11/03/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-akhil-joondeph-11032024?si=a5ebd12ab1d24737b1d3a68b7e2b40b7&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Akhill Joondeph</a></div>
+                        <div class="archive-item indent">11/17/2024 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-danae-williams-11172024?si=78b351b0d5b14eedaafb9d804fd03da6&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing">Interview with Danae Williams</a></div>
+
+                        <div class="archive-item"><strong>Season 4</strong></div>
+                        <div class="archive-item indent">02/16/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-woody-woody-02162025?si=24af01a07dd3495fa2478bb7653fa9a1&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Woody Woody</a></div>
+                        <div class="archive-item indent">03/02/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-noah-king-03022025?si=29fea6b84dd4479d9b979f4be0113c51&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Noah King</a></div>
+                        <div class="archive-item indent">03/31/2025 <a href=" ">Interview with Michael Fadugbagbe</a></div>
+                        <div class="archive-item indent">04/07/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-jasmin-wong-04072025?si=1d4f46d52663460b9a0af27ef33c585e&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Jasmin Wong</a></div>
+                        <div class="archive-item indent">05/05/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-nolan-lewis-05052025?si=5750ef0a470142d1a9091f34fd0bf188&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Nolan Lewis</a></div>
+                        <div class="archive-item indent">05/18/2025 <a href="https://soundcloud.com/user-174818463/lotus-talk-interview-with-jess-jara-williams-05182025?si=a1282f3eac00409db50aca86989902af&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing ">Interview with Jess Jara-Williams</a></div>
+
+
+                        <!-- <div class="archive-item indent">02/04/2024 <a href=" ">Interview with </a></div> -->
+
+                        <!-- <div class="archive-item"><a href="https://drive.google.com/file/d/1BOw7PZYLfPEN5V3FNsTYcjdfT7Tw3YSc/view?usp=drive_link">Variety Show</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1eNWVEQW7hxHnsCdgM-xChKadpgxLli-t/view?usp=drive_link">Found Sounds</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/14s8wLtxXucxIIEzCAqybdtJWJkNmR6VH/view?usp=drive_link">Al Green</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1hj7F1qLtFP3AsQ6eyfM9anE-e_7tutSw/view?usp=drive_link">Blood Orange</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1-NGWrdEEESMtc6UuP8IqG-GLu_lZVxO3/view?usp=drive_link">Cleo Sol</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1BfyuIQj-rqC48m6gEfUfgpooqWt7wzm7/view?usp=drive_link">Donny Hathaway</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1-XghqMVtfWnZ8eJwo6-yYCNDy0JbqZ_o/view?usp=drive_link">Interview with Abbi Abraham</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1EY1LGUIUQeTOZhHCEE81QJkblz3n2wEd/view?usp=drive_link">Interview with Akhil Joondeph</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1__FQqGMaktgt1vfJrVOrAemfKSWa2lVx/view?usp=drive_link">Interview with Alisha Simmons</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1lsWJeN7hFT_vYYp6CJqhRh9yTPpfAoGZ/view?usp=drive_link">Interview with Ava Guralnick</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1r4R6IYc3JMRGnmbm4GO3wMQHqsycmCWG/view?usp=drive_link">Interview with Ava Liberace</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1GIsmnKTgKuRTwWuB5taGvMqoECK7fFvj/view?usp=drive_link">Interview with Crystal Peña</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1SepBkHuvHA82GJeC3uQ0I-VpSUmxOvf4/view?usp=drive_link">Danae Williams</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1kCseFxvryGHpihqA-CzGWjLSaO1oPzRp/view?usp=drive_link">Interview with Jasmin Wong</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1qbGDVmfJ3n-F5x4g7W7kFjz__48efvj0/view?usp=drive_link">Interview with Jess Jara Williams</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1nO0jj6TErYjKkLjD2RP72SqaevAdZgha/view?usp=drive_link">Interview with Judely Jean-Charles</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1n5ZO9VuCIz0rlyh8wlM1duh_H4G0GSMm/view?usp=drive_link">Interview with Kathy Liang</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1XdpLF8wVqVA2cF0I9Z_iihVoilVaanm0/view?usp=drive_link">Interview with Leevon Matthews</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/18EhvHCTvCJ25bVaZItv5h0lyEML-9C8R/view?usp=drive_link">Interview with Maseo Refuerzo</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/11J13P4Eb_T8YQhGe4WxIz3Kc39sxJUl1/view?usp=drive_link">Interview with Michael Fadugbagbe</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1qCUn04bi9PIHAh-UoW9V9TPOlVISXcvk/view?usp=drive_link">Interview with Natalie Williams</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1YLEmSGP5fsZVjL23FVFeoUIEBrQrwSbK/view?usp=drive_link">Interview with Neo Fleurimond</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1EeApOFGiUYd0XCtI_-1__T7naNSw9mm0/view?usp=drive_link">Interview with Noah King</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1w6Bma_RkeiEl-HHvVddlWAVmyjqWoEvL/view?usp=drive_link">Interview with Nolan Lewis</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1VPbNpdqMzOvK7iZG0yN2Ts3chg3LxqWB/view?usp=drive_link">Interview with Shasekh Augustin</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1-1CdoVyhXz8hN5paoxcAk-K0DY-iFtn9/view?usp=drive_link">Interview with Woody Woody</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1x63SgrV9wfELqs_hHjEJkV6c76RHIQkQ/view?usp=drive_link">Lauryn Hill</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1mN6B3yZlMIgKUj0J7gNAvkRaXduXdxCY/view?usp=drive_link">Shortcomings by Adrian Tomine</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1QicQ80WJd_eScIa3zdrVqBH1fs_qXRO5/view?usp=drive_link">Stay True by Hua Hsu</a></div>
+
+
+                    -->
+                        <!-- <div class="archive-item"><a href="#">Interview with</a></div> -->
+                        <!-- <div class="archive-item"><a href="#">Lotus Talk</a></div> -->
+
+
+                        <h3>WESU Engage Radio</h3>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1Q-3ljGaxa_30Mzh1iUC95AteTKnZF_Jc/view?usp=drive_link">Engage Radio</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1pTpt2GYwqL83-vNu0arIr9fz_1Fiq5ZO/view?usp=drive_link">Bishop Monts Interview</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1IpigKnzZKz1U9pNjgKdMVkWVjKV6Myxx/view?usp=drive_link">MYRP 85th Anniversary Final</a></div>
+                        <div class="archive-item"><a href="https://drive.google.com/file/d/1kljWuwXRzx1QteqhiyEehICvs-xiONJj/view?usp=drive_link">Student of Color (SOC) Fashion Show Interview</a></div>
+                        
+                        <h3><a href="#">NPR's The World</a></h3>
+                        <div class="archive-item">08/29/2024 <a href="https://theworld.org/segments/2024/08/29/why-retirees-gather-in-shanghai-parks-to-dance-to-pop-music">Why retirees in Shanghai gather in Shanghai parks to dance to pop music, The World</a></div>
+                        
+                        <h3>WHYY</h3>
+                        <div class="archive-item">07/29/2024 <a href="https://whyy.org/segments/megalodons-and-what-researchers-have-learned-of-their-extinction/">The Pulse - Why megalodons have captured our imagination and what researchers have learned from their extinction</a></div>
+                        <div class="archive-item">08/28/2024 <a href="https://whyy.org/articles/andrew-robinson-english-channel-swim-new-jersey/">main newsroom - Just keep swimming: A New Jersey Swimmer's Journey to the English Channel</a></div>
+                        
+                        <h3><a href="#">VOA Border Crossings</a></h3>
+                    </div>
+                </div>
+
+                <div class="archive-content" id="writingContent">
+                    <div class="archive-section">
+                        <h2>writing</h2>
+                        <h3>Honors Thesis</h3>
+                        <div class="archive-item"><a href="https://digitalcollections.wesleyan.edu/islandora/residing-within-affect-and-critical-inscrutability-contemporary-asian-american-culture">Residing Within: Affect and Critical Inscrutability in Contemporary Asian American Culture</a></div>
+                    </div>
+                </div>
+
+                <div class="archive-content" id="photoContent">
+                    <div class="archive-section">
+                        <h2>photo</h2>
+                        <div class="archive-item">06/28/2024 <a href="https://whyy.org/articles/prevention-point-philadelphia-hiv-testing-kensington/">As Philly health providers push HIV testing, advocates stress the role of syringe services programs to keep infections down</a></div>
+                    </div>
+                </div>
+
+                <div class="archive-content" id="djRadioContent">
+                    <div class="archive-section">
+                        <h2>dj/radio</h2>
+                        <div class="archive-item"><a href="#">Minivan, Mega Fun</a></div>
+                        <div class="archive-item"><a href="#">Supercuts</a></div>
+                        <div class="archive-item"><a href="#">Sister Sound</a></div>
+                    </div>
+                </div>
+
+                <div class="archive-content" id="contactContent">
+                    <div class="archive-section">
+                        <h2>contact</h2>
+                        <div class="archive-item"><a href="#">laurenmuchowski@gmail.com</a></div>
+                        <div class="archive-item"><a href="https://www.linkedin.com/in/lauren-tran-muchowski-852a1a22b/">linkedin</a></div>
+                        <div class="archive-item"><a href="https://soundcloud.com/user-174818463">soundcloud archive</a></div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="sidebar">
+            <div class="nav-tab first" onclick="showTab('about')">about</div>
+            <div class="nav-tab" onclick="showTab('audio')">audio</div>
+            <div class="nav-tab" onclick="showTab('writing')">writing</div>
+            <div class="nav-tab" onclick="showTab('photo')">photo</div>
+            <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
+            <div class="nav-tab" onclick="showTab('contact')">contact</div>
+
+        </div>
+    </div>
+
+    <div class="footer" id="footer">
+        <div class="footer-left">
+            <a href="mailto:lauren@example.com">lauren lien</a>
+        </div>
+        <div class="footer-right">
+            Code by <a href="https://joshphythian.com" target="_blank">Josh</a>
+        </div>
+    </div>
+
+    <script>
+        function openEmail() {
+            const nameElement = document.querySelector('.name');
+            nameElement.classList.add('clicked');
+            setTimeout(() => {
+                nameElement.classList.remove('clicked');
+            }, 1000);
+            window.location.href = 'mailto:lauren@example.com';
+        }
+
+        function showTab(tabName) {
+            const clickedTab = event.target;
+            clickedTab.style.transform = 'translateX(-15px) translateY(-1px) scale(0.95)';
+            clickedTab.style.boxShadow = '2px 2px 0px #f2abb9';
+            setTimeout(() => {
+                clickedTab.style.transform = 'translateX(-6px) translateY(-3px)';
+                clickedTab.style.boxShadow = '2px 2px 0px #f2abb9';
+            }, 150);
+            
+            const imageContainer = document.getElementById('imageContainer');
+            const aboutContent = document.getElementById('aboutContent');
+            const audioContent = document.getElementById('audioContent');
+            const writingContent = document.getElementById('writingContent');
+            const photoContent = document.getElementById('photoContent');
+            const djRadioContent = document.getElementById('djRadioContent');
+            const contactContent = document.getElementById('contactContent');
+            
+            // Hide all content first
+            imageContainer.style.display = 'none';
+            aboutContent.classList.remove('active');
+            audioJournalismContent.classList.remove('active');
+            writingContent.classList.remove('active');
+            photoContent.classList.remove('active');
+            djRadioContent.classList.remove('active');
+            contactContent.classList.remove('active');
+            
+            // Show the selected content
+            if (tabName === 'about') {
+                aboutContent.classList.add('active');
+            } else if (tabName === 'audio') {
+                audioContent.classList.add('active');
+            } else if (tabName === 'writing') {
+                writingContent.classList.add('active');
+            } else if (tabName === 'photo') {
+                photoContent.classList.add('active');
+            } else if (tabName === 'dj-radio') {
+                djRadioContent.classList.add('active');
+            } else if (tabName === 'contact') {
+                contactContent.classList.add('active');
+            } else {
+                imageContainer.style.display = 'flex';
+                console.log('Showing:', tabName);
+            }
+        }
+
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('mouseenter', function() {
+                this.style.background = 'rgba(255, 255, 255, 0.25)';
+            });
+            
+            tab.addEventListener('mouseleave', function() {
+                this.style.background = 'rgba(246, 246, 246, 0.913)';
+            });
+        });
+
+        const images = ['Lauren3.jpg', 'sunset1.jpg', 'sunset2.jpg', 'sunset3.jpg'];
+        let currentImageIndex = 0;
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            const mainImage = document.getElementById('main-image');
+            mainImage.src = images[currentImageIndex];
+        }
+
+        let hasScrolled = false;
+        let scrollTimeout;
+
+        function showFooter() {
+            if (hasScrolled) {
+                const footer = document.getElementById('footer');
+                footer.classList.add('visible');
+            }
+        }
+
+        function hideFooter() {
+            const footer = document.getElementById('footer');
+            footer.classList.remove('visible');
+        }
+
+        function handleScroll() {
+            if (!hasScrolled) {
+                hasScrolled = true;
+            }
+            showFooter();
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                hideFooter();
+            }, 3000);
+        }
+
+        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('wheel', handleScroll);
+        window.addEventListener('touchmove', handleScroll);
+    </script>
+</body>
+</html>
