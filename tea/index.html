@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tea Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Garamond', 'Times New Roman', serif;
+      background: rgb(119, 113, 113);
+      overflow-x: hidden;
+      box-sizing: border-box;
+    }
+
+    /* Hero section with tea animation */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      flex-direction: column;
+    }
+
+    .hero-title {
+      position: absolute;
+      top: 20%;
+      color: white;
+      font-size: 64px;
+      font-weight: normal;
+      letter-spacing: 4px;
+      text-align: center;
+      z-index: 10;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .sprite {
+      width: 1024px;
+      height: 1024px;
+      background: url('sprite_1024.png') left top no-repeat;
+      background-size: 36864px 1024px;
+      animation: play 1.5s steps(36) infinite;
+      transform: scale(0.25);
+      transform-origin: center center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin: -512px 0 0 -512px;
+    }
+
+    @keyframes play {
+      from { background-position: 0 0; }
+      to   { background-position: -36864px 0; }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 36px;
+      opacity: 0.8;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .scroll-indicator:hover {
+      opacity: 1;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      40% {
+        transform: translateX(-50%) translateY(-10px);
+      }
+      60% {
+        transform: translateX(-50%) translateY(-5px);
+      }
+    }
+
+    /* Content sections */
+    .content-section {
+      background: rgb(188, 181, 181);
+      min-height: 100vh;
+      padding: 80px 20px 50px 20px;
+    }
+
+    .section-header {
+      text-align: center;
+      font-size: 48px;
+      font-weight: normal;
+      letter-spacing: 3px;
+      margin-bottom: 60px;
+      color: rgb(40, 40, 40);
+      text-transform: uppercase;
+    }
+
+    .spacer {
+      height: 100px;
+    }
+
+    /* Presentation Grid */
+    .presentation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
+      gap: 60px;
+      max-width: 1400px;
+      margin: 0 auto 80px auto;
+      padding: 0 40px;
+    }
+
+    .presentation-item {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .presentation-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .presentation-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: rgb(40, 40, 40);
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    .presentation-wrapper {
+      background: white;
+      border: 3px solid black;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .presentation-embed {
+      width: 100%;
+      height: 569px;
+      border: none;
+      display: block;
+    }
+
+    /* Tea List Section */
+    .tea-list {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .tea-category {
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .tea-category.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tea-category-title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      color: rgb(40, 40, 40);
+      border-bottom: 2px solid black;
+      padding-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .tea-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 15px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.2);
+    }
+
+    .tea-image {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border: 2px solid rgb(40, 40, 40);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .tea-content {
+      flex: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 20px;
+    }
+
+    .tea-name {
+      font-size: 22px;
+      color: rgb(40, 40, 40);
+    }
+
+    .tea-description {
+      font-size: 16px;
+      color: rgb(80, 80, 80);
+      font-style: italic;
+      text-align: right;
+      max-width: 400px;
+    }
+
+    /* Footer */
+    .footer {
+      background: rgb(188, 181, 181);
+      color: rgb(25, 25, 25);
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      border-top: 3px solid rgb(119, 113, 113);
+    }
+
+    .footer a {
+      color: rgb(25, 25, 25);
+      text-decoration: none;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      letter-spacing: 1px;
+    }
+
+    .footer a:hover {
+      color: rgb(150, 145, 145);
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 1024px) {
+      .presentation-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+      }
+
+      .presentation-embed {
+        height: 450px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 42px;
+        padding: 0 20px;
+      }
+
+      .sprite {
+        transform: scale(0.2);
+      }
+
+      .section-header {
+        font-size: 36px;
+      }
+
+      .presentation-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .presentation-embed {
+        height: 400px;
+      }
+
+      .tea-list {
+        padding: 0 20px;
+      }
+
+      .tea-category-title {
+        font-size: 26px;
+      }
+
+      .tea-item {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .tea-content {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .tea-description {
+        margin-left: 0;
+        margin-top: 8px;
+        text-align: left;
+        max-width: 100%;
+      }
+
+      .footer {
+        flex-direction: column;
+        gap: 15px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .sprite {
+        transform: scale(0.15);
+      }
+
+      .section-header {
+        font-size: 28px;
+      }
+
+      .presentation-embed {
+        height: 300px;
+      }
+
+      .tea-name {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1 class="hero-title">Josh Phythian</h1>
+    <div class="sprite"></div>
+    <div class="scroll-indicator" onclick="scrollToContent()">↓</div>
+  </section>
+
+  <!-- Presentations Section -->
+  <section class="content-section" id="presentations">
+    <h2 class="section-header">Presentations</h2>
+    
+    <div class="presentation-grid">
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 1: Green</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/1s4prixjTpvoPES1ivIhwD3LBYdFsKyukM_m82tjrpkE/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 2: Red and White</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/169GNBRNUPw6dLkHNKcZsetQtVWjDg_YinxqL8Fy34wM/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 4: Green and Yellow, differences in method</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/1lwOom7llRS0kZuAQ-UvK_Qn67tOPRS8Fm8xV4RQOjZY/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 5: Puerh</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/1P8a7cJL9raeaHi9mtzLxmfw1sjmSPA4GcCiFds5LNfg/embed?start=false&loop=false&delayms=3000" 
+            
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 6: Review</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/13TEF5u--vGe3f1j7LdrZEazUx4WFjw08omo9BApzoIA/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 8: Flavored</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/1w7CjgiPjDrZCA_k1wp8isbCgtHKN4Q-a0z13Qo20ExY/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 9: Review</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/1tiDMwTiRdCaUrRuEPtXIEkXEZu2WfKUgYOvh90Vu2dA/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+
+      <div class="presentation-item">
+        <h3 class="presentation-title">Tea Forum Week 10: Red and Black</h3>
+        <div class="presentation-wrapper">
+          <iframe class="presentation-embed" 
+            src="https://docs.google.com/presentation/d/1Y7wz3vwO9qyLjxU9LeE-TYfPTM2iAwQkZtXsHwqVSeg/embed?start=false&loop=false&delayms=3000" 
+            allowfullscreen="true" 
+            mozallowfullscreen="true" 
+            webkitallowfullscreen="true">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Favorite Teas Section -->
+  <section class="content-section" id="favorite-teas">
+    <h2 class="section-header">Favorite Teas</h2>
+    
+    <div class="tea-list">
+      <div class="tea-category">
+        <h3 class="tea-category-title">Green Teas</h3>
+        <div class="tea-item">
+          <img src="./images/Tea/Gyokuro.jpg" alt="Gyokuro Fujinami" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Gyokuro Fujinami</span>
+            <span class="tea-description">Brothy, umami-rich flavor, with subtle sweetness</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Tea/Sencha.jpg" alt="Asatsuyu Senchy" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Asatsuyu Sencha</span>
+            <span class="tea-description">Sweet, refreshing and grassy finish</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Tea/Hojicha.jpg" alt="Hojicha" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Hojicha</span>
+            <span class="tea-description">Roasty, sweet, nutty</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tea-category">
+        <h3 class="tea-category-title">Pu Erh</h3>
+        <div class="tea-item">
+          <img src="./images/Tea/Shengpuerh.jpg" alt="Jasmine Pearl Sheng" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Jasmine Pearl Sheng</span>
+            <span class="tea-description">Elegant, floral, with a musky finish</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Tea/Blackstickyrice2.jpg" alt="Black Sticky Rice" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Black Sticky Rice</span>
+            <span class="tea-description">Bold, murky, sticky rice (haha)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tea-category">
+        <h3 class="tea-category-title">Infusions</h3>
+        <div class="tea-item">
+          <img src="./images/Tea/Coldbrewbarley.jpg" alt="Barley" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Barley</span>
+            <span class="tea-description">Bold, nutty, similar body to coffee</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Tea/Corn.jpg" alt="Corn" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Corn</span>
+            <span class="tea-description">Sweet, refreshing</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Syrups Section -->
+  <section class="content-section" id="syrups">
+    <h2 class="section-header">Signature Syrups</h2>
+    
+    <div class="tea-list">
+      <div class="tea-category">
+        <h3 class="tea-category-title">Classic Flavors</h3>
+        <div class="tea-item">
+          <img src="./images/Syrup/Strawberry.jpg" alt="Strawberry" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Strawberry</span>
+            <span class="tea-description">Versatile, can be used in mixed drinks or tea</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Syrup/Mango.jpg" alt="Mango" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Mango</span>
+            <span class="tea-description">All around yummy, great on deserts, in drinks, or on its own</span>
+          </div>
+        </div>   
+        <div class="tea-item">
+          <img src="./images/Syrup/Lemon.jpg" alt="Lemon" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Lemon</span>
+            <span class="tea-description">Bright, sour, also versatile</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Syrup/orange.jpg" alt="Caracara Orange" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Cara Cara Orange</span>
+            <span class="tea-description">Sweet, less citrus than lemon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tea-category">
+        <h3 class="tea-category-title">Seasonal Specialties</h3>
+        <div class="tea-item">
+          <img src="./images/Syrup/Apple.jpg" alt="Apple" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Apple (usually red)</span>
+            <span class="tea-description">Warm with a kick of fall</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Syrup/Kumquat.jpg" alt="Kumquat" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Kumquat (with zest)</span>
+            <span class="tea-description">Bright, citrus zing, little sour</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Syrup/melon.jpg" alt="Sugar Bee Melon" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Sugar Bee Melon</span>
+            <span class="tea-description">Subtle, somehow savory?, lightly sweet</span>
+          </div>
+        </div>
+        <div class="tea-item">
+          <img src="./images/Syrup/Guava.jpg" alt="Guava" class="tea-image">
+          <div class="tea-content">
+            <span class="tea-name">Guava</span>
+            <span class="tea-description">Amazing, tropical, sweet</span>
+          </div>
+        </div>
+      </div>
+
+    <div class="spacer"></div>
+  </section>
+
+  <!-- Footer -->
+  <!-- <footer class="footer">
+    <a href="https://www.instagram.com/will.hardison/" target="_blank">Art by Will Hardison</a>
+    <span>—</span>
+    <a href="http://www.joshphythian.com" target="_blank">Code by Josh Phythian</a>
+  </footer> -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ScrollMagic/2.0.8/ScrollMagic.min.js"></script>
+  <script>
+    // Scroll to content function
+    function scrollToContent() {
+      document.getElementById('presentations').scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all animatable elements
+    document.querySelectorAll('.presentation-item, .tea-category').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Touch event support for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    document.addEventListener('touchstart', function(e) {
+      touchStartY = e.changedTouches[0].screenY;
+    }, false);
+
+    document.addEventListener('touchend', function(e) {
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    }, false);
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const currentScrollPosition = window.pageYOffset;
+      
+      if (currentScrollPosition < 100 && touchStartY - touchEndY > swipeThreshold) {
+        scrollToContent();
+      }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown' && window.pageYOffset < 100) {
+        e.preventDefault();
+        scrollToContent();
+      }
+    });
+  </script>
+</body>
+</html>
