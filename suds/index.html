@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suds - Premium Laundry Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-weight: 300;
+            color: #2a2a2a;
+            background: #fafafa;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            color: #2a2a2a;
+            text-transform: lowercase;
+        }
+
+        .hamburger {
+            width: 30px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 2px;
+            background: #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(8px, -8px);
+        }
+
+        .menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 400px;
+            height: 100vh;
+            background: #ffffff;
+            padding: 8rem 3rem;
+            transition: right 0.4s ease;
+            box-shadow: -5px 0 30px rgba(0, 0, 0, 0.1);
+            z-index: 2000;
+        }
+
+        .menu.active {
+            right: 0;
+        }
+
+        .menu a {
+            display: inline-block;
+            font-size: 1.8rem;
+            color: #2a2a2a;
+            text-decoration: none;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            transition: color 0.5s ease;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .menu a:last-child {
+            margin-bottom: 0;
+        }
+
+        .menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #b5a8d6;
+            transition: width 0.6s ease;
+        }
+
+        .menu a:hover::after {
+            width: 100%;
+        }
+
+        .menu a:hover {
+            color: #b5a8d6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 8rem 3rem 3rem;
+            position: relative;
+        }
+
+        .hero-main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            flex: 1;
+            align-items: center;
+        }
+
+        .hero-content {
+            padding-left: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 8rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            margin-bottom: 2rem;
+            color: #2a2a2a;
+            line-height: 0.9;
+        }
+
+        .hero-content .tagline {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5a5a5a;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-content .promise {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #7a7a7a;
+            letter-spacing: 0.3px;
+        }
+
+        .health-warning {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(181, 168, 214, 0.08);
+            border-left: 3px solid #b5a8d6;
+        }
+
+        .health-warning-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #b5a8d6;
+            letter-spacing: 0.3px;
+        }
+
+        .cta {
+            margin-top: 3rem;
+            padding: 3rem 3rem 2rem;
+            font-size: 1.8rem;
+            color: #b5a8d6;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .video-container {
+            width: 100%;
+            height: 600px;
+            background: #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder {
+            font-size: 1rem;
+            color: #999;
+            letter-spacing: 2px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 8rem 3rem;
+            background: #ffffff;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 4px;
+            text-align: center;
+            margin-bottom: 5rem;
+            color: #2a2a2a;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-number {
+            font-size: 4rem;
+            color: #b5a8d6;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #7a7a7a;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+
+        /* About Section */
+        .about {
+            padding: 8rem 3rem;
+            background: #fafafa;
+        }
+
+        .founders {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .founder-card {
+            text-align: center;
+        }
+
+        .founder-image {
+            width: 100%;
+            height: 450px;
+            background: #e8e8e8;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .founder-name {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            color: #2a2a2a;
+        }
+
+        .founder-title {
+            font-size: 1rem;
+            color: #b5a8d6;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+        }
+
+        .founder-description {
+            font-size: 0.95rem;
+            color: #7a7a7a;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+
+        /* Locations Section */
+        .locations {
+            padding: 8rem 3rem;
+            background: #ffffff;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .location-card {
+            padding: 2.5rem;
+            border: 1px solid #e8e8e8;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+            border-color: #b5a8d6;
+            transform: translateY(-5px);
+        }
+
+        .location-card h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            color: #2a2a2a;
+        }
+
+        .location-card p {
+            font-size: 0.95rem;
+            color: #7a7a7a;
+            line-height: 1.8;
+            letter-spacing: 0.3px;
+        }
+
+        @media (max-width: 968px) {
+            nav {
+                padding: 1.5rem 2rem;
+            }
+
+            .hero {
+                padding: 6rem 2rem 2rem;
+            }
+
+            .hero-main {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-content {
+                padding-left: 0;
+            }
+
+            .hero-content h1 {
+                font-size: 4rem;
+                letter-spacing: 4px;
+            }
+
+            .hero-content .tagline {
+                font-size: 1rem;
+            }
+
+            .hero-content .promise {
+                font-size: 0.9rem;
+            }
+
+            .video-container {
+                height: 400px;
+            }
+
+            .cta {
+                font-size: 1.3rem;
+                padding: 2rem 1rem 1.5rem;
+            }
+
+            .service-grid,
+            .location-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .founders {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .founder-image {
+                height: 350px;
+            }
+
+            .menu {
+                width: 100%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services, .about, .locations {
+                padding: 5rem 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">SUDS</div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="menu" id="menu">
+        <a href="#services">Services & Pricing</a>
+        <a href="#about">About</a>
+        <a href="#locations">Locations</a>
+    </div>
+
+    <section class="hero">
+        <div class="hero-main">
+            <div class="hero-content">
+                <h1>suds</h1>
+                <div class="tagline">
+                    laundry for clean freaks and clothing geeks
+                </div>
+                <div class="promise">
+                    no parfums, allergens, or fragrances EVER<br>
+                    handled with care by fabric specialists
+                </div>
+                <div class="health-warning">
+                    <div class="health-warning-text">
+                        Common laundry detergents contain chemicals linked to respiratory issues, skin irritation, and hormone disruption. Some ingredients have been associated with increased cancer risk through long-term exposure.
+                    </div>
+                </div>
+            </div>
+            <div class="video-container">
+                <div class="video-placeholder">VIDEO PLACEHOLDER</div>
+            </div>
+        </div>
+        <div class="cta">
+            Why spend hours when you could click 3 buttons?
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2 class="section-title">Services & Pricing</h2>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <h3>Schedule</h3>
+                <p>Pick a time that works for you. We offer same-day pickup and delivery windows throughout the week.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <h3>We Collect</h3>
+                <p>Our fabric specialists arrive at your door, carefully collect your items, and begin the meticulous cleaning process.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <h3>Fresh & Clean</h3>
+                <p>Your garments return perfectly cleaned, pressed, and packaged. Every piece treated with expert care.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <h2 class="section-title">About</h2>
+        <div class="founders">
+            <div class="founder-card">
+                <div class="founder-image">FOUNDER IMAGE</div>
+                <div class="founder-name">Michael Fadugbagbe</div>
+                <div class="founder-title">Co-Founder</div>
+                <p class="founder-description">With 15 years in textile care, Michael brings unparalleled expertise in fabric preservation and eco-friendly cleaning methods.</p>
+            </div>
+            <div class="founder-card">
+                <div class="founder-image">FOUNDER IMAGE</div>
+                <div class="founder-name">Josh Phythian</div>
+                <div class="founder-title">Co-Founder</div>
+                <p class="founder-description">Josh's background in chemistry led to developing our proprietary hypoallergenic cleaning formulas that are gentle yet effective.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="locations" class="locations">
+        <h2 class="section-title">Locations</h2>
+        <div class="location-grid">
+            <div class="location-card">
+                <h3>Crown Heights</h3>
+                <p>Open Mon-Sat<br>7am - 8pm</p>
+            </div>
+            <div class="location-card">
+                <h3>Prospect Park</h3>
+                <p>Open Mon-Sat<br>7am - 8pm</p>
+            </div>
+            <div class="location-card">
+                <h3>Williamsburg</h3>
+                <p>Open Mon-Sat<br>7am - 8pm</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.menu');
+            hamburger.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.querySelector('.menu');
+            const isClickInsideMenu = menu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnHamburger && menu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                menu.classList.remove('active');
+            }
+        });
+
+        document.querySelectorAll('.menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                const hamburger = document.querySelector('.hamburger');
+                const menu = document.querySelector('.menu');
+                hamburger.classList.remove('active');
+                menu.classList.remove('active');
+            });
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
