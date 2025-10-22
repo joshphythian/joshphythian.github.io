@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suds - Premium Laundry Service</title>
+    <title>suds</title>
     <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         * {
@@ -37,8 +37,8 @@
 
         .logo {
             font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 3px;
+            font-weight: 500;
+            letter-spacing: 1px;
             color: #2a2a2a;
             text-transform: lowercase;
         }
@@ -139,6 +139,18 @@
             position: relative;
         }
 
+        .hero-top {
+            text-align: center;
+            padding: 1rem 0 2rem;
+        }
+
+        .hero-top-cta {
+            font-size: 1.8rem;
+            color: #b5a8d6;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
         .hero-main {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -191,13 +203,129 @@
 
         .cta {
             margin-top: 3rem;
-            padding: 3rem 3rem 2rem;
-            font-size: 1.8rem;
-            color: #b5a8d6;
-            font-weight: 400;
-            letter-spacing: 1px;
+            padding: 2rem 3rem;
             text-align: center;
             width: 100%;
+        }
+
+        .scroll-arrow {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border: 2px solid #b5a8d6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-arrow:hover {
+            transform: translateY(5px);
+            background: #b5a8d6;
+        }
+
+        .scroll-arrow:hover svg {
+            stroke: #ffffff;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Popup */
+        .popup {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #ffffff;
+            padding: 2rem 2.5rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border-left: 4px solid #b5a8d6;
+            max-width: 320px;
+            z-index: 900;
+            animation: jiggle 0.6s ease-in-out 2s 3;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .popup:hover {
+            transform: scale(1.05);
+        }
+
+        .popup-title {
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 1px;
+            color: #2a2a2a;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        .popup-subtitle {
+            font-size: 0.95rem;
+            color: #7a7a7a;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+
+        .popup-subtitle .highlight {
+            color: #b5a8d6;
+            font-weight: 400;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-close:hover {
+            opacity: 1;
+        }
+
+        .popup-close::before,
+        .popup-close::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 2px;
+            background: #2a2a2a;
+            top: 50%;
+            left: 50%;
+        }
+
+        .popup-close::before {
+            transform: translate(-50%, -50%) rotate(45deg);
+        }
+
+        .popup-close::after {
+            transform: translate(-50%, -50%) rotate(-45deg);
+        }
+
+        @keyframes jiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+
+        .popup.hidden {
+            display: none;
         }
 
         .video-container {
@@ -230,6 +358,14 @@
             text-align: center;
             margin-bottom: 5rem;
             color: #2a2a2a;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section-title.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .service-grid {
@@ -402,8 +538,31 @@
             }
 
             .cta {
+                padding: 1.5rem 1rem;
+            }
+
+            .scroll-arrow {
+                width: 36px;
+                height: 36px;
+            }
+
+            .hero-top-cta {
                 font-size: 1.3rem;
-                padding: 2rem 1rem 1.5rem;
+            }
+
+            .popup {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 1.5rem 2rem;
+                max-width: 280px;
+            }
+
+            .popup-title {
+                font-size: 1rem;
+            }
+
+            .popup-subtitle {
+                font-size: 0.85rem;
             }
 
             .service-grid,
@@ -447,11 +606,16 @@
 
     <div class="menu" id="menu">
         <a href="#services"><span>Services & Pricing</span></a>
-        <a href="#about"><span>About</span></a>
         <a href="#locations"><span>Locations</span></a>
+        <a href="#about"><span>About</span></a>
     </div>
 
     <section class="hero">
+        <div class="hero-top">
+            <div class="hero-top-cta">
+                Why spend hours when you could click 3 buttons?
+            </div>
+        </div>
         <div class="hero-main">
             <div class="hero-content">
                 <h1>suds</h1>
@@ -473,12 +637,16 @@
             </div>
         </div>
         <div class="cta">
-            Why spend hours when you could click 3 buttons?
+            <div class="scroll-arrow" onclick="scrollToServices()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b5a8d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+            </div>
         </div>
     </section>
 
     <section id="services" class="services">
-        <h2 class="section-title">Services & Pricing</h2>
+        <h2 class="section-title">Sign Up, Schedule, Pay</h2>
         <div class="service-grid">
             <div class="service-card">
                 <div class="service-number">01</div>
@@ -494,28 +662,6 @@
                 <div class="service-number">03</div>
                 <h3>Fresh & Clean</h3>
                 <p>Your garments return perfectly cleaned, pressed, and packaged. Every piece treated with expert care.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <h2 class="section-title">About</h2>
-        <div class="founders">
-            <div class="founder-card">
-                <div class="founder-image">FOUNDER IMAGE</div>
-                <div class="founder-name">Michael Fadugbagbe</div>
-                <div class="founder-title">Co-Founder</div>
-                <p class="founder-description"> I’ve been buying and selling vintage for over 5 years. I’ve bought in over four countries across three continents in the outer parts of Paris and the markets of Lagos.</p>
-<p class="founder-description">In that time I’ve learned how to wash, dry, and maintain clothes that are older than me and even my parents, and I hope to do the same for you.
-</p>
-            </div>
-            <div class="founder-card">
-                <div class="founder-image">FOUNDER IMAGE</div>
-                <div class="founder-name">Josh Phythian</div>
-                <div class="founder-title">Co-Founder</div>
-                <p class="founder-description">I love clothes and want to take care of them the best way possible. Through my experience as a cancer researcher, I've been abhored by the harmful effects of everyday laundry detergents</p>
-                <p class="founder-description">Garments with specific cleaning requirements such as selvedge, delicate fabrics or vintage items need special attention, and I want to extend that care to others.</p>
-
             </div>
         </div>
     </section>
@@ -538,12 +684,47 @@
         </div>
     </section>
 
+    <section id="about" class="about">
+        <h2 class="section-title">About</h2>
+        <div class="founders">
+            <div class="founder-card">
+                <div class="founder-image">FOUNDER IMAGE</div>
+                <div class="founder-name">Michael Fadugbagbe</div>
+                <div class="founder-title">Co-Founder</div>
+                <p class="founder-description">With 15 years in textile care, Michael brings unparalleled expertise in fabric preservation and eco-friendly cleaning methods.</p>
+            </div>
+            <div class="founder-card">
+                <div class="founder-image">FOUNDER IMAGE</div>
+                <div class="founder-name">Josh Phythian</div>
+                <div class="founder-title">Co-Founder</div>
+                <p class="founder-description">Josh's background in chemistry led to developing our proprietary hypoallergenic cleaning formulas that are gentle yet effective.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="popup" id="popup">
+        <div class="popup-close" onclick="closePopup()"></div>
+        <div class="popup-title">laundry with 3 hours or 3 clicks</div>
+        <div class="popup-subtitle">you decide: <span class="highlight">use suds</span></div>
+    </div>
+
     <script>
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.querySelector('.menu');
             hamburger.classList.toggle('active');
             menu.classList.toggle('active');
+        }
+
+        function closePopup() {
+            document.getElementById('popup').classList.add('hidden');
+        }
+
+        function scrollToServices() {
+            document.getElementById('services').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
 
         // Close menu when clicking outside
@@ -556,6 +737,24 @@
             if (!isClickInsideMenu && !isClickOnHamburger && menu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 menu.classList.remove('active');
+            }
+        });
+
+        // Scroll animation for section title
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.3
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sectionTitle = document.querySelector('.section-title');
+            if (sectionTitle) {
+                observer.observe(sectionTitle);
             }
         });
 
