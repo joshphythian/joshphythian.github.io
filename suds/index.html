@@ -20,6 +20,10 @@
             overflow-x: hidden;
         }
 
+        :root {
+            --accent-color: #a8d5e2;
+        }
+
         /* Navigation */
         nav {
             position: fixed;
@@ -146,7 +150,7 @@
 
         .hero-top-cta {
             font-size: 1.8rem;
-            color: #b5a8d6;
+            color: var(--accent-color);
             font-weight: 400;
             letter-spacing: 1px;
         }
@@ -190,14 +194,14 @@
         .health-warning {
             margin-top: 2rem;
             padding: 1.5rem;
-            background: rgba(181, 168, 214, 0.08);
-            border-left: 3px solid #b5a8d6;
+            background: rgba(168, 213, 226, 0.08);
+            border-left: 3px solid var(--accent-color);
         }
 
         .health-warning-text {
             font-size: 0.9rem;
             line-height: 1.7;
-            color: #b5a8d6;
+            color: var(--accent-color);
             letter-spacing: 0.3px;
         }
 
@@ -212,7 +216,7 @@
             width: 40px;
             height: 40px;
             margin: 0 auto;
-            border: 2px solid #b5a8d6;
+            border: 2px solid var(--accent-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -224,7 +228,7 @@
 
         .scroll-arrow:hover {
             transform: translateY(5px);
-            background: #b5a8d6;
+            background: var(--accent-color);
         }
 
         .scroll-arrow:hover svg {
@@ -251,7 +255,7 @@
             background: #ffffff;
             padding: 2rem 2.5rem;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            border-left: 4px solid #b5a8d6;
+            border-left: 4px solid var(--accent-color);
             max-width: 320px;
             z-index: 900;
             animation: jiggle 0.6s ease-in-out 2s 3;
@@ -280,8 +284,117 @@
         }
 
         .popup-subtitle .highlight {
-            color: #b5a8d6;
+            color: var(--accent-color);
             font-weight: 400;
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 8rem 3rem;
+            background: #ffffff;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            padding: 2.5rem;
+            background: #fafafa;
+            border-left: 3px solid var(--accent-color);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .review-stars {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            line-height: 1.8;
+            color: #5a5a5a;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .review-author {
+            font-size: 0.9rem;
+            color: #2a2a2a;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* Partner Section */
+        .partner {
+            padding: 8rem 3rem;
+            background: #fafafa;
+            text-align: center;
+        }
+
+        .partner-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .partner-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5a5a5a;
+            margin-bottom: 3rem;
+            letter-spacing: 0.3px;
+        }
+
+        .partner-benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .benefit-item {
+            padding: 1.5rem;
+        }
+
+        .benefit-icon {
+            font-size: 2rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .benefit-text {
+            font-size: 0.95rem;
+            color: #7a7a7a;
+            line-height: 1.6;
+        }
+
+        .partner-cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: var(--accent-color);
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent-color);
+        }
+
+        .partner-cta-button:hover {
+            background: transparent;
+            color: var(--accent-color);
         }
 
         .popup-close {
@@ -388,7 +501,7 @@
 
         .service-number {
             font-size: 4rem;
-            color: #b5a8d6;
+            color: var(--accent-color);
             font-weight: 300;
             margin-bottom: 1.5rem;
         }
@@ -449,7 +562,7 @@
 
         .founder-title {
             font-size: 1rem;
-            color: #b5a8d6;
+            color: var(--accent-color);
             letter-spacing: 1px;
             margin-bottom: 1.5rem;
         }
@@ -483,7 +596,7 @@
         }
 
         .location-card:hover {
-            border-color: #b5a8d6;
+            border-color: var(--accent-color);
             transform: translateY(-5px);
         }
 
@@ -591,6 +704,20 @@
             .services, .about, .locations {
                 padding: 5rem 2rem;
             }
+
+            .review-grid,
+            .partner-benefits {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .partner {
+                padding: 5rem 2rem;
+            }
+
+            .reviews {
+                padding: 5rem 2rem;
+            }
         }
     </style>
 </head>
@@ -606,7 +733,9 @@
 
     <div class="menu" id="menu">
         <a href="#services"><span>Services & Pricing</span></a>
+        <a href="#reviews"><span>Reviews</span></a>
         <a href="#locations"><span>Locations</span></a>
+        <a href="#partner"><span>Partner With Us</span></a>
         <a href="#about"><span>About</span></a>
     </div>
 
@@ -638,7 +767,7 @@
         </div>
         <div class="cta">
             <div class="scroll-arrow" onclick="scrollToServices()">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#b5a8d6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a8d5e2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
             </div>
@@ -666,6 +795,27 @@
         </div>
     </section>
 
+    <section id="reviews" class="reviews">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Finally, a laundry service that understands sensitive skin. No more breakouts from harsh chemicals. My clothes smell fresh without any artificial fragrance."</p>
+                <div class="review-author">— Sarah M.</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"The attention to detail is incredible. They treat my designer pieces with such care. I'll never trust my clothes to anyone else."</p>
+                <div class="review-author">— James K.</div>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Three clicks and my laundry is done. This service has given me back hours every week. The quality is consistently perfect."</p>
+                <div class="review-author">— Maria L.</div>
+            </div>
+        </div>
+    </section>
+
     <section id="locations" class="locations">
         <h2 class="section-title">Locations</h2>
         <div class="location-grid">
@@ -684,26 +834,47 @@
         </div>
     </section>
 
-<section id="about" class="about">
-       <h2 class="section-title">About</h2>
-       <div class="founders">
-           <div class="founder-card">
-               <div class="founder-image">FOUNDER IMAGE</div>
-               <div class="founder-name">Michael Fadugbagbe</div>
-               <div class="founder-title">Co-Founder</div>
-              <p class="founder-description"> I’ve been buying and selling vintage for over 5 years. I’ve bought in over four countries across three continents in the outer parts of Paris and the markets of Lagos.</p>
-               <p class="founder-description">In that time I’ve learned how to wash, dry, and maintain clothes that are older than me and even my parents, and I hope to do the same for you.</p>
-           </div>
-           <div class="founder-card">
-               <div class="founder-image">FOUNDER IMAGE</div>
-               <div class="founder-name">Josh Phythian</div>
-               <div class="founder-title">Co-Founder</div>
-              <p class="founder-description">I love clothes and want to take care of them the best way possible. Through my experience as a cancer researcher, I've been abhored by the harmful effects of everyday laundry detergents</p>
-              <p class="founder-description">Garments with specific cleaning requirements such as selvedge, delicate fabrics or vintage items need special attention, and I want to extend that care to others.</p>
-           </div>
-       </div>
-   </section>
+    <section id="partner" class="partner">
+        <h2 class="section-title">Partner With Suds</h2>
+        <div class="partner-content">
+            <p class="partner-description">
+                Are you a laundromat owner looking to elevate your business? Join the Suds network and offer your customers premium, hypoallergenic cleaning services.
+            </p>
+            <div class="partner-benefits">
+                <div class="benefit-item">
+                    <div class="benefit-icon">01</div>
+                    <p class="benefit-text">Access to our proprietary cleaning formulas</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">02</div>
+                    <p class="benefit-text">Training from fabric care specialists</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">03</div>
+                    <p class="benefit-text">Connect with our customer base</p>
+                </div>
+            </div>
+            <a href="#" class="partner-cta-button">BECOME A PARTNER</a>
+        </div>
+    </section>
 
+    <section id="about" class="about">
+        <h2 class="section-title">About</h2>
+        <div class="founders">
+            <div class="founder-card">
+                <div class="founder-image">FOUNDER IMAGE</div>
+                <div class="founder-name">Michael Fadugbagbe</div>
+                <div class="founder-title">Co-Founder</div>
+                <p class="founder-description">With 15 years in textile care, Michael brings unparalleled expertise in fabric preservation and eco-friendly cleaning methods.</p>
+            </div>
+            <div class="founder-card">
+                <div class="founder-image">FOUNDER IMAGE</div>
+                <div class="founder-name">Josh Phythian</div>
+                <div class="founder-title">Co-Founder</div>
+                <p class="founder-description">Josh's background in chemistry led to developing our proprietary hypoallergenic cleaning formulas that are gentle yet effective.</p>
+            </div>
+        </div>
+    </section>
 
     <div class="popup" id="popup">
         <div class="popup-close" onclick="closePopup()"></div>
