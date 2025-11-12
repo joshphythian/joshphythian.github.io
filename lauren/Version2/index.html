@@ -395,6 +395,142 @@
                 text-align: center;
             }
         }
+                .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, rgba(246, 246, 246, 0.95), rgba(242, 171, 185, 0.15));
+            border: 2px solid #f2abb9;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(187, 0, 101, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .contact-link:hover::before {
+            left: 100%;
+        }
+
+        .contact-link:hover {
+            transform: translateX(8px);
+            border-color: #bb0065;
+            box-shadow: -4px 4px 0px rgba(187, 0, 101, 0.2);
+        }
+
+        .contact-link:active {
+            transform: translateX(6px) scale(0.98);
+        }
+
+        .link-icon {
+            font-size: 1.3rem;
+            color: #bb0065;
+            min-width: 24px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-link:hover .link-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .link-content {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .link-label {
+            font-size: 0.75rem;
+            color: #b56590;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .link-text {
+            font-size: 1.1rem;
+            color: #bb0065;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .contact-link:hover .link-text {
+            color: #8a004d;
+        }
+
+        .copy-indicator {
+            font-size: 0.85rem;
+            color: #b56590;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-style: italic;
+        }
+
+        .contact-link:hover .copy-indicator {
+            opacity: 1;
+        }
+
+        .copied-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #bb0065;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(187, 0, 101, 0.3);
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .copied-toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+/* 
+            .demo-container {
+                padding: 25px;
+            } */
+
+            .contact-link {
+                padding: 10px 15px;
+            }
+
+            .link-text {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -422,6 +558,47 @@
                 
                 <div class="archive-content" id="aboutContent">
                     <div class="archive-section">
+                    <h2>about</h2>
+                        <h4>
+                            Hello! I'm Lauren Tran-Muchowski (she/they), a writing and audio enthusiast with a passion for journalism, podcast production, and editorial writing. I graduated with Honors from Wesleyan University with B.A. in American Studies and English with a certificate in Social, Cultural, and Critical Theory.
+                            <br><br>
+                            While at Wes, I was the Public Affairs Director of WESU, co-coordinator of the Wesleyan Doula Project, and co-host of Engage Radio, a collaboration with the Jewett Center for Community Partnerships and WESU. My work has appeared on WHYY, NPR's The World, Voice of America, and KALW. A deep appreciator of language, I am passionate about informing the public, deconstructing social norms, and showcasing underrepresented voices.
+                            <br><br>
+                            If there is a project you'd like to see come to fruition, please send me an email, and let's make it happen!
+                            <br><br>
+                            And if there's something you think I should be listening or reading, feel free to send an email as well. ♡
+                        </h4>
+
+                        <div class="contact-links">
+                            <div class="contact-link" onclick="copyEmail(event)">
+                                <div class="link-icon">✉</div>
+                                <div class="link-content">
+                                    <span class="link-label">Email</span>
+                                    <span class="link-text">laurenmuchowski@gmail.com</span>
+                                </div>
+                                <span class="copy-indicator">click to copy</span>
+                            </div>
+
+                            <a href="https://www.linkedin.com/in/lauren-tran-muchowski-852a1a22b/" target="_blank" class="contact-link" style="text-decoration: none;">
+                                <div class="link-icon">🔗</div>
+                                <div class="link-content">
+                                    <span class="link-label">LinkedIn</span>
+                                    <span class="link-text">@lauren-tran-muchowski</span>
+                                </div>
+                            </a>
+
+                            <a href="https://soundcloud.com/user-174818463" target="_blank" class="contact-link" style="text-decoration: none;">
+                                <div class="link-icon">🎵</div>
+                                <div class="link-content">
+                                    <span class="link-label">SoundCloud</span>
+                                    <span class="link-text">audio archive</span>
+                                </div>
+                            </a>
+                        </div>
+                </div>
+            </div>
+                <!-- <div class="archive-content" id="aboutContent">
+                    <div class="archive-section">
                         <h2>about</h2>
                         <div class="about-content-wrapper">
                             <div class="about-text">
@@ -441,7 +618,7 @@
                             <img src="headshot.jpg" alt="Lauren Lien" class="about-image">
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 
                 <div class="archive-content" id="audioContent">
@@ -613,7 +790,9 @@
             Code by <a href="https://joshphythian.com" target="_blank">Josh</a>
         </div>
     </div>
-
+    <div class="copied-toast" id="copiedToast">
+        ✓ Email copied to clipboard!
+    </div>
     <script>
         function openEmail() {
             const nameElement = document.querySelector('.name');
@@ -731,6 +910,25 @@
             scrollTimeout = setTimeout(() => {
                 hideFooter();
             }, 3000);
+        }
+        function copyEmail(event) {
+            event.preventDefault();
+            const email = 'laurenmuchowski@gmail.com';
+            
+            navigator.clipboard.writeText(email).then(() => {
+                showToast();
+            }).catch(err => {
+                console.error('Failed to copy email:', err);
+            });
+        }
+
+        function showToast() {
+            const toast = document.getElementById('copiedToast');
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
         }
 
         window.addEventListener('scroll', handleScroll);
