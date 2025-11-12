@@ -316,7 +316,144 @@
             transform: translateX(-5px) translateY(-1px) scale(0.98);
             box-shadow: 2px 2px 0px #f2abb9;
         }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            /* 1. NAME - Smaller font on mobile */
+            .name {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+                text-align: center;
+                order: 1;
+                letter-spacing: 2px;
+            }
 
+            /* 2. SUBHEADER - Smaller font on mobile */
+            .subheader {
+                font-size: 1.2rem;
+                margin-top: -10px;
+                margin-bottom: 20px;
+                order: 2;
+                letter-spacing: 1px;
+            }
+
+            /* 3. IMAGE CONTAINER - Appears third */
+            .content-area {
+                min-height: 300px;
+                order: 3;
+                margin-bottom: 20px;
+            }
+
+            /* 4. SIDEBAR/NAV - Appears fourth with improved mobile UX */
+            .sidebar {
+                width: 100%;
+                height: auto;
+                flex-direction: row;
+                justify-content: center;
+                padding: 20px;
+                gap: 12px;
+                order: 4;
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                width: 100%;
+                height: auto;
+                padding: 20px 20px 0 20px;
+                flex: none;
+                order: 5;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            /* Improved mobile nav buttons - more compact grid layout */
+            .nav-tab {
+                width: calc(50% - 6px);
+                margin-right: 0;
+                margin-bottom: 0;
+                font-size: 1.2rem;
+                padding: 12px 8px;
+                flex: 0 0 auto;
+            }
+
+            /* Hover effects work better on mobile with reduced transform */
+            .nav-tab:hover {
+                transform: translateY(-2px);
+                box-shadow: 0px 3px 0px #f2abb9;
+            }
+
+            .nav-tab:active {
+                transform: translateY(0px) scale(0.98);
+                box-shadow: 0px 1px 0px #f2abb9;
+            }
+            
+            .footer {
+                position: static;
+                transform: translateY(0);
+                margin-top: 20px;
+                order: 6;
+                justify-content: center;
+                gap: 15px;
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .footer-left, .footer-right {
+                font-size: 0.9rem;
+                text-align: center;
+            }
+
+            .about-content-wrapper {
+                flex-direction: column;
+            }
+
+            .about-image {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .audio-tabs {
+                flex-direction: column;
+            }
+
+            .audio-tab {
+                width: 100%;
+                text-align: center;
+            }
+
+            .contact-link {
+                padding: 10px 15px;
+            }
+
+            .link-text {
+                font-size: 1rem;
+            }
+
+            /* Better touch targets for mobile */
+            .contact-link {
+                min-height: 60px;
+            }
+        }
+
+        /* Extra small phones */
+        @media (max-width: 480px) {
+            .name {
+                font-size: 2rem;
+            }
+
+            .subheader {
+                font-size: 1rem;
+            }
+
+            .nav-tab {
+                font-size: 1.1rem;
+                padding: 10px 6px;
+            }
+        }
         @media (max-width: 768px) {
             .container {
                 flex-direction: column;
@@ -535,14 +672,6 @@
 </head>
 <body>
     <div class="container">
-        <div class="sidebar">
-            <div class="nav-tab first" onclick="showTab('about')">about</div>
-            <div class="nav-tab" onclick="showTab('audio')">audio</div>
-            <div class="nav-tab" onclick="showTab('writing')">writing</div>
-            <div class="nav-tab" onclick="showTab('photo')">photo</div>
-            <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
-            <!-- <div class="nav-tab" onclick="showTab('contact')">contact</div> -->
-        </div>
 
         <div class="main-content">
             <span class="name">
@@ -551,6 +680,14 @@
             <div class="subheader">
                 freelance digital and audio journalist
             </div>
+            <div class="sidebar">
+            <div class="nav-tab first" onclick="showTab('about')">about</div>
+            <div class="nav-tab" onclick="showTab('audio')">audio</div>
+            <div class="nav-tab" onclick="showTab('writing')">writing</div>
+            <div class="nav-tab" onclick="showTab('photo')">photo</div>
+            <div class="nav-tab" onclick="showTab('dj-radio')">dj/radio</div>
+            <!-- <div class="nav-tab" onclick="showTab('contact')">contact</div> -->
+        </div>
             <div class="content-area">
                 <div class="image-container" id="imageContainer" onclick="nextImage()">
                     <img src="Lauren3.jpg" class="image-style" id="main-image">
@@ -597,29 +734,6 @@
                         </div>
                 </div>
             </div>
-                <!-- <div class="archive-content" id="aboutContent">
-                    <div class="archive-section">
-                        <h2>about</h2>
-                        <div class="about-content-wrapper">
-                            <div class="about-text">
-                                <h4>Hello! I'm Lauren Tran-Muchowski (she/they), a writing and audio enthusiast with a passion for journalism, podcast production, and editorial writing. I graduated with Honors from Wesleyan University with B.A. in American Studies and English with a certificate in Social, Cultural, and Critical Theory. 
-
-                                <p><br>While at Wes, I was the Public Affairs Director of WESU, co-coordinator of the Wesleyan Doula Project, and co-host of Engage Radio, a collaboration with the Jewett Center for Community Partnerships and WESU. My work has appeared on WHYY, NPR's The World, Voice of America, and KALW. A deep appreciator of language, I am passionate about informing the public, deconstructing social norms, and showcasing underrepresented voices.</p>
-                                </h4>
-                                <h4>If there is a project you’d like to see come to fruition, please send me an email, and let’s make it happen!  
-
-                                <p><br>And if there’s something you think I should be listening or reading, feel free to send an email as well. ♡</p>
-                                <br>
-                                <p><div class="archive-item indent"><a href="#">laurenmuchowski@gmail.com</a></div></p>
-                                <p><div class="archive-item indent"><a href="https://www.linkedin.com/in/lauren-tran-muchowski-852a1a22b/">linkedin</a></div></p>
-                                <p><div class="archive-item indent"><a href="https://soundcloud.com/user-174818463">soundcloud archive</a></div></p>
-
-                            </div>
-                            <img src="headshot.jpg" alt="Lauren Lien" class="about-image">
-                        </div>
-                    </div>
-                </div> -->
-
 
                 <div class="archive-content" id="audioContent">
                     <div class="archive-section">
@@ -764,20 +878,7 @@
                     </div>
                 </div>
 
-                <!-- <div class="archive-content" id="contactContent">
-                    <div class="archive-section">
-                        <h2>contact</h2>
-                        <div class="about-text">
-                                <h4>Hey there! I am a freelance writer, audio journalist, and podcast producer, and always willing to learn about writing and audio opportunities. If there is a project you’d like to see come to fruition, please send me an email, and let’s make it happen!  
-
-                                <p><br>And if there’s something you think I should be listening or reading, feel free to send an email as well. ♡</p>
-                                </h4>
-                        </div>
-                        <div class="archive-item"><a href="#">laurenmuchowski@gmail.com</a></div>
-                        <div class="archive-item"><a href="https://www.linkedin.com/in/lauren-tran-muchowski-852a1a22b/">linkedin</a></div>
-                        <div class="archive-item"><a href="https://soundcloud.com/user-174818463">soundcloud archive</a></div>
-                    </div>
-                </div> -->
+                
             </div>
         </div>
     </div>
